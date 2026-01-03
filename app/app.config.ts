@@ -6,6 +6,7 @@ export default defineAppConfig({
       alt: 'My profile picture'
     },
     email: 'bielfaria2003@gmail.com',
+    meetingLink: 'mailto:bielfaria2003@gmail.com',
     available: true
   },
   ui: {
