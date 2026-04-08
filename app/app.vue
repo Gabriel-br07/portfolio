@@ -18,29 +18,13 @@ useHead({
 })
 
 useSeoMeta({
-  titleTemplate: '%s - Nuxt Portfolio Template',
-  ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/portfolio-light.png',
-  twitterImage: 'https://ui.nuxt.com/assets/templates/nuxt/portfolio-light.png',
+  titleTemplate: '%s - Nuxt Portfolio Gabriel Oliveira',
+  ogImage: 'https://i.imgur.com/xfmm9Ms.jpeg',
+  twitterImage: 'https://i.imgur.com/xfmm9Ms.jpeg',
   twitterCard: 'summary_large_image'
 })
 
-const [{ data: navigation }, { data: files }] = await Promise.all([
-  useAsyncData('navigation', () => {
-    return Promise.all([
-      queryCollectionNavigation('blog')
-    ])
-  }, {
-    transform: data => data.flat()
-  }),
-  useLazyAsyncData('search', () => {
-    return Promise.all([
-      queryCollectionSearchSections('blog')
-    ])
-  }, {
-    server: false,
-    transform: data => data.flat()
-  })
-])
+const [{ data: navigation }, { data: files }] = useBlogSearchData()
 </script>
 
 <template>
