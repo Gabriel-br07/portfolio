@@ -40,24 +40,30 @@ export default defineContentConfig({
       type: 'page',
       source: 'index.yml',
       schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        seo: z.object({
+          title: z.string(),
+          description: z.string()
+        }).optional(),
         hero: z.object({
           links: z.array(createButtonSchema()),
-          images: z.array(createImageSchema())
+          images: z.array(createImageSchema()).default([])
         }),
         about: createBaseSchema(),
         experience: createBaseSchema().extend({
           items: z.array(z.object({
-            date: z.date(),
+            date: z.string(),
             position: z.string(),
             company: z.object({
               name: z.string(),
-              url: z.string(),
+              url: z.string().optional(),
               logo: z.string().editor({ input: 'icon' }),
-              color: z.string()
+              color: z.string().optional()
             })
           }))
         }),
-        testimonials: z.array(createTestimonialSchema()),
+        testimonials: z.array(createTestimonialSchema()).default([]),
         blog: createBaseSchema(),
         faq: createBaseSchema().extend({
           categories: z.array(
@@ -70,7 +76,7 @@ export default defineContentConfig({
                 })
               )
             }))
-        })
+        }).optional()
       })
     }),
     projects: defineCollection({
