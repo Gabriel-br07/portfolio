@@ -28,13 +28,13 @@ experience:
   title: "Work Experience"
   items:
     - position: "FullStack Developer at"
-      date: "Oct 2025 − Present"
+      date: "Feb 2025 − Present"
       company:
         name: "DW Corp"
         logo: "/logos/DW-Corp-logo.svg"
         url: "https://dwcorp.com.br/"
     - position: "Intern at"
-      date: "May 2024 − Oct 2025"
+      date: "May 2024 − Feb 2025"
       company:
         name: "Serpro"
         logo: "/logos/serpro.svg"
