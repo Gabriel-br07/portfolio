@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import type { IndexCollectionItem } from '@nuxt/content'
 import type { ExperienceItem } from '~/types/experience'
 
@@ -33,9 +34,7 @@ const items = computed(() => props.page.experience.items)
           :in-view-options="{ once: true }"
           class="text-muted flex items-center text-nowrap gap-2"
         >
-          <p class="text-sm">
-            {{ experience.date }}
-          </p>
+          <p class="text-sm">{{ experience.date }}</p>
           <USeparator />
 
           <template v-if="experience.company && experience.company.url">
