@@ -23,5 +23,6 @@ logs
 .env.*
 !.env.example
 
-# VSC
+# VSC/Cursor
 .history
+.cursor
