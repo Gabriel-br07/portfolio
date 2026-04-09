@@ -7,7 +7,7 @@ export default defineAppConfig({
     },
     email: 'bielfaria2003@gmail.com',
     available: true,
-    meetingLink: 'https://cal.com'
+    meetingLink: 'https://cal.com/gabriel-faria07'
   },
   ui: {
     colors: {
@@ -26,20 +26,20 @@ export default defineAppConfig({
     colorMode: false,
     links: [
       {
-        icon: 'i-simple-icons-linkedin',
-        to: 'https://www.linkedin.com/in/faria0703',
-        target: '_blank',
+        'icon': 'i-simple-icons-linkedin',
+        'to': 'https://www.linkedin.com/in/faria0703',
+        'target': '_blank',
         'aria-label': 'Gabriel Oliveira on LinkedIn'
       },
       {
-        icon: 'i-simple-icons-github',
-        to: 'https://github.com/Gabriel-br07',
-        target: '_blank',
+        'icon': 'i-simple-icons-github',
+        'to': 'https://github.com/Gabriel-br07',
+        'target': '_blank',
         'aria-label': 'Gabriel Oliveira on GitHub'
       },
       {
-        icon: 'i-lucide-mail',
-        to: 'mailto:bielfaria2003@gmail.com',
+        'icon': 'i-lucide-mail',
+        'to': 'mailto:bielfaria2003@gmail.com',
         'aria-label': 'Email Gabriel Oliveira'
       }
     ]

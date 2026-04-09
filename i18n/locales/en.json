@@ -40,5 +40,22 @@
   "speaking": {
     "listen": "Listen",
     "watch": "Watch"
+  },
+  "contactModal": {
+    "title": "Let's talk",
+    "description": "Choose the best way to get in touch. Book a meeting or send a message.",
+    "formLead": "Share a few details and we'll get back to you shortly.",
+    "bookMeeting": "Book a meeting",
+    "sendMessage": "Send a message",
+    "back": "Back",
+    "nameLabel": "Name",
+    "emailLabel": "Email",
+    "messageLabel": "Message",
+    "submit": "Send message",
+    "errorTitle": "Something went wrong",
+    "errorDescription": "Your message could not be sent. Please try again in a moment.",
+    "successTitle": "Message sent",
+    "successDescription": "Thank you for reaching out. I'll reply as soon as I can.",
+    "close": "Close"
   }
 }

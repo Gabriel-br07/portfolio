@@ -40,5 +40,22 @@
   "speaking": {
     "listen": "Escuchar",
     "watch": "Ver"
+  },
+  "contactModal": {
+    "title": "Hablemos",
+    "description": "Elige la mejor forma de contacto: reserva una reunión o envía un mensaje.",
+    "formLead": "Comparte algunos detalles y te responderé pronto.",
+    "bookMeeting": "Reservar una reunión",
+    "sendMessage": "Enviar un mensaje",
+    "back": "Volver",
+    "nameLabel": "Nombre",
+    "emailLabel": "Correo electrónico",
+    "messageLabel": "Mensaje",
+    "submit": "Enviar mensaje",
+    "errorTitle": "Algo salió mal",
+    "errorDescription": "No se pudo enviar tu mensaje. Inténtalo de nuevo en un momento.",
+    "successTitle": "Mensaje enviado",
+    "successDescription": "Gracias por escribirme. Responderé lo antes posible.",
+    "close": "Cerrar"
   }
 }
