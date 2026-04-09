@@ -29,6 +29,11 @@ useSeoMeta({
 
 <template>
   <UPage v-if="page">
+    <div
+      id="contact"
+      class="sr-only"
+      tabindex="-1"
+    />
     <LandingHero :page />
     <UPageSection
       :ui="{

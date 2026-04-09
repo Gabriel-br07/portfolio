@@ -3,6 +3,7 @@ import type { IndexCollectionItem } from '@nuxt/content'
 
 const { footer, global } = useAppConfig()
 const { t } = useI18n()
+const { open: openContactModal } = useContactModal()
 
 defineProps<{
   page: IndexCollectionItem
@@ -120,11 +121,13 @@ const heroSocialLinks = computed(() => {
         >
           <UButton v-bind="page.hero.links[0]" />
           <UButton
+            :disabled="!global.available"
             :color="global.available ? 'success' : 'error'"
             variant="ghost"
             class="gap-2"
-            :to="global.available ? global.meetingLink : ''"
+            :class="{ 'opacity-80': !global.available }"
             :label="global.available ? t('hero.available') : t('hero.unavailable')"
+            @click="openContactModal()"
           >
             <template #leading>
               <span class="relative flex size-2">
@@ -166,6 +169,16 @@ const heroSocialLinks = computed(() => {
           }"
         >
           <UButton
+            v-if="isMailLink(link)"
+            size="md"
+            color="neutral"
+            variant="ghost"
+            :icon="link.icon"
+            :aria-label="link['aria-label']"
+            @click="openContactModal()"
+          />
+          <UButton
+            v-else
             v-bind="{ size: 'md', color: 'neutral', variant: 'ghost', ...link }"
           />
         </Motion>

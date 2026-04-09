@@ -48,6 +48,8 @@ const [{ data: navigation }, { data: files }] = useBlogSearchData()
       </UMain>
     </NuxtLayout>
 
+    <ContactModal />
+
     <ClientOnly>
       <LazyUContentSearch
         :files="files"

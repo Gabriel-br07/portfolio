@@ -42,7 +42,7 @@ const { data: projects } = await useAsyncData(
   }
 )
 
-const { global } = useAppConfig()
+const { open: openContactModal } = useContactModal()
 
 useSeoMeta({
   title: page.value?.seo?.title || page.value?.title,
@@ -69,12 +69,13 @@ useSeoMeta({
         >
           <UButton
             :label="page.links[0]?.label"
-            :to="global.meetingLink"
-            v-bind="page.links[0]"
+            :color="page.links[0]?.color"
+            @click="openContactModal()"
           />
           <UButton
-            :to="`mailto:${global.email}`"
             v-bind="page.links[1]"
+            target="_blank"
+            rel="noopener noreferrer"
           />
         </div>
       </template>

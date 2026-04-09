@@ -2,6 +2,7 @@
 const { t } = useI18n()
 const { footer } = useAppConfig()
 const year = new Date().getFullYear()
+const { open: openContactModal } = useContactModal()
 </script>
 
 <template>
@@ -15,11 +16,24 @@ const year = new Date().getFullYear()
 
     <template #right>
       <template v-if="footer?.links?.length">
-        <UButton
+        <template
           v-for="(link, index) of footer?.links"
           :key="index"
-          v-bind="{ size: 'xs', color: 'neutral', variant: 'ghost', ...link }"
-        />
+        >
+          <UButton
+            v-if="isMailLink(link)"
+            size="xs"
+            color="neutral"
+            variant="ghost"
+            :icon="link.icon"
+            :aria-label="link['aria-label']"
+            @click="openContactModal()"
+          />
+          <UButton
+            v-else
+            v-bind="{ size: 'xs', color: 'neutral', variant: 'ghost', ...link }"
+          />
+        </template>
       </template>
     </template>
   </UFooter>

@@ -40,5 +40,22 @@
   "speaking": {
     "listen": "Ouvir",
     "watch": "Assistir"
+  },
+  "contactModal": {
+    "title": "Vamos conversar",
+    "description": "Escolha a melhor forma de contato: agende uma reunião ou envie uma mensagem.",
+    "formLead": "Envie alguns detalhes e retornarei em breve.",
+    "bookMeeting": "Agendar uma reunião",
+    "sendMessage": "Enviar uma mensagem",
+    "back": "Voltar",
+    "nameLabel": "Nome",
+    "emailLabel": "E-mail",
+    "messageLabel": "Mensagem",
+    "submit": "Enviar mensagem",
+    "errorTitle": "Algo deu errado",
+    "errorDescription": "Não foi possível enviar sua mensagem. Tente novamente em instantes.",
+    "successTitle": "Mensagem enviada",
+    "successDescription": "Obrigado pelo contato. Responderei o mais breve possível.",
+    "close": "Fechar"
   }
 }
