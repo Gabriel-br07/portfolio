@@ -38,7 +38,11 @@ export default defineContentConfig({
   collections: {
     index: defineCollection({
       type: 'page',
-      source: 'index.yml',
+      source: [
+        { include: 'index.yml' },
+        { include: 'pt/index.yml' },
+        { include: 'es/index.yml' }
+      ],
       schema: z.object({
         title: z.string(),
         description: z.string(),
@@ -64,7 +68,7 @@ export default defineContentConfig({
           }))
         }),
         testimonials: z.array(createTestimonialSchema()).default([]),
-        blog: createBaseSchema(),
+        blog: createBaseSchema().optional(),
         faq: createBaseSchema().extend({
           categories: z.array(
             z.object({
@@ -81,7 +85,11 @@ export default defineContentConfig({
     }),
     projects: defineCollection({
       type: 'data',
-      source: 'projects/*.yml',
+      source: [
+        { include: 'projects/*.yml' },
+        { include: 'pt/projects/*.yml' },
+        { include: 'es/projects/*.yml' }
+      ],
       schema: z.object({
         title: z.string().nonempty(),
         description: z.string().nonempty(),
@@ -91,21 +99,12 @@ export default defineContentConfig({
         date: z.date()
       })
     }),
-    blog: defineCollection({
-      type: 'page',
-      source: 'blog/*.md',
-      schema: z.object({
-        minRead: z.number(),
-        date: z.date(),
-        image: z.string().nonempty().editor({ input: 'media' }),
-        author: createAuthorSchema()
-      })
-    }),
     pages: defineCollection({
       type: 'page',
       source: [
         { include: 'projects.yml' },
-        { include: 'blog.yml' }
+        { include: 'pt/projects.yml' },
+        { include: 'es/projects.yml' }
       ],
       schema: z.object({
         links: z.array(createButtonSchema())
@@ -113,7 +112,11 @@ export default defineContentConfig({
     }),
     speaking: defineCollection({
       type: 'page',
-      source: 'speaking.yml',
+      source: [
+        { include: 'speaking.yml' },
+        { include: 'pt/speaking.yml' },
+        { include: 'es/speaking.yml' }
+      ],
       schema: z.object({
         links: z.array(createButtonSchema()),
         events: z.array(z.object({
@@ -127,7 +130,11 @@ export default defineContentConfig({
     }),
     about: defineCollection({
       type: 'page',
-      source: 'about.yml',
+      source: [
+        { include: 'about.yml' },
+        { include: 'pt/about.yml' },
+        { include: 'es/about.yml' }
+      ],
       schema: z.object({
         content: z.object({}),
         images: z.array(createImageSchema())

@@ -1,0 +1,6 @@
+title: ETL B3 — Brazilian Stock Market Data Pipeline
+description: "ETL and data pipeline for Brazilian stock market (B3) data: ingesting market sources, transforming and consolidating time-series and reference datasets, and loading structured results into PostgreSQL. Built in Python with FastAPI for APIs and Prefect for workflow orchestration, with a focus on reliable ingestion and maintainable pipelines."
+image: https://i.imgur.com/LcICPbC.png
+url: "https://github.com/LabTechUDF"
+tags: ["Python", "FastAPI", "Prefect", "PostgreSQL"]
+date: "2026-03-15"

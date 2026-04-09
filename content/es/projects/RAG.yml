@@ -1,0 +1,6 @@
+title: Sistema RAG para investigación en derecho penal brasileño
+description: "Diseño y entrega de un sistema RAG de extremo a extremo para investigación en derecho penal brasileño, con recuperación y síntesis eficientes de precedentes de varios tribunales (STF, STJ, TRF4). Solución full stack con scraping automatizado, búsqueda semántica con FAISS y OpenSearch e interfaz de chat responsive con Nuxt 4 y Vue 3. La plataforma admite consultas con RAG y consultas directas al LLM mediante un servicio FastAPI en producción, centrado en escalabilidad, rendimiento y precisión jurídica."
+image: https://i.imgur.com/vePCk0Y.png
+url: "https://github.com/LabTechUDF/RAG-TCC"
+tags: ["Vue", "Nuxt", "FastAPI", "OpenSearch","Python"]
+date: "2025-02-01"

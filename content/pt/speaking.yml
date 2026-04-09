@@ -1,0 +1,27 @@
+title: Palestras e workshops
+description: Palestras, workshops e participações em podcasts sobre sistemas de back-end, desenvolvimento fullstack e software confiável.
+links:
+  - label: Convidar para palestrar
+    to: "mailto:bielfaria2003@gmail.com"
+    size: md
+events:
+  - category: Conference
+    title: "Construindo sistemas de back-end confiáveis"
+    date: "2024-10-26"
+    location: "Brazil Web Summit"
+    url: "#"
+  - category: Conference
+    title: "APIs sustentáveis em produção"
+    date: "2024-06-15"
+    location: "Developer Conference Online"
+    url: "#"
+  - category: Live talk
+    title: "Observabilidade no dia a dia da engenharia"
+    date: "2024-08-20"
+    location: "Meetups e workshops locais"
+    url: "#"
+  - category: Podcast
+    title: "Escalando sistemas: dicas práticas"
+    date: "2024-07-18"
+    location: "Podcast tech (convidado)"
+    url: "#"
