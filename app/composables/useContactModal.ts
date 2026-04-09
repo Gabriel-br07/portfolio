@@ -17,12 +17,6 @@ export function useContactModal() {
     screen.value = 'choice'
   }
 
-  watch(isOpen, (open) => {
-    if (!open) {
-      reset()
-    }
-  })
-
   return {
     isOpen,
     screen,
