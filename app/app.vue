@@ -26,7 +26,11 @@ useHead(() => ({
 }))
 
 useSeoMeta({
-  titleTemplate: (title?: string) => t('seo.titleTemplate', { title: title ?? '' }),
+  titleTemplate: (title?: string) => {
+    const pageTitle = (title ?? '').trim()
+    if (!pageTitle) return t('seo.siteTitle')
+    return t('seo.titleWithPage', { title: pageTitle })
+  },
   ogImage: 'https://i.imgur.com/xfmm9Ms.jpeg',
   twitterImage: 'https://i.imgur.com/xfmm9Ms.jpeg',
   twitterCard: 'summary_large_image'

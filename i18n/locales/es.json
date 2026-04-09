@@ -21,11 +21,12 @@
     "comingSoonDescription": "Pronto habrá artículos sobre desarrollo, diseño y tecnología.",
     "sectionTitle": "Últimos artículos",
     "sectionDescription": "Ideas sobre desarrollo, colaboración y aprendizaje práctico.",
-    "seoTitle": "Blog — Gabriel Oliveira",
+    "seoTitle": "Blog",
     "seoDescription": "Artículos sobre desarrollo, diseño y tecnología. Nuevo contenido próximamente."
   },
   "seo": {
-    "titleTemplate": "{title} — Portafolio Gabriel Oliveira"
+    "siteTitle": "Portafolio Gabriel Oliveira",
+    "titleWithPage": "{title} — Portafolio Gabriel Oliveira"
   },
   "hero": {
     "available": "Disponible para nuevos proyectos",

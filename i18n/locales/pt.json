@@ -21,11 +21,12 @@
     "comingSoonDescription": "Artigos estão a caminho. Fique atento a conteúdos sobre desenvolvimento, design e tecnologia.",
     "sectionTitle": "Artigos recentes",
     "sectionDescription": "Reflexões sobre desenvolvimento, colaboração e aprendizado prático.",
-    "seoTitle": "Blog — Gabriel Oliveira",
+    "seoTitle": "Blog",
     "seoDescription": "Artigos sobre desenvolvimento, design e tecnologia. Novo conteúdo em breve."
   },
   "seo": {
-    "titleTemplate": "{title} — Portfólio Gabriel Oliveira"
+    "siteTitle": "Portfólio Gabriel Oliveira",
+    "titleWithPage": "{title} — Portfólio Gabriel Oliveira"
   },
   "hero": {
     "available": "Disponível para novos projetos",

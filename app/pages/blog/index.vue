@@ -3,9 +3,7 @@ const { t } = useI18n()
 
 useSeoMeta({
   title: t('blog.seoTitle'),
-  ogTitle: t('blog.seoTitle'),
-  description: t('blog.seoDescription'),
-  ogDescription: t('blog.seoDescription')
+  description: t('blog.seoDescription')
 })
 </script>
 
