@@ -2,10 +2,23 @@
 import type { IndexCollectionItem } from '@nuxt/content'
 
 const { footer, global } = useAppConfig()
+const { t } = useI18n()
 
 defineProps<{
   page: IndexCollectionItem
 }>()
+
+/** Hero already has a View LinkedIn CTA; omit duplicate LinkedIn icon here. */
+const heroSocialLinks = computed(() => {
+  const links = footer?.links ?? []
+  return links.filter((link) => {
+    const to = String((link as { to?: string }).to ?? '')
+    const icon = String((link as { icon?: string }).icon ?? '')
+    if (icon.includes('linkedin')) return false
+    if (to.includes('linkedin.com')) return false
+    return true
+  })
+})
 </script>
 
 <template>
@@ -37,7 +50,7 @@ defineProps<{
           class="size-18 ring ring-default ring-offset-3 ring-offset-(--ui-bg)"
           :light="global.picture?.light!"
           :dark="global.picture?.dark!"
-          :alt="global.picture?.alt!"
+          :alt="t('hero.profileAlt')"
         />
       </Motion>
     </template>
@@ -111,7 +124,7 @@ defineProps<{
             variant="ghost"
             class="gap-2"
             :to="global.available ? global.meetingLink : ''"
-            :label="global.available ? 'Available for new projects' : 'Not available at the moment'"
+            :label="global.available ? t('hero.available') : t('hero.unavailable')"
           >
             <template #leading>
               <span class="relative flex size-2">
@@ -129,9 +142,12 @@ defineProps<{
         </div>
       </Motion>
 
-      <div class="gap-x-4 inline-flex mt-4">
+      <div
+        v-if="heroSocialLinks.length"
+        class="gap-x-4 inline-flex mt-4"
+      >
         <Motion
-          v-for="(link, index) of footer?.links"
+          v-for="(link, index) of heroSocialLinks"
           :key="index"
 
           :initial="{

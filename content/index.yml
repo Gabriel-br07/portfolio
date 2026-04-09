@@ -1,5 +1,5 @@
 seo:
-  title: "Gabriel Oliveira — Fullstack & Back-End Developer"
+  title: "Fullstack & Back-End Developer"
   description: "Welcome to the portfolio of Gabriel Oliveira, a developer who builds reliable, maintainable, and impactful digital solutions. My work focuses on clarity, collaborative problem-solving, and well-structured software."
 
 title: "Hello, I'm Gabriel Oliveira"
@@ -39,6 +39,3 @@ experience:
         name: "Serpro"
         logo: "/logos/serpro.svg"
         url: "https://www.serpro.gov.br"
-blog:
-  title: "Latest Articles"
-  description: "Thoughts and insights on development, collaboration, and practical learning experiences."

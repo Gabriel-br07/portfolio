@@ -1,5 +1,7 @@
 <script setup lang="ts">
+const { t } = useI18n()
 const { footer } = useAppConfig()
+const year = new Date().getFullYear()
 </script>
 
 <template>
@@ -8,11 +10,11 @@ const { footer } = useAppConfig()
     :ui="{ left: 'text-muted text-xs' }"
   >
     <template #left>
-      {{ footer.credits }}
+      {{ t('footer.credits', { year }) }}
     </template>
 
     <template #right>
-      <template v-if="footer?.links">
+      <template v-if="footer?.links?.length">
         <UButton
           v-for="(link, index) of footer?.links"
           :key="index"

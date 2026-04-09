@@ -1,0 +1,41 @@
+seo:
+  title: "Desarrollador Fullstack y Back-End"
+  description: "Bienvenido al portafolio de Gabriel Oliveira, un desarrollador que construye soluciones digitales fiables, mantenibles y con impacto. Mi trabajo se centra en la claridad, el trabajo colaborativo y el software bien estructurado."
+
+title: "Hola, soy Gabriel Oliveira"
+description: "Soy un desarrollador dedicado a crear experiencias digitales significativas que equilibran fiabilidad y usabilidad. Me gusta resolver problemas con un diseño cuidadoso y código limpio."
+
+hero:
+  links:
+    - label: "Ver LinkedIn"
+      to: "https://www.linkedin.com/in/faria0703"
+      color: "neutral"
+    - label: "Explorar GitHub"
+      to: "https://github.com/Gabriel-br07"
+      color: "neutral"
+    - label: "Enviar correo"
+      to: "mailto:bielfaria2003@gmail.com"
+      color: "neutral"
+
+about:
+  title: "Sobre mí"
+  description: |
+    Soy un desarrollador con un fuerte interés en crear software fiable, intuitivo y alineado con las necesidades de usuarios y equipos.
+    A lo largo de mi trabajo he colaborado estrechamente con otras personas para entregar soluciones que destacan la comunicación clara, el diseño cuidadoso y el código mantenible.
+    Mi enfoque se basa en resolver problemas de forma práctica, aprender de forma continua y construir productos que funcionen bien en el mundo real.
+
+experience:
+  title: "Experiencia laboral"
+  items:
+    - position: "Desarrollador full stack en"
+      date: "feb. 2025 — actualidad"
+      company:
+        name: "DW Corp"
+        logo: "/logos/DW-Corp-logo.svg"
+        url: "https://dwcorp.com.br/"
+    - position: "Pasante en"
+      date: "may. 2024 — feb. 2025"
+      company:
+        name: "Serpro"
+        logo: "/logos/serpro.svg"
+        url: "https://www.serpro.gov.br"

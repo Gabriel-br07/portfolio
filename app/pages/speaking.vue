@@ -7,9 +7,20 @@ type Event = {
   category: 'Conference' | 'Live talk' | 'Podcast'
 }
 
-const { data: page } = await useAsyncData('speaking', () => {
-  return queryCollection('speaking').first()
-})
+const route = useRoute()
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
+const { data: page } = await useAsyncData(
+  () => `speaking-${locale.value}`,
+  async () => {
+    for (const p of contentPathVariants(localePath('/speaking'), route.path)) {
+      const doc = await queryCollection('speaking').path(p).first()
+      if (doc) return doc
+    }
+    return null
+  }
+)
 if (!page.value) {
   throw createError({
     statusCode: 404,
@@ -20,9 +31,7 @@ if (!page.value) {
 
 useSeoMeta({
   title: page.value?.seo?.title || page.value?.title,
-  ogTitle: page.value?.seo?.title || page.value?.title,
-  description: page.value?.seo?.description || page.value?.description,
-  ogDescription: page.value?.seo?.description || page.value?.description
+  description: page.value?.seo?.description || page.value?.description
 })
 
 const { global } = useAppConfig()
@@ -41,7 +50,10 @@ const groupedEvents = computed((): Record<Event['category'], Event[]> => {
 })
 
 function formatDate(dateString: string): string {
-  return new Date(dateString).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })
+  return new Date(dateString).toLocaleDateString(
+    locale.value === 'en' ? 'en-US' : locale.value === 'pt' ? 'pt-BR' : 'es',
+    { year: 'numeric', month: 'long' }
+  )
 }
 </script>
 
@@ -109,7 +121,7 @@ function formatDate(dateString: string): string {
             <UButton
               v-if="event.url"
               target="_blank"
-              :label="event.category === 'Podcast' ? 'Listen' : 'Watch'"
+              :label="event.category === 'Podcast' ? t('speaking.listen') : t('speaking.watch')"
               variant="link"
               class="p-0 pt-2 gap-0"
             >

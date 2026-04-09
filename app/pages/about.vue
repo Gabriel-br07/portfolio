@@ -1,7 +1,18 @@
 <script setup lang="ts">
-const { data: page } = await useAsyncData('about', () => {
-  return queryCollection('about').first()
-})
+const route = useRoute()
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
+const { data: page } = await useAsyncData(
+  () => `about-${locale.value}`,
+  async () => {
+    for (const p of contentPathVariants(localePath('/about'), route.path)) {
+      const doc = await queryCollection('about').path(p).first()
+      if (doc) return doc
+    }
+    return null
+  }
+)
 if (!page.value) {
   throw createError({
     statusCode: 404,
@@ -14,9 +25,7 @@ const { global } = useAppConfig()
 
 useSeoMeta({
   title: page.value?.seo?.title || page.value?.title,
-  ogTitle: page.value?.seo?.title || page.value?.title,
-  description: page.value?.seo?.description || page.value?.description,
-  ogDescription: page.value?.seo?.description || page.value?.description
+  description: page.value?.seo?.description || page.value?.description
 })
 </script>
 
@@ -37,7 +46,7 @@ useSeoMeta({
         class="sm:rotate-4 size-36 rounded-lg ring ring-default ring-offset-3 ring-offset-(--ui-bg)"
         :light="global.picture?.light!"
         :dark="global.picture?.dark!"
-        :alt="global.picture?.alt!"
+        :alt="t('hero.profileAlt')"
       />
     </UPageHero>
     <UPageSection

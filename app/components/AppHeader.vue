@@ -19,7 +19,10 @@ defineProps<{
       }"
     >
       <template #list-trailing>
-        <ColorModeButton />
+        <div class="flex items-center gap-0.5 sm:gap-1">
+          <LocaleSwitcher />
+          <ColorModeButton />
+        </div>
       </template>
     </UNavigationMenu>
   </div>

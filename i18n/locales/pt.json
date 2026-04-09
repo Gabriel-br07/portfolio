@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Início",
+    "projects": "Projetos",
+    "blog": "Blog",
+    "about": "Sobre mim"
+  },
+  "footer": {
+    "credits": "Feito com Nuxt UI • © {year}"
+  },
+  "error": {
+    "title": "Página não encontrada",
+    "description": "Desculpe, esta página não foi encontrada."
+  },
+  "blog": {
+    "backToBlog": "Blog",
+    "minRead": "{n} MIN DE LEITURA",
+    "copyLink": "Copiar link",
+    "linkCopied": "Link do artigo copiado para a área de transferência",
+    "comingSoon": "Em breve",
+    "comingSoonDescription": "Artigos estão a caminho. Fique atento a conteúdos sobre desenvolvimento, design e tecnologia.",
+    "sectionTitle": "Artigos recentes",
+    "sectionDescription": "Reflexões sobre desenvolvimento, colaboração e aprendizado prático.",
+    "seoTitle": "Blog",
+    "seoDescription": "Artigos sobre desenvolvimento, design e tecnologia. Novo conteúdo em breve."
+  },
+  "seo": {
+    "siteTitle": "Portfólio Gabriel Oliveira",
+    "titleWithPage": "{title} — Portfólio Gabriel Oliveira"
+  },
+  "hero": {
+    "available": "Disponível para novos projetos",
+    "unavailable": "Indisponível no momento",
+    "profileAlt": "Foto de perfil de Gabriel Oliveira"
+  },
+  "locale": {
+    "ariaSwitch": "Alterar idioma",
+    "viewProject": "Ver projeto"
+  },
+  "speaking": {
+    "listen": "Ouvir",
+    "watch": "Assistir"
+  }
+}

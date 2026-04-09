@@ -1,30 +1,17 @@
 <script setup lang="ts">
-const { data: page } = await useAsyncData('blog-page', () => {
-  return queryCollection('pages').path('/blog').first()
-})
-if (!page.value) {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Page not found',
-    fatal: true
-  })
-}
-// posts listing removed — show "Coming Soon" instead
+const { t } = useI18n()
 
 useSeoMeta({
-  title: page.value?.seo?.title || page.value?.title,
-  ogTitle: page.value?.seo?.title || page.value?.title,
-  description: page.value?.seo?.description || page.value?.description,
-  ogDescription: page.value?.seo?.description || page.value?.description
+  title: t('blog.seoTitle'),
+  description: t('blog.seoDescription')
 })
 </script>
 
 <template>
-  <UPage v-if="page">
+  <UPage>
     <UPageHero
-      :title="page.title"
-      :description="page.description"
-      :links="page.links"
+      :title="t('blog.sectionTitle')"
+      :description="t('blog.sectionDescription')"
       :ui="{
         title: '!mx-0 text-left',
         description: '!mx-0 text-left',
@@ -39,15 +26,26 @@ useSeoMeta({
       <div class="flex flex-col items-center justify-center py-16 lg:py-20">
         <div class="text-center space-y-4">
           <div class="flex items-center justify-center gap-2">
-            <h3 class="text-3xl lg:text-4xl font-semibold animate-pulse">Coming Soon</h3>
+            <h3 class="text-3xl lg:text-4xl font-semibold animate-pulse">
+              {{ t('blog.comingSoon') }}
+            </h3>
             <span class="flex gap-1">
-              <span class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 0ms;"></span>
-              <span class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 150ms;"></span>
-              <span class="w-2 h-2 bg-primary rounded-full animate-bounce" style="animation-delay: 300ms;"></span>
+              <span
+                class="w-2 h-2 bg-primary rounded-full animate-bounce"
+                style="animation-delay: 0ms;"
+              />
+              <span
+                class="w-2 h-2 bg-primary rounded-full animate-bounce"
+                style="animation-delay: 150ms;"
+              />
+              <span
+                class="w-2 h-2 bg-primary rounded-full animate-bounce"
+                style="animation-delay: 300ms;"
+              />
             </span>
           </div>
           <p class="text-muted text-sm lg:text-base max-w-lg px-4">
-            Exciting articles are on the way. Stay tuned for insights on development, design, and technology.
+            {{ t('blog.comingSoonDescription') }}
           </p>
         </div>
       </div>
