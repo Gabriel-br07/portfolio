@@ -5,18 +5,6 @@ const { footer, global } = useAppConfig()
 const { t } = useI18n()
 const { open: openContactModal } = useContactModal()
 
-function onAvailabilityClick() {
-  if (global.available) {
-    openContactModal()
-  }
-}
-
-function isMailFooterLink(link: { to?: string, icon?: string }) {
-  const to = String(link.to ?? '')
-  const icon = String(link.icon ?? '')
-  return icon.includes('lucide-mail') || to.startsWith('mailto:')
-}
-
 defineProps<{
   page: IndexCollectionItem
 }>()
@@ -133,11 +121,13 @@ const heroSocialLinks = computed(() => {
         >
           <UButton v-bind="page.hero.links[0]" />
           <UButton
+            :disabled="!global.available"
             :color="global.available ? 'success' : 'error'"
             variant="ghost"
             class="gap-2"
+            :class="{ 'opacity-80': !global.available }"
             :label="global.available ? t('hero.available') : t('hero.unavailable')"
-            @click="onAvailabilityClick"
+            @click="openContactModal()"
           >
             <template #leading>
               <span class="relative flex size-2">
@@ -179,7 +169,7 @@ const heroSocialLinks = computed(() => {
           }"
         >
           <UButton
-            v-if="isMailFooterLink(link)"
+            v-if="isMailLink(link)"
             size="md"
             color="neutral"
             variant="ghost"

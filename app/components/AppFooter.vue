@@ -3,12 +3,6 @@ const { t } = useI18n()
 const { footer } = useAppConfig()
 const year = new Date().getFullYear()
 const { open: openContactModal } = useContactModal()
-
-function isMailFooterLink(link: { to?: string, icon?: string }) {
-  const to = String(link.to ?? '')
-  const icon = String(link.icon ?? '')
-  return icon.includes('lucide-mail') || to.startsWith('mailto:')
-}
 </script>
 
 <template>
@@ -27,7 +21,7 @@ function isMailFooterLink(link: { to?: string, icon?: string }) {
           :key="index"
         >
           <UButton
-            v-if="isMailFooterLink(link)"
+            v-if="isMailLink(link)"
             size="xs"
             color="neutral"
             variant="ghost"

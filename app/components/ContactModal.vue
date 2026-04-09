@@ -14,7 +14,8 @@ if (import.meta.dev) {
   }
 }
 
-const { isOpen, screen, open, close } = useContactModal()
+const { isOpen, screen, open, close, reset } = useContactModal()
+const localePath = useLocalePath()
 
 const name = ref('')
 const email = ref('')
@@ -31,6 +32,7 @@ function resetForm() {
 watch(isOpen, (v) => {
   if (!v) {
     resetForm()
+    reset()
   }
 })
 
@@ -43,8 +45,15 @@ function goToChoice() {
   submitStatus.value = 'idle'
 }
 
+function isHomeRoute() {
+  const homePath = localePath('/')
+  const path = route.path.replace(/\/$/, '') || '/'
+  const home = homePath.replace(/\/$/, '') || '/'
+  return path === home
+}
+
 function consumeContactHash() {
-  if (route.hash !== '#contact') return
+  if (route.hash !== '#contact' || !isHomeRoute()) return
   open()
   router.replace({ path: route.path, query: route.query, hash: '' })
 }
@@ -53,9 +62,12 @@ onMounted(() => {
   consumeContactHash()
 })
 
-watch(() => route.hash, () => {
-  consumeContactHash()
-})
+watch(
+  () => [route.path, route.hash] as const,
+  () => {
+    consumeContactHash()
+  }
+)
 
 async function onSubmit() {
   const accessKey = String(runtimeConfig.public.web3formsAccessKey ?? '').trim()
