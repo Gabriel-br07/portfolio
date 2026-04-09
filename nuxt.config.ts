@@ -51,6 +51,7 @@ export default defineNuxtConfig({
     baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
+    // Resolved under `restructureDir` (default `i18n/`) → `i18n/locales/*.json`
     langDir: 'locales',
     locales: [
       { code: 'en', language: 'en', name: 'English', file: 'en.json' },
