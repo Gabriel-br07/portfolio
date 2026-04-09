@@ -8,23 +8,28 @@ defineProps({
   }
 })
 
-useHead({
+const { t } = useI18n()
+const i18nHead = useLocaleHead()
+
+useHead(() => ({
   htmlAttrs: {
-    lang: 'en'
-  }
-})
+    ...i18nHead.value.htmlAttrs
+  },
+  link: [...(i18nHead.value.link || [])]
+}))
 
 useSeoMeta({
-  title: 'Page not found',
-  description: 'We are sorry but this page could not be found.'
+  title: () => t('error.title'),
+  description: () => t('error.description')
 })
 
+const links = useNavLinks()
 const [{ data: navigation }, { data: files }] = useBlogSearchData()
 </script>
 
 <template>
   <div>
-    <AppHeader :links="navLinks" />
+    <AppHeader :links="links" />
 
     <UMain>
       <UContainer>
@@ -41,7 +46,7 @@ const [{ data: navigation }, { data: files }] = useBlogSearchData()
         :files="files"
         shortcut="meta_k"
         :navigation="navigation"
-        :links="navLinks"
+        :links="links"
         :fuse="{ resultLimit: 42 }"
       />
     </ClientOnly>

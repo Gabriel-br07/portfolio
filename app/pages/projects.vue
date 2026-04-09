@@ -1,7 +1,21 @@
 <script setup lang="ts">
-const { data: page } = await useAsyncData('projects-page', () => {
-  return queryCollection('pages').path('/projects').first()
-})
+const route = useRoute()
+const { locale, t } = useI18n()
+const localePath = useLocalePath()
+
+const { data: page } = await useAsyncData(
+  () => `projects-page-${locale.value}`,
+  async () => {
+    for (const p of contentPathVariants(localePath('/projects'), route.path)) {
+      const doc = await queryCollection('pages').path(p).first()
+      if (doc) return doc
+    }
+    // Fallback: page-type paths can miss `.path()` lookup; YAML stem matches locale folder (e.g. `projects`, `pt/projects`).
+    const stem = localePath('/projects').replace(/^\/+|\/+$/g, '')
+    const all = await queryCollection('pages').all()
+    return all.find(item => (item as { stem?: string }).stem === stem) ?? null
+  }
+)
 if (!page.value) {
   throw createError({
     statusCode: 404,
@@ -10,9 +24,23 @@ if (!page.value) {
   })
 }
 
-const { data: projects } = await useAsyncData('projects', () => {
-  return queryCollection('projects').all()
-})
+const { data: projects } = await useAsyncData(
+  () => `projects-${locale.value}`,
+  async () => {
+    const all = await queryCollection('projects').all()
+    // Data collections expose `stem` (file path without ext), not `path` like page collections.
+    const stemPrefix = localePath('/projects').replace(/^\/+|\/+$/g, '')
+    const filtered = all.filter((item) => {
+      const stem = (item as { stem?: string }).stem ?? ''
+      return stem.startsWith(`${stemPrefix}/`)
+    })
+    return filtered.sort((a, b) => {
+      const da = new Date((a as { date: string | Date }).date).getTime()
+      const db = new Date((b as { date: string | Date }).date).getTime()
+      return db - da
+    })
+  }
+)
 
 const { global } = useAppConfig()
 
@@ -68,7 +96,6 @@ useSeoMeta({
       >
         <UPageCard
           :title="project.title"
-          :description="project.description"
           :to="project.url"
           orientation="horizontal"
           variant="naked"
@@ -83,12 +110,29 @@ useSeoMeta({
               {{ new Date(project.date).getFullYear() }}
             </span>
           </template>
+          <template #description>
+            <p>{{ project.description }}</p>
+            <div
+              v-if="project.tags?.length"
+              class="flex flex-wrap gap-1.5 mt-2"
+            >
+              <UBadge
+                v-for="tag in project.tags"
+                :key="`${project.title}-${tag}`"
+                variant="subtle"
+                size="sm"
+                color="neutral"
+              >
+                {{ tag }}
+              </UBadge>
+            </div>
+          </template>
           <template #footer>
             <ULink
               :to="project.url"
               class="text-sm text-primary flex items-center"
             >
-              View Project
+              {{ t('locale.viewProject') }}
               <UIcon
                 name="i-lucide-arrow-right"
                 class="size-4 text-primary transition-all opacity-0 group-hover:translate-x-1 group-hover:opacity-100"

@@ -1,38 +1,26 @@
 /**
- * Loads Nuxt Content search/navigation for the blog collection.
- * Fails soft when the blog is unused or the content DB is missing tables (e.g. stale .data cache).
- *
- * Must call useAsyncData / useLazyAsyncData synchronously (not inside an async wrapper)
- * so Nuxt registers them during setup.
+ * Placeholder for content search scoped to the blog area. Returns empty data until blog content is wired back in.
  */
+import type { ContentNavigationItem } from '@nuxt/content'
+
 export function useBlogSearchData() {
+  const { locale } = useI18n()
+
   const navigation = useAsyncData(
-    'navigation',
-    async () => {
-      try {
-        return await Promise.all([queryCollectionNavigation('blog')])
-      } catch {
-        return []
-      }
-    },
+    () => `navigation-${locale.value}`,
+    async () => [] as ContentNavigationItem[],
     {
-      transform: (data: unknown[]) => data.flat(),
+      watch: [locale],
       default: () => []
     }
   )
 
   const search = useLazyAsyncData(
-    'search',
-    async () => {
-      try {
-        return await Promise.all([queryCollectionSearchSections('blog')])
-      } catch {
-        return []
-      }
-    },
+    () => `search-${locale.value}`,
+    async () => [] as { path?: string }[],
     {
       server: false,
-      transform: (data: unknown[]) => data.flat(),
+      watch: [locale],
       default: () => []
     }
   )

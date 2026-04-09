@@ -2,6 +2,7 @@
 import type { IndexCollectionItem } from '@nuxt/content'
 
 const { footer, global } = useAppConfig()
+const { t } = useI18n()
 
 defineProps<{
   page: IndexCollectionItem
@@ -37,7 +38,7 @@ defineProps<{
           class="size-18 ring ring-default ring-offset-3 ring-offset-(--ui-bg)"
           :light="global.picture?.light!"
           :dark="global.picture?.dark!"
-          :alt="global.picture?.alt!"
+          :alt="t('hero.profileAlt')"
         />
       </Motion>
     </template>
@@ -111,7 +112,7 @@ defineProps<{
             variant="ghost"
             class="gap-2"
             :to="global.available ? global.meetingLink : ''"
-            :label="global.available ? 'Available for new projects' : 'Not available at the moment'"
+            :label="global.available ? t('hero.available') : t('hero.unavailable')"
           >
             <template #leading>
               <span class="relative flex size-2">
