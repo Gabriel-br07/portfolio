@@ -22,7 +22,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com'
+      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
+      web3formsAccessKey: process.env.NUXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? ''
     }
   },
 
