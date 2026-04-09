@@ -23,6 +23,25 @@ export default defineAppConfig({
     }
   },
   footer: {
-    colorMode: false
+    colorMode: false,
+    links: [
+      {
+        icon: 'i-simple-icons-linkedin',
+        to: 'https://www.linkedin.com/in/faria0703',
+        target: '_blank',
+        'aria-label': 'Gabriel Oliveira on LinkedIn'
+      },
+      {
+        icon: 'i-simple-icons-github',
+        to: 'https://github.com/Gabriel-br07',
+        target: '_blank',
+        'aria-label': 'Gabriel Oliveira on GitHub'
+      },
+      {
+        icon: 'i-lucide-mail',
+        to: 'mailto:bielfaria2003@gmail.com',
+        'aria-label': 'Email Gabriel Oliveira'
+      }
+    ]
   }
 })

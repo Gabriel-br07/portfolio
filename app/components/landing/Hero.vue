@@ -7,6 +7,18 @@ const { t } = useI18n()
 defineProps<{
   page: IndexCollectionItem
 }>()
+
+/** Hero already has a View LinkedIn CTA; omit duplicate LinkedIn icon here. */
+const heroSocialLinks = computed(() => {
+  const links = footer?.links ?? []
+  return links.filter((link) => {
+    const to = String((link as { to?: string }).to ?? '')
+    const icon = String((link as { icon?: string }).icon ?? '')
+    if (icon.includes('linkedin')) return false
+    if (to.includes('linkedin.com')) return false
+    return true
+  })
+})
 </script>
 
 <template>
@@ -130,9 +142,12 @@ defineProps<{
         </div>
       </Motion>
 
-      <div class="gap-x-4 inline-flex mt-4">
+      <div
+        v-if="heroSocialLinks.length"
+        class="gap-x-4 inline-flex mt-4"
+      >
         <Motion
-          v-for="(link, index) of footer?.links"
+          v-for="(link, index) of heroSocialLinks"
           :key="index"
 
           :initial="{
