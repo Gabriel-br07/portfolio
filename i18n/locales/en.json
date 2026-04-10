@@ -28,6 +28,9 @@
     "siteTitle": "Gabriel Oliveira Portfolio",
     "titleWithPage": "{title} — Gabriel Oliveira Portfolio"
   },
+  "home": {
+    "techCarouselTitle": "Technologies I've worked with"
+  },
   "hero": {
     "available": "Available for new projects",
     "unavailable": "Not available at the moment",

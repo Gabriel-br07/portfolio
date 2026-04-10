@@ -154,7 +154,7 @@ const modalDescription = computed(() => {
               variant="outline"
               size="lg"
               block
-              class="sm:flex-1"
+              class="sm:flex-1 cursor-pointer"
               icon="i-lucide-mail"
               :label="t('contactModal.sendMessage')"
               @click="goToForm"

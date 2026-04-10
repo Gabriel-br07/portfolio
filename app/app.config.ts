@@ -16,7 +16,7 @@ export default defineAppConfig({
     },
     pageHero: {
       slots: {
-        container: 'py-18 sm:py-24 lg:py-32',
+        container: 'pt-18 pb-12 sm:pt-24 sm:pb-16 lg:pt-32 lg:pb-20',
         title: 'mx-auto max-w-xl text-pretty text-3xl sm:text-4xl lg:text-5xl',
         description: 'mt-2 text-md mx-auto max-w-2xl text-pretty sm:text-md text-muted'
       }
