@@ -15,3 +15,13 @@ export function contentPathVariants(...candidates: string[]): string[] {
   }
   return [...out]
 }
+
+/**
+ * File stems for the home page in the `index` collection (`index.yml`, `pt/index.yml`, `es/index.yml`).
+ * Used when `queryCollection('index').path(...)` does not match the stored path.
+ */
+export function indexCollectionStem(localePathRoot: string): string {
+  const p = localePathRoot.replace(/\/+$/, '') || '/'
+  if (p === '/') return 'index'
+  return `${p.replace(/^\//, '')}/index`
+}
