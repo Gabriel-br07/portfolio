@@ -24,23 +24,7 @@ if (!page.value) {
   })
 }
 
-const { data: projects } = await useAsyncData(
-  () => `projects-${locale.value}`,
-  async () => {
-    const all = await queryCollection('projects').all()
-    // Data collections expose `stem` (file path without ext), not `path` like page collections.
-    const stemPrefix = localePath('/projects').replace(/^\/+|\/+$/g, '')
-    const filtered = all.filter((item) => {
-      const stem = (item as { stem?: string }).stem ?? ''
-      return stem.startsWith(`${stemPrefix}/`)
-    })
-    return filtered.sort((a, b) => {
-      const da = new Date((a as { date: string | Date }).date).getTime()
-      const db = new Date((b as { date: string | Date }).date).getTime()
-      return db - da
-    })
-  }
-)
+const { data: projects } = await useProjectsCollection()
 
 const { open: openContactModal } = useContactModal()
 
