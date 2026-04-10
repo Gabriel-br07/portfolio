@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { Swiper as SwiperInstance } from 'swiper/types'
 import { Autoplay } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
@@ -59,8 +58,6 @@ const loopAdditionalSlides = techItems.length
 
 const modules = [Autoplay]
 
-const swiperRef = shallowRef<SwiperInstance | null>(null)
-
 const hoveredSlideKey = ref<string | null>(null)
 
 const autoplayConfig = computed(() => ({
@@ -71,18 +68,13 @@ const autoplayConfig = computed(() => ({
   waitForTransition: true
 }))
 
-function onSwiper(swiper: SwiperInstance) {
-  swiperRef.value = swiper
-}
-
+/** Hover highlight only — autoplay is never stopped so the track stays in continuous motion. */
 function onTileEnter(slideKey: string) {
   hoveredSlideKey.value = slideKey
-  swiperRef.value?.autoplay?.stop()
 }
 
 function onTileLeave() {
   hoveredSlideKey.value = null
-  swiperRef.value?.autoplay?.start()
 }
 
 function isActive(slideKey: string) {
@@ -174,7 +166,6 @@ function tileClass(slideKey: string) {
                 768: { spaceBetween: 16 },
                 1024: { spaceBetween: 18 }
               }"
-              @swiper="onSwiper"
             >
               <SwiperSlide
                 v-for="{ item, slideKey } in swiperSlides"
