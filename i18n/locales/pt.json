@@ -28,6 +28,9 @@
     "siteTitle": "Portfólio Gabriel Oliveira",
     "titleWithPage": "{title} — Portfólio Gabriel Oliveira"
   },
+  "home": {
+    "techCarouselTitle": "Tecnologias com que trabalhei"
+  },
   "hero": {
     "available": "Disponível para novos projetos",
     "unavailable": "Indisponível no momento",
