@@ -23,6 +23,7 @@ const { open: openContactModal } = useContactModal()
           <UButton
             v-if="isMailLink(link)"
             size="xs"
+            class="cursor-pointer"
             color="neutral"
             variant="ghost"
             :icon="link.icon"

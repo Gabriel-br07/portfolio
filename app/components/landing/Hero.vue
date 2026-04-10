@@ -172,6 +172,7 @@ const heroSocialLinks = computed(() => {
             v-if="isMailLink(link)"
             size="md"
             color="neutral"
+            class="cursor-pointer"
             variant="ghost"
             :icon="link.icon"
             :aria-label="link['aria-label']"
