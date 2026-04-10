@@ -3,6 +3,7 @@
     "home": "Home",
     "projects": "Projects",
     "blog": "Blog",
+    "books": "Books",
     "about": "About"
   },
   "footer": {
@@ -23,6 +24,27 @@
     "sectionDescription": "Thoughts and insights on development, collaboration, and practical learning.",
     "seoTitle": "Blog",
     "seoDescription": "Articles on development, design, and technology. New content coming soon."
+  },
+  "livros": {
+    "sectionTitle": "Books I recommend",
+    "sectionDescription": "Short notes on each title and why it matters in practice — including what I'm reading now.",
+    "seoTitle": "Books",
+    "seoDescription": "Books on agile delivery, software craftsmanship, and clean architecture — recommendations from my reading list.",
+    "buy": "Buy",
+    "whyRead": "Why read?",
+    "whyReadHeading": "Why it's worth reading",
+    "currentlyReading": "Currently reading",
+    "books": {
+      "agile-cdc": {
+        "whyRead": "A great read if you have little experience working in a team or want to get better at it.\n\nIt shows the mindset teams need in software development, stressing that the focus is not on the individual but on collaboration and the value delivered. In Agile, teams work together and prioritize frequent releases with a business focus.\n\nI recommend it if you want to grow how you work with others and understand that being strong on your own is not enoug,the team has to work well as a whole."
+      },
+      "software-craftsman": {
+        "whyRead": "More than good practices, this book explains what it means to be a software professional.\n\nIt covers ideas like TDD and XP, but what stands out is the author’s real experience and strong focus on community — sharing knowledge, helping others, and growing together.\n\nI recommend it if you want to grow not only technically but also as a professional in the software ecosystem."
+      },
+      "clean-architecture-pt": {
+        "whyRead": "I’m still reading, so the full recommendation will come soon.\n\nSo far the book seems to offer solid ideas about organizing and structuring software. When I finish, I’ll update this with a fuller review."
+      }
+    }
   },
   "seo": {
     "siteTitle": "Gabriel Oliveira Portfolio",
