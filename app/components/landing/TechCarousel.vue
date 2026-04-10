@@ -9,8 +9,19 @@ type TechItem = { key: string, src: string, label: string, alt: string }
 const { t } = useI18n()
 const prefersReducedMotion = usePreferredReducedMotion()
 
-/** Explicit `.value` check for template + script (avoids relying on template ref unwrapping for comparisons). */
-const isReducedMotion = computed(() => prefersReducedMotion.value === 'reduce')
+/**
+ * SSR + first client paint: always false until mount, so server and hydration both render
+ * the static grid (stable markup). After mount, true only when motion is allowed — then Swiper mounts
+ * with autoplay; reduced-motion users keep the static grid.
+ */
+const hasMounted = ref(false)
+onMounted(() => {
+  hasMounted.value = true
+})
+
+const showAnimatedCarousel = computed(
+  () => hasMounted.value && prefersReducedMotion.value === 'no-preference'
+)
 
 /** Enough repeats for Swiper `loop` + `slides-per-view="auto"` on wide viewports */
 const SWIPER_REPEAT_COUNT = 4
@@ -52,16 +63,13 @@ const swiperRef = shallowRef<SwiperInstance | null>(null)
 
 const hoveredSlideKey = ref<string | null>(null)
 
-const autoplayConfig = computed(() => {
-  if (isReducedMotion.value) return false
-  return {
-    delay: 0,
-    disableOnInteraction: false,
-    pauseOnMouseEnter: false,
-    reverseDirection: false,
-    waitForTransition: true
-  }
-})
+const autoplayConfig = computed(() => ({
+  delay: 0,
+  disableOnInteraction: false,
+  pauseOnMouseEnter: false,
+  reverseDirection: false,
+  waitForTransition: true
+}))
 
 function onSwiper(swiper: SwiperInstance) {
   swiperRef.value = swiper
@@ -96,13 +104,13 @@ function mediaClass(slideKey: string) {
   ]
 }
 
-/** Static list: same grayscale / color behavior as carousel tiles */
-const staticMediaInteractive
-  = `${techMediaSize} ${techMediaTransition} text-muted grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.03] group-focus-visible:grayscale-0 group-focus-visible:opacity-100 group-focus-visible:scale-[1.03]`
+/** Static list: hover parity with carousel; no focus styling (tiles are not interactive). */
+const staticMediaHover
+  = `${techMediaSize} ${techMediaTransition} text-muted grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.03]`
 
 function tileClass(slideKey: string) {
   return [
-    'flex flex-col items-center justify-center gap-1.5 px-0.5 py-1 sm:gap-2 sm:px-1 sm:py-1.5 rounded-lg sm:rounded-xl outline-none transition-[box-shadow,background-color] duration-200',
+    'flex flex-col items-center justify-center gap-1.5 px-0.5 py-1 sm:gap-2 sm:px-1 sm:py-1.5 rounded-lg sm:rounded-xl transition-[box-shadow,background-color] duration-200',
     isActive(slideKey)
       ? 'ring-1 ring-default bg-elevated/50'
       : 'ring-0'
@@ -117,25 +125,23 @@ function tileClass(slideKey: string) {
   >
     <template #description>
       <div class="mt-4 -mx-4 sm:-mx-6 overflow-hidden">
+        <!-- SSR + pre-mount + reduced-motion: one stable tree (static grid). -->
         <div
-          v-if="isReducedMotion"
+          v-if="!showAnimatedCarousel"
           class="mx-auto max-w-6xl px-4 sm:px-6"
         >
-          <div
-            class="flex flex-wrap justify-center gap-x-6 gap-y-4 sm:gap-x-7 sm:gap-y-5"
-            role="list"
+          <ul
+            class="m-0 flex list-none flex-wrap justify-center gap-x-6 gap-y-4 p-0 sm:gap-x-7 sm:gap-y-5"
           >
-            <div
+            <li
               v-for="item in techItems"
               :key="item.key"
-              role="listitem"
-              tabindex="0"
-              class="group flex min-w-[3.75rem] flex-col items-center gap-1.5 rounded-lg p-1 outline-none transition-colors focus-visible:ring-1 focus-visible:ring-default sm:min-w-[4rem] sm:gap-2 sm:rounded-xl sm:p-1.5 hover:bg-elevated/40 focus-visible:bg-elevated/40"
+              class="group flex min-w-[3.75rem] flex-col items-center gap-1.5 rounded-lg p-1 transition-colors sm:min-w-[4rem] sm:gap-2 sm:rounded-xl sm:p-1.5 hover:bg-elevated/40"
             >
               <img
                 :src="item.src"
                 :alt="item.alt"
-                :class="staticMediaInteractive"
+                :class="staticMediaHover"
                 width="36"
                 height="36"
                 loading="lazy"
@@ -144,9 +150,10 @@ function tileClass(slideKey: string) {
               <span class="max-w-[5.5rem] text-center text-[0.6875rem] leading-tight text-muted sm:text-xs">{{
                 item.label
               }}</span>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
+        <!-- Client-only (gated by showAnimatedCarousel): Swiper never mounts on server or for reduced motion. -->
         <div
           v-else
           class="mx-auto max-w-3xl px-2 sm:px-1"
@@ -176,11 +183,8 @@ function tileClass(slideKey: string) {
               >
                 <div
                   :class="tileClass(slideKey)"
-                  tabindex="0"
                   @mouseenter="onTileEnter(slideKey)"
                   @mouseleave="onTileLeave"
-                  @focusin="onTileEnter(slideKey)"
-                  @focusout="onTileLeave"
                 >
                   <img
                     :src="item.src"
