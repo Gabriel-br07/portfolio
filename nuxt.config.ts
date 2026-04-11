@@ -40,6 +40,12 @@ export default defineNuxtConfig({
     }
   },
 
+  routeRules: {
+    '/livros': { redirect: '/books' },
+    '/pt/livros': { redirect: '/pt/books' },
+    '/es/livros': { redirect: '/es/books' }
+  },
+
   // Dev: first SSR transform of large graphs (Tailwind, Nuxt UI, etc.) can exceed 60s on Windows — see nuxt/nuxt#32789
   vite: {
     viteNode: {
