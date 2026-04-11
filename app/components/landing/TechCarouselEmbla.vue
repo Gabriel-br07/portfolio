@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import type { EmblaOptionsType } from 'embla-carousel'
+import type { EmblaCarouselType, EmblaOptionsType } from 'embla-carousel'
 import AutoScroll from 'embla-carousel-auto-scroll'
 import useEmblaCarousel from 'embla-carousel-vue'
-
-export type TechItem = { key: string, src: string, label: string, alt: string }
-export type TechCarouselSlide = { item: TechItem, slideKey: string }
+import type { TechCarouselSlide } from '~/types/tech-carousel'
 
 /** Must match parent `TechCarousel` — set false to silence logs. Keep logging lightweight to avoid noise. */
 const CAROUSEL_DEBUG = import.meta.dev
@@ -45,7 +43,7 @@ const [emblaRef, emblaApi] = useEmblaCarousel(emblaOptions, emblaPlugins)
 
 watch(
   emblaApi,
-  (api) => {
+  (api, _, onCleanup) => {
     if (!api)
       return
 
@@ -53,9 +51,13 @@ watch(
       console.log('[TechCarousel] embla ready')
     }
 
-    /** After `reInit` (resize, theme reflow, etc.) auto-scroll must be nudged — not a color-mode watcher */
-    api.on('reInit', () => {
-      api.plugins()?.autoScroll?.play()
+    const handleReInit = (embla: EmblaCarouselType) => {
+      embla.plugins()?.autoScroll?.play()
+    }
+
+    api.on('reInit', handleReInit)
+    onCleanup(() => {
+      api.off('reInit', handleReInit)
     })
 
     api.plugins()?.autoScroll?.play()
@@ -128,8 +130,7 @@ function tileClass(slideKey: string) {
                   :class="mediaClass(slideKey)"
                   width="36"
                   height="36"
-                  loading="lazy"
-                  fetchpriority="low"
+                  loading="eager"
                   decoding="async"
                   draggable="false"
                 >

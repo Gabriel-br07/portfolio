@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type TechItem = { key: string, src: string, label: string, alt: string }
+import type { TechCarouselSlide, TechItem } from '~/types/tech-carousel'
 
 const { t } = useI18n()
 const prefersReducedMotion = usePreferredReducedMotion()
@@ -44,7 +44,7 @@ const techItems: readonly TechItem[] = [
   { key: 'mongodb', src: '/icons/tech/mongodb.svg', label: 'MongoDB', alt: 'MongoDB' }
 ]
 
-const emblaSlides = computed(() => {
+const emblaSlides = computed((): TechCarouselSlide[] => {
   const repeated: TechItem[] = []
   for (let r = 0; r < EMBLA_REPEAT_COUNT; r++) {
     repeated.push(...techItems)
