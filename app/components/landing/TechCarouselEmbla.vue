@@ -128,7 +128,8 @@ function tileClass(slideKey: string) {
                   :class="mediaClass(slideKey)"
                   width="36"
                   height="36"
-                  loading="eager"
+                  loading="lazy"
+                  fetchpriority="low"
                   decoding="async"
                   draggable="false"
                 >
