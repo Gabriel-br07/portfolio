@@ -23,7 +23,7 @@ export function useNavLinks(): ComputedRef<NavigationMenuItem[]> {
     {
       label: t('nav.books'),
       icon: 'i-lucide-book-open',
-      to: localePath('/livros')
+      to: localePath('/books')
     },
     {
       label: t('nav.about'),

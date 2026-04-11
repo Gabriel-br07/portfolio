@@ -40,6 +40,15 @@ export default defineNuxtConfig({
     }
   },
 
+  routeRules: {
+    '/livros': { redirect: { to: '/books', statusCode: 308 } },
+    '/livros/': { redirect: { to: '/books', statusCode: 308 } },
+    '/pt/livros': { redirect: { to: '/pt/books', statusCode: 308 } },
+    '/pt/livros/': { redirect: { to: '/pt/books', statusCode: 308 } },
+    '/es/livros': { redirect: { to: '/es/books', statusCode: 308 } },
+    '/es/livros/': { redirect: { to: '/es/books', statusCode: 308 } }
+  },
+
   // Dev: first SSR transform of large graphs (Tailwind, Nuxt UI, etc.) can exceed 60s on Windows — see nuxt/nuxt#32789
   vite: {
     viteNode: {

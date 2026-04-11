@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { Autoplay } from 'swiper/modules'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import 'swiper/css'
-
-type TechItem = { key: string, src: string, label: string, alt: string }
+import type { TechCarouselSlide, TechItem } from '~/types/tech-carousel'
 
 const { t } = useI18n()
 const prefersReducedMotion = usePreferredReducedMotion()
 
 /**
  * SSR + first client paint: always false until mount, so server and hydration both render
- * the static grid (stable markup). After mount, true only when motion is allowed — then Swiper mounts
- * with autoplay; reduced-motion users keep the static grid.
+ * the static grid (stable markup). After mount, true only when motion is allowed.
+ * The Embla branch uses `v-if` so it mounts only when visible — Embla must measure a real viewport
+ * width; `v-show` could init while `display: none` and break `loop` / auto-scroll. Theme toggles do
+ * not flip `showAnimatedCarousel`, so the Embla instance stays mounted across dark/light changes.
  */
 const hasMounted = ref(false)
 onMounted(() => {
@@ -22,8 +20,8 @@ const showAnimatedCarousel = computed(
   () => hasMounted.value && prefersReducedMotion.value === 'no-preference'
 )
 
-/** Enough repeats for Swiper `loop` + `slides-per-view="auto"` on wide viewports */
-const SWIPER_REPEAT_COUNT = 4
+/** Enough repeats for `loop: true` on wide viewports (Embla needs sufficient scroll length) */
+const EMBLA_REPEAT_COUNT = 5
 
 const sectionUi = {
   container: '!pt-8 !pb-6 sm:!pt-10 sm:!pb-8',
@@ -46,68 +44,21 @@ const techItems: readonly TechItem[] = [
   { key: 'mongodb', src: '/icons/tech/mongodb.svg', label: 'MongoDB', alt: 'MongoDB' }
 ]
 
-const swiperSlides = computed(() => {
+const emblaSlides = computed((): TechCarouselSlide[] => {
   const repeated: TechItem[] = []
-  for (let r = 0; r < SWIPER_REPEAT_COUNT; r++) {
+  for (let r = 0; r < EMBLA_REPEAT_COUNT; r++) {
     repeated.push(...techItems)
   }
   return repeated.map((item, index) => ({ item, slideKey: `${item.key}-${index}` }))
 })
 
-const loopAdditionalSlides = techItems.length
-
-const modules = [Autoplay]
-
-const hoveredSlideKey = ref<string | null>(null)
-
-const autoplayConfig = computed(() => ({
-  delay: 0,
-  disableOnInteraction: false,
-  pauseOnMouseEnter: false,
-  reverseDirection: false,
-  waitForTransition: true
-}))
-
-/** Hover highlight only — autoplay is never stopped so the track stays in continuous motion. */
-function onTileEnter(slideKey: string) {
-  hoveredSlideKey.value = slideKey
-}
-
-function onTileLeave() {
-  hoveredSlideKey.value = null
-}
-
-function isActive(slideKey: string) {
-  return hoveredSlideKey.value === slideKey
-}
-
 /** Shared size + motion for icons and images (carousel + reduced-motion parity) */
 const techMediaSize = 'size-8 sm:size-9 shrink-0 object-contain'
 const techMediaTransition = 'transition-[filter,opacity,transform] duration-200 ease-out'
 
-function mediaClass(slideKey: string) {
-  const active = isActive(slideKey)
-  return [
-    techMediaSize,
-    techMediaTransition,
-    active
-      ? 'grayscale-0 opacity-100 scale-[1.03]'
-      : 'grayscale opacity-70'
-  ]
-}
-
 /** Static list: hover parity with carousel; no focus styling (tiles are not interactive). */
 const staticMediaHover
   = `${techMediaSize} ${techMediaTransition} text-muted grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-[1.03]`
-
-function tileClass(slideKey: string) {
-  return [
-    'flex flex-col items-center justify-center gap-1.5 px-0.5 py-1 sm:gap-2 sm:px-1 sm:py-1.5 rounded-lg sm:rounded-xl transition-[box-shadow,background-color] duration-200',
-    isActive(slideKey)
-      ? 'ring-1 ring-default bg-elevated/50'
-      : 'ring-0'
-  ]
-}
 </script>
 
 <template>
@@ -117,10 +68,11 @@ function tileClass(slideKey: string) {
   >
     <template #description>
       <div class="mt-4 -mx-4 sm:-mx-6 overflow-hidden">
-        <!-- SSR + pre-mount + reduced-motion: one stable tree (static grid). -->
+        <!-- SSR + pre-mount + reduced-motion: static grid only (no Embla in SSR HTML). -->
         <div
           v-if="!showAnimatedCarousel"
           class="mx-auto max-w-6xl px-4 sm:px-6"
+          :aria-hidden="showAnimatedCarousel"
         >
           <ul
             class="m-0 flex list-none flex-wrap justify-center gap-x-6 gap-y-4 p-0 sm:gap-x-7 sm:gap-y-5"
@@ -145,99 +97,13 @@ function tileClass(slideKey: string) {
             </li>
           </ul>
         </div>
-        <!-- Client-only (gated by showAnimatedCarousel): Swiper never mounts on server or for reduced motion. -->
-        <div
+        <!-- Mount only when animated — viewport has real dimensions (see script comment). -->
+        <LandingTechCarouselEmbla
           v-else
-          class="mx-auto max-w-3xl px-2 sm:px-1"
-        >
-          <div class="tech-carousel-viewport">
-            <Swiper
-              :modules="modules"
-              loop
-              :loop-additional-slides="loopAdditionalSlides"
-              slides-per-view="auto"
-              :space-between="12"
-              :speed="4500"
-              :allow-touch-move="false"
-              :autoplay="autoplayConfig"
-              class="tech-swiper"
-              :breakpoints="{
-                480: { spaceBetween: 14 },
-                768: { spaceBetween: 16 },
-                1024: { spaceBetween: 18 }
-              }"
-            >
-              <SwiperSlide
-                v-for="{ item, slideKey } in swiperSlides"
-                :key="slideKey"
-                class="!w-[4.25rem] shrink-0 sm:!w-[4.5rem] lg:!w-[5rem]"
-              >
-                <div
-                  :class="tileClass(slideKey)"
-                  @mouseenter="onTileEnter(slideKey)"
-                  @mouseleave="onTileLeave"
-                >
-                  <img
-                    :src="item.src"
-                    :alt="item.alt"
-                    :class="mediaClass(slideKey)"
-                    width="36"
-                    height="36"
-                    loading="lazy"
-                    decoding="async"
-                  >
-                  <span
-                    class="max-w-full px-0.5 text-center text-[0.6875rem] leading-tight transition-colors duration-200 sm:text-xs"
-                    :class="isActive(slideKey) ? 'text-highlighted' : 'text-muted'"
-                  >{{ item.label }}</span>
-                </div>
-              </SwiperSlide>
-            </Swiper>
-          </div>
-        </div>
+          :slides="emblaSlides"
+          :aria-hidden="!showAnimatedCarousel"
+        />
       </div>
     </template>
   </UPageSection>
 </template>
-
-<style scoped>
-.tech-carousel-viewport {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 4%,
-    black 96%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 4%,
-    black 96%,
-    transparent
-  );
-}
-
-@media (min-width: 640px) {
-  .tech-carousel-viewport {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 3%,
-      black 97%,
-      transparent
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent,
-      black 3%,
-      black 97%,
-      transparent
-    );
-  }
-}
-
-.tech-swiper :deep(.swiper-wrapper) {
-  transition-timing-function: linear !important;
-}
-</style>
