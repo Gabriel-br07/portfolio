@@ -40,6 +40,13 @@ export default defineNuxtConfig({
     }
   },
 
+  // Dev: first SSR transform of large graphs (Tailwind, Nuxt UI, etc.) can exceed 60s on Windows — see nuxt/nuxt#32789
+  vite: {
+    viteNode: {
+      requestTimeout: 120000
+    }
+  },
+
   eslint: {
     config: {
       stylistic: {

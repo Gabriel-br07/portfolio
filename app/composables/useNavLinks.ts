@@ -21,6 +21,11 @@ export function useNavLinks(): ComputedRef<NavigationMenuItem[]> {
       to: localePath('/blog')
     },
     {
+      label: t('nav.books'),
+      icon: 'i-lucide-book-open',
+      to: localePath('/livros')
+    },
+    {
       label: t('nav.about'),
       icon: 'i-lucide-user',
       to: localePath('/about')

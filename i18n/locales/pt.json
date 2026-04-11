@@ -3,6 +3,7 @@
     "home": "Início",
     "projects": "Projetos",
     "blog": "Blog",
+    "books": "Livros",
     "about": "Sobre mim"
   },
   "footer": {
@@ -23,6 +24,27 @@
     "sectionDescription": "Reflexões sobre desenvolvimento, colaboração e aprendizado prático.",
     "seoTitle": "Blog",
     "seoDescription": "Artigos sobre desenvolvimento, design e tecnologia. Novo conteúdo em breve."
+  },
+  "livros": {
+    "sectionTitle": "Livros que recomendo",
+    "sectionDescription": "Notas breves sobre cada título e por que importa na prática — incluindo o que estou lendo agora.",
+    "seoTitle": "Livros",
+    "seoDescription": "Livros sobre entregas ágeis, ofício de software e arquitetura limpa — recomendações da minha leitura.",
+    "buy": "Comprar",
+    "whyRead": "Por que ler?",
+    "whyReadHeading": "Por que vale a pena",
+    "currentlyReading": "Lendo agora",
+    "books": {
+      "agile-cdc": {
+        "whyRead": "Ótimo livro para quem tem pouca experiência em trabalhar em equipe ou quer melhorar nesse aspecto.\n\nEle mostra o mindset necessário em times de desenvolvimento, reforçando que o foco não está no indivíduo, mas na colaboração e no valor entregue. No Agile, equipes trabalham de forma conjunta e priorizam entregas frequentes com foco no negócio.\n\nRecomendo para quem quer evoluir na forma de trabalhar em equipe e entender que ser bom individualmente não é suficiente, é preciso funcionar bem como time."
+      },
+      "software-craftsman": {
+        "whyRead": "Mais do que boas práticas, este livro mostra o que significa ser um profissional de software.\n\nEle aborda conceitos como TDD e XP, mas o diferencial está nas experiências reais do autor e na forte ênfase em comunidade — compartilhar conhecimento, ajudar outros e evoluir junto.\n\nRecomendo para quem quer crescer não só tecnicamente, mas também como profissional dentro do ecossistema de desenvolvimento."
+      },
+      "clean-architecture-pt": {
+        "whyRead": "Ainda estou lendo, então a recomendação completa virá em breve.\n\nAté agora, o livro parece trazer bons conceitos sobre organização e estrutura de software. Quando finalizar, atualizo com uma análise mais completa."
+      }
+    }
   },
   "seo": {
     "siteTitle": "Portfólio Gabriel Oliveira",

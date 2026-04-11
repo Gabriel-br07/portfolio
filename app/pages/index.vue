@@ -10,7 +10,10 @@ const { data: page } = await useAsyncData(
       const doc = await queryCollection('index').path(p).first()
       if (doc) return doc
     }
-    return null
+    // Fallback: `.path()` can miss page-type routes; YAML stem matches locale folder (e.g. `index`, `pt/index`).
+    const stem = indexCollectionStem(localePath('/'))
+    const all = await queryCollection('index').all()
+    return all.find(item => (item as { stem?: string }).stem === stem) ?? null
   }
 )
 if (!page.value) {
