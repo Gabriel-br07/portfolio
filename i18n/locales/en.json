@@ -36,7 +36,7 @@
     "currentlyReading": "Currently reading",
     "books": {
       "agile-cdc": {
-        "whyRead": "A great read if you have little experience working in a team or want to get better at it.\n\nIt shows the mindset teams need in software development, stressing that the focus is not on the individual but on collaboration and the value delivered. In Agile, teams work together and prioritize frequent releases with a business focus.\n\nI recommend it if you want to grow how you work with others and understand that being strong on your own is not enoug,the team has to work well as a whole."
+        "whyRead": "A great read if you have little experience working in a team or want to get better at it.\n\nIt shows the mindset teams need in software development, stressing that the focus is not on the individual but on collaboration and the value delivered. In Agile, teams work together and prioritize frequent releases with a business focus.\n\nI recommend it if you want to grow how you work with others and understand that being strong on your own is not enough; the team has to work well as a whole."
       },
       "software-craftsman": {
         "whyRead": "More than good practices, this book explains what it means to be a software professional.\n\nIt covers ideas like TDD and XP, but what stands out is the author’s real experience and strong focus on community — sharing knowledge, helping others, and growing together.\n\nI recommend it if you want to grow not only technically but also as a professional in the software ecosystem."
