@@ -27,11 +27,12 @@
     "embla-carousel-vue": "^8.6.0",
     "motion-v": "^1.7.3",
     "nuxt": "^4.2.2",
-    "nuxt-og-image": "^5.1.13",
     "typed.js": "^3.0.0"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.12.1",
+    "@nuxtjs/robots": "^6.1.1",
+    "@nuxtjs/sitemap": "^8.2.1",
     "eslint": "^9.39.2",
     "typescript": "^5.9.3",
     "vue-tsc": "^3.2.1"
