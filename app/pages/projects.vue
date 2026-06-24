@@ -123,6 +123,10 @@ usePageSeo(() => page.value)
             :src="project.image"
             :alt="project.title"
             class="object-cover w-full h-48 rounded-lg"
+            width="960"
+            height="477"
+            :loading="index === 0 ? 'eager' : 'lazy'"
+            decoding="async"
           >
         </UPageCard>
       </Motion>
