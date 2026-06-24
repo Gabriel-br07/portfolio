@@ -1,0 +1,6 @@
+title: Curupira — Identity Infrastructure for Multi-Tenant Applications
+description: "Curupira is an identity control plane for modern multi-tenant applications, centralizing tenants, applications, users, roles, role groups, API keys, and audit trails in a single secure admin panel. Built on OAuth2 with scoped tokens and RBAC, it enforces tenant isolation, monitors login attempts, and records every relevant operation in structured, exportable audit logs — turning identity into a governable, observable, and secure operation."
+image: /projects/curupira.webp
+url: "https://curupira.api.br/en"
+tags: ["Rust", "Axum", "PostgreSQL", "Nuxt", "OAuth2"]
+date: "2026-06-20"
