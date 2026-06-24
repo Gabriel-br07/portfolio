@@ -9,19 +9,15 @@ events:
     title: "Building Reliable Back-End Systems"
     date: "2024-10-26"
     location: "Brazil Web Summit"
-    url: "#"
   - category: Conference
     title: "Designing Maintainable APIs"
     date: "2024-06-15"
     location: "Developer Conference Online"
-    url: "#"
   - category: Live talk
     title: "Observability for Everyday Engineering"
     date: "2024-08-20"
     location: "Local Meetups & Workshops"
-    url: "#"
   - category: Podcast
     title: "Scaling Systems: Practical Tips"
     date: "2024-07-18"
     location: "Tech Podcast (Guest)"
-    url: "#"
