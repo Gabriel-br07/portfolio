@@ -65,15 +65,16 @@ function toggleWhyRead() {
       <div
         class="mx-auto mt-2 w-full max-w-[10.5rem] shrink-0 overflow-hidden rounded-md ring ring-default"
       >
-        <img
+        <NuxtImg
           :src="book.coverSrc"
           :alt="book.coverAlt"
           width="168"
           height="252"
+          sizes="168px"
           loading="lazy"
           decoding="async"
           class="aspect-[2/3] h-auto w-full object-cover"
-        >
+        />
       </div>
 
       <div class="mt-4 flex min-h-0 min-w-0 flex-1 flex-col gap-1 text-center">

@@ -1,4 +1,26 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+
+// Single normalized site URL used by SEO modules (sitemap/robots), i18n `baseUrl`,
+// and `runtimeConfig.public.siteUrl`. A production build/generate must never ship the
+// `https://example.com` template placeholder: it is always rejected. Resolution order
+// is env override → production default domain → localhost (development only).
+const PRODUCTION_SITE_URL = 'https://gabriel07.vercel.app'
+const PLACEHOLDER_SITE_URL = 'https://example.com'
+const rawSiteUrl = process.env.NUXT_PUBLIC_SITE_URL?.trim()
+
+function resolveSiteUrl(): string {
+  if (rawSiteUrl && rawSiteUrl !== PLACEHOLDER_SITE_URL) {
+    return rawSiteUrl.replace(/\/+$/, '')
+  }
+  if (process.env.NODE_ENV === 'production') {
+    return PRODUCTION_SITE_URL
+  }
+  // Development-only convenience fallback.
+  return 'http://localhost:3000'
+}
+
+const siteUrl = resolveSiteUrl()
+
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
@@ -20,7 +42,7 @@ export default defineNuxtConfig({
 
   // Single source of truth for Nuxt SEO modules (sitemap, robots).
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
+    url: siteUrl,
     name: 'Gabriel Oliveira Portfolio'
   },
   colorMode: {
@@ -29,7 +51,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
+      siteUrl,
       web3formsAccessKey: process.env.NUXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? ''
     }
   },
@@ -72,7 +94,7 @@ export default defineNuxtConfig({
     }
   },
   i18n: {
-    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
+    baseUrl: siteUrl,
     defaultLocale: 'en',
     strategy: 'prefix_except_default',
     // Resolved under `restructureDir` (default `i18n/`) → `i18n/locales/*.json`

@@ -46,6 +46,12 @@ const groupedEvents = computed((): Record<Event['category'], Event[]> => {
   return grouped
 })
 
+/** Treats "#", empty, null and undefined as "no real URL" so placeholders never render links. */
+function isRealUrl(url?: string | null): boolean {
+  const trimmed = (url ?? '').trim()
+  return trimmed !== '' && trimmed !== '#'
+}
+
 function formatDate(dateString: string): string {
   return new Date(dateString).toLocaleDateString(
     locale.value === 'en' ? 'en-US' : locale.value === 'pt' ? 'pt-BR' : 'es',
@@ -98,8 +104,11 @@ function formatDate(dateString: string): string {
             class="group relative pl-6 border-l border-default"
           >
             <NuxtLink
-              v-if="event.url"
+              v-if="isRealUrl(event.url)"
               :to="event.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              :aria-label="event.title"
               class="absolute inset-0"
             />
             <div class="mb-1 text-sm font-medium text-muted">
@@ -116,8 +125,10 @@ function formatDate(dateString: string): string {
             </h3>
 
             <UButton
-              v-if="event.url"
+              v-if="isRealUrl(event.url)"
+              :to="event.url"
               target="_blank"
+              rel="noopener noreferrer"
               :label="event.category === 'Podcast' ? t('speaking.listen') : t('speaking.watch')"
               variant="link"
               class="p-0 pt-2 gap-0"

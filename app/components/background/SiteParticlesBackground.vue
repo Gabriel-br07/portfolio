@@ -72,7 +72,7 @@ const particles: Particle[] = Array.from({ length: PARTICLE_COUNT }, (_, i): Par
       class="site-particles__dot"
       :class="[`is-${p.side}`, { 'is-mobile-hidden': p.mobileHidden }]"
       :style="{
-        top: `${p.top}%`,
+        'top': `${p.top}%`,
         '--x': `${p.x}%`,
         '--size': `${p.size}px`,
         '--dur': `${p.dur}s`,

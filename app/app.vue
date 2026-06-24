@@ -7,6 +7,10 @@ const { public: { siteUrl } } = useRuntimeConfig()
 
 const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
 
+// Self-hosted social image, resolved to an absolute URL from the normalized site URL
+// (OG/Twitter/JSON-LD all require absolute URLs).
+const ogImageUrl = `${siteUrl}/images/seo/og-image.jpeg`
+
 // Person + WebSite structured data. `sameAs` is built from the public footer
 // profile links (mailto excluded), so social profiles stay in one place.
 const jsonLd = computed(() => ({
@@ -17,7 +21,7 @@ const jsonLd = computed(() => ({
       'name': 'Gabriel Oliveira',
       'email': appConfig.global?.email,
       'url': siteUrl,
-      'image': appConfig.global?.picture?.dark,
+      'image': `${siteUrl}${appConfig.global?.picture?.dark ?? ''}`,
       'sameAs': (appConfig.footer?.links ?? [])
         .map(link => link.to)
         .filter((to): to is string => typeof to === 'string' && to.startsWith('http'))
@@ -62,8 +66,8 @@ useSeoMeta({
     if (!pageTitle) return t('seo.siteTitle')
     return t('seo.titleWithPage', { title: pageTitle })
   },
-  ogImage: 'https://i.imgur.com/xfmm9Ms.jpeg',
-  twitterImage: 'https://i.imgur.com/xfmm9Ms.jpeg',
+  ogImage: ogImageUrl,
+  twitterImage: ogImageUrl,
   twitterCard: 'summary_large_image'
 })
 

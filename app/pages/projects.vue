@@ -119,15 +119,17 @@ usePageSeo(() => page.value)
               />
             </ULink>
           </template>
-          <img
+          <NuxtImg
             :src="project.image"
             :alt="project.title"
             class="object-cover w-full h-48 rounded-lg"
             width="960"
             height="477"
+            sizes="100vw sm:600px"
             :loading="index === 0 ? 'eager' : 'lazy'"
+            :fetchpriority="index === 0 ? 'high' : 'auto'"
             decoding="async"
-          >
+          />
         </UPageCard>
       </Motion>
     </UPageSection>
