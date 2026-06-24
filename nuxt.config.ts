@@ -18,11 +18,11 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  // Single source of truth for NuxtSEO modules (sitemap, robots, og-image).
+  // Single source of truth for Nuxt SEO modules (sitemap, robots).
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
     name: 'Gabriel Oliveira Portfolio'
-  },
+  }
   colorMode: {
     preference: 'dark',
     fallback: 'dark'

@@ -3,7 +3,7 @@
 You are working in a Nuxt 4 application using Vue 3.5, Vite 7, Nitro 2, and pnpm 10.
 
 ## Stack & layout
-- **Nuxt 4.2.2 · Vue 3.5 · TypeScript · Nuxt UI 4 · Nuxt Content 3** (YAML collections) · **@nuxtjs/i18n** · **@nuxt/image** · `motion-v` · `nuxt-og-image`.
+- **Nuxt 4.2.2 · Vue 3.5 · TypeScript · Nuxt UI 4 · Nuxt Content 3** (YAML collections) · **@nuxtjs/i18n** · **@nuxt/image** · **@nuxtjs/sitemap** · **@nuxtjs/robots** · `motion-v`.
 - **i18n**: locales `en` (default), `pt`, `es`; strategy `prefix_except_default` (`/about`, `/pt/about`, `/es/about`). UI strings live in `i18n/locales/{en,pt,es}.json`.
 - **Content**: collections defined in `content.config.ts`; localized content under `content/`, `content/pt/`, `content/es/`. Filtered by locale via `queryCollection(...).all()` + stem-prefix matching (see `app/composables/useProjectsCollection.ts`).
 - **Rendering**: static prerender (`nitro.prerender`, `/`, `/pt`, `/es`, `crawlLinks`).

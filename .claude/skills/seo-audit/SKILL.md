@@ -9,16 +9,16 @@ How SEO works in this Nuxt 4 portfolio, and the checklist for any page change.
 
 ## Global setup (`app/app.vue`)
 - `useSeoMeta` sets `titleTemplate` from i18n: empty page title → `t('seo.siteTitle')`; otherwise `t('seo.titleWithPage', { title })`. **Do not** set a full title elsewhere — pass only the page-specific part.
-- Static OG/Twitter fallback (`ogImage`, `twitterImage`, `twitterCard: 'summary_large_image'`) — overridden per page by generated OG images.
+- Static OG/Twitter fallback (`ogImage`, `twitterImage`, `twitterCard: 'summary_large_image'`).
 - `useLocaleHead()` emits hreflang alternates + `htmlAttrs` (lang/dir) and the canonical link; `theme-color` and `google-site-verification` live here too.
-- A single `application/ld+json` block (`Person` + `WebSite`) is injected via `useHead`, built from `app.config.ts` + `site.url`.
+- A single `application/ld+json` block (`Person` + `WebSite`) is injected via `useHead`, built from `app.config.ts` + `runtimeConfig.public.siteUrl`.
 
 ## Site-wide config (`nuxt.config.ts`)
-- `site: { url, name }` is the single source of truth (env `NUXT_PUBLIC_SITE_URL`), consumed by `@nuxtjs/sitemap`, `@nuxtjs/robots`, and `nuxt-og-image`.
+- `site: { url, name }` is the single source of truth (env `NUXT_PUBLIC_SITE_URL`), consumed by `@nuxtjs/sitemap` and `@nuxtjs/robots`.
 - `@nuxtjs/sitemap` → `/sitemap.xml` (i18n-aware). `@nuxtjs/robots` → managed `robots.txt` referencing the sitemap. **Do not** add a static `public/robots.txt` — it would shadow the module.
 
 ## Per-page rule
-Every page sets SEO through the shared **`usePageSeo()`** composable (`app/composables/usePageSeo.ts`) — never hand-roll `useSeoMeta` with the `seo?.title ?? title` fallback again. It applies title/description, a generated OG image, and canonical in one call.
+Every page sets SEO through the shared **`usePageSeo()`** composable (`app/composables/usePageSeo.ts`) — never hand-roll `useSeoMeta` with the `seo?.title ?? title` fallback again. It applies title/description (preferring a dedicated `seo:` block when present) in one call.
 
 - **Content-driven pages** (`index`, `projects`, `about`, `speaking`): pass the content `page` object. It prefers a dedicated `seo: { title, description }` block in the YAML, falling back to `title`/`description`.
 - **i18n-string pages** (`books`, `blog`, error): pass `{ title: t('...seoTitle'), description: t('...seoDescription') }`. The key must exist in **all three** locale files (`i18n/locales/{en,pt,es}.json`).
