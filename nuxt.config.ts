@@ -22,7 +22,7 @@ export default defineNuxtConfig({
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
     name: 'Gabriel Oliveira Portfolio'
-  }
+  },
   colorMode: {
     preference: 'dark',
     fallback: 'dark'
