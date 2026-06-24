@@ -82,14 +82,15 @@ function isActive(slideKey: string) {
 const techMediaSize = 'size-8 sm:size-9 shrink-0 object-contain'
 const techMediaTransition = 'transition-[filter,opacity,transform] duration-200 ease-out'
 
-function mediaClass(slideKey: string) {
+function mediaClass(slideKey: string, invertOnDark?: boolean) {
   const active = isActive(slideKey)
   return [
     techMediaSize,
     techMediaTransition,
     active
       ? 'grayscale-0 opacity-100 scale-[1.03]'
-      : 'grayscale opacity-70'
+      : 'grayscale opacity-70',
+    invertOnDark ? 'dark:invert' : ''
   ]
 }
 
@@ -127,7 +128,7 @@ function tileClass(slideKey: string) {
                 <img
                   :src="item.src"
                   :alt="item.alt"
-                  :class="mediaClass(slideKey)"
+                  :class="mediaClass(slideKey, item.invertOnDark)"
                   width="36"
                   height="36"
                   loading="eager"

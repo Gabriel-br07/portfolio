@@ -6,8 +6,9 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@nuxt/content',
     '@nuxtjs/i18n',
+    '@nuxtjs/sitemap',
+    '@nuxtjs/robots',
     '@vueuse/nuxt',
-    'nuxt-og-image',
     'motion-v/nuxt'
   ],
 
@@ -16,6 +17,12 @@ export default defineNuxtConfig({
   },
 
   css: ['~/assets/css/main.css'],
+
+  // Single source of truth for Nuxt SEO modules (sitemap, robots).
+  site: {
+    url: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
+    name: 'Gabriel Oliveira Portfolio'
+  },
   colorMode: {
     preference: 'dark',
     fallback: 'dark'
@@ -25,6 +32,15 @@ export default defineNuxtConfig({
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://example.com',
       web3formsAccessKey: process.env.NUXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? ''
     }
+  },
+
+  routeRules: {
+    '/livros': { redirect: { to: '/books', statusCode: 308 } },
+    '/livros/': { redirect: { to: '/books', statusCode: 308 } },
+    '/pt/livros': { redirect: { to: '/pt/books', statusCode: 308 } },
+    '/pt/livros/': { redirect: { to: '/pt/books', statusCode: 308 } },
+    '/es/livros': { redirect: { to: '/es/books', statusCode: 308 } },
+    '/es/livros/': { redirect: { to: '/es/books', statusCode: 308 } }
   },
 
   compatibilityDate: '2024-11-01',
@@ -38,15 +54,6 @@ export default defineNuxtConfig({
       ],
       crawlLinks: true
     }
-  },
-
-  routeRules: {
-    '/livros': { redirect: { to: '/books', statusCode: 308 } },
-    '/livros/': { redirect: { to: '/books', statusCode: 308 } },
-    '/pt/livros': { redirect: { to: '/pt/books', statusCode: 308 } },
-    '/pt/livros/': { redirect: { to: '/pt/books', statusCode: 308 } },
-    '/es/livros': { redirect: { to: '/es/books', statusCode: 308 } },
-    '/es/livros/': { redirect: { to: '/es/books', statusCode: 308 } }
   },
 
   // Dev: first SSR transform of large graphs (Tailwind, Nuxt UI, etc.) can exceed 60s on Windows — see nuxt/nuxt#32789

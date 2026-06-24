@@ -2,8 +2,33 @@
 const colorMode = useColorMode()
 const { t } = useI18n()
 const i18nHead = useLocaleHead()
+const appConfig = useAppConfig()
+const { public: { siteUrl } } = useRuntimeConfig()
 
 const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
+
+// Person + WebSite structured data. `sameAs` is built from the public footer
+// profile links (mailto excluded), so social profiles stay in one place.
+const jsonLd = computed(() => ({
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      'name': 'Gabriel Oliveira',
+      'email': appConfig.global?.email,
+      'url': siteUrl,
+      'image': appConfig.global?.picture?.dark,
+      'sameAs': (appConfig.footer?.links ?? [])
+        .map(link => link.to)
+        .filter((to): to is string => typeof to === 'string' && to.startsWith('http'))
+    },
+    {
+      '@type': 'WebSite',
+      'name': t('seo.siteTitle'),
+      'url': siteUrl
+    }
+  ]
+}))
 
 useHead(() => ({
   meta: [
@@ -22,7 +47,13 @@ useHead(() => ({
   ],
   htmlAttrs: {
     ...i18nHead.value.htmlAttrs
-  }
+  },
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify(jsonLd.value)
+    }
+  ]
 }))
 
 useSeoMeta({

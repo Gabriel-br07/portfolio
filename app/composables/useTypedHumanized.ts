@@ -16,7 +16,7 @@ function fasterTypeBackDelay(ms: number): number {
 
 function injectPauses(singleParagraph: string, chunkWords: number): string {
   const line = singleParagraph.replace(/\s+/g, ' ').trim()
-  const w = line.split(' ').filter((x) => x.length > 0)
+  const w = line.split(' ').filter(x => x.length > 0)
   if (w.length <= 1) return line
   const pieces: string[] = []
   for (let i = 0; i < w.length; i += chunkWords) {
@@ -33,7 +33,7 @@ function injectPausesMultiline(original: string, chunkWords: number): string {
   const blocks = trimmed.split(/\n\s*\n/)
   if (blocks.length === 1) return injectPauses(blocks[0] ?? '', chunkWords)
   return blocks
-    .map((b) => injectPauses(b.replace(/\s+/g, ' ').trim(), chunkWords))
+    .map(b => injectPauses(b.replace(/\s+/g, ' ').trim(), chunkWords))
     .join(` ^${randomInt(140, 340)} \n\n`)
 }
 

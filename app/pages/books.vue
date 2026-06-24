@@ -4,10 +4,10 @@ import { recommendedBooks } from '~/data/recommended-books'
 
 const { t } = useI18n()
 
-useSeoMeta({
+usePageSeo(() => ({
   title: t('livros.seoTitle'),
   description: t('livros.seoDescription')
-})
+}))
 </script>
 
 <template>

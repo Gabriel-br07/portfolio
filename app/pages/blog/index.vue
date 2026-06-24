@@ -1,10 +1,10 @@
 <script setup lang="ts">
 const { t } = useI18n()
 
-useSeoMeta({
+usePageSeo(() => ({
   title: t('blog.seoTitle'),
   description: t('blog.seoDescription')
-})
+}))
 </script>
 
 <template>
