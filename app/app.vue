@@ -73,6 +73,8 @@ const [{ data: navigation }, { data: files }] = useBlogSearchData()
 
 <template>
   <UApp>
+    <BackgroundSiteParticlesBackground />
+
     <NuxtLayout>
       <UMain class="relative">
         <NuxtPage />
