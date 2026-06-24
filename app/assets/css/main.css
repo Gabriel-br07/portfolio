@@ -11,6 +11,10 @@
 :root {
   --ui-container: var(--container-4xl);
 
+  /* Decorative side-particle background (light mode): slate dots, pale lilac/blue glow. */
+  --particles-color: 100 116 139;
+  --particles-glow: 165 180 252;
+
   ::selection {
     color: #282a30;
     background-color: #c8c8c8;
@@ -18,6 +22,10 @@
 }
 
 .dark {
+  /* Decorative side-particle background (dark mode): soft cyan/green dots, subtle sky glow. */
+  --particles-color: 134 206 203;
+  --particles-glow: 56 189 248;
+
   ::selection {
     color: #ffffff;
     background-color: #474747;
