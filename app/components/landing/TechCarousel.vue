@@ -41,7 +41,23 @@ const techItems: readonly TechItem[] = [
   { key: 'rust', src: '/icons/tech/rust-ferris.png', label: 'Rust', alt: 'Ferris, the Rust mascot' },
   { key: 'docker', src: '/icons/tech/docker.svg', label: 'Docker', alt: 'Docker' },
   { key: 'postgresql', src: '/icons/tech/postgresql.svg', label: 'PostgreSQL', alt: 'PostgreSQL' },
-  { key: 'mongodb', src: '/icons/tech/mongodb.svg', label: 'MongoDB', alt: 'MongoDB' }
+  { key: 'mongodb', src: '/icons/tech/mongodb.svg', label: 'MongoDB', alt: 'MongoDB' },
+  { key: 'typescript', src: '/icons/tech/typescript.svg', label: 'TypeScript', alt: 'TypeScript' },
+  { key: 'fastapi', src: '/icons/tech/fastapi.svg', label: 'FastAPI', alt: 'FastAPI' },
+  { key: 'django', src: '/icons/tech/django.svg', label: 'Django', alt: 'Django', invertOnDark: true },
+  { key: 'flask', src: '/icons/tech/flask.svg', label: 'Flask', alt: 'Flask', invertOnDark: true },
+  { key: 'nextjs', src: '/icons/tech/nextjs.svg', label: 'Next.js', alt: 'Next.js', invertOnDark: true },
+  { key: 'tailwind', src: '/icons/tech/tailwind-css.svg', label: 'Tailwind CSS', alt: 'Tailwind CSS' },
+  { key: 'graphql', src: '/icons/tech/graphql.svg', label: 'GraphQL', alt: 'GraphQL' },
+  { key: 'redis', src: '/icons/tech/redis.svg', label: 'Redis', alt: 'Redis' },
+  { key: 'jupyter', src: '/icons/tech/jupyter.svg', label: 'Jupyter', alt: 'Jupyter' },
+  { key: 'playwright', src: '/icons/tech/playwright.svg', label: 'Playwright', alt: 'Playwright' },
+  { key: 'git', src: '/icons/tech/git.svg', label: 'Git', alt: 'Git' },
+  { key: 'github', src: '/icons/tech/github.svg', label: 'GitHub', alt: 'GitHub', invertOnDark: true },
+  { key: 'github-actions', src: '/icons/tech/github-actions.svg', label: 'GitHub Actions', alt: 'GitHub Actions' },
+  { key: 'jetbrains', src: '/icons/tech/jetbrains.svg', label: 'JetBrains', alt: 'JetBrains' },
+  { key: 'android-studio', src: '/icons/tech/android-studio.svg', label: 'Android Studio', alt: 'Android Studio' },
+  { key: 'insomnia', src: '/icons/tech/insomnia.svg', label: 'Insomnia', alt: 'Insomnia' }
 ]
 
 const emblaSlides = computed((): TechCarouselSlide[] => {
@@ -85,7 +101,7 @@ const staticMediaHover
               <img
                 :src="item.src"
                 :alt="item.alt"
-                :class="staticMediaHover"
+                :class="[staticMediaHover, item.invertOnDark && 'dark:invert']"
                 width="36"
                 height="36"
                 loading="lazy"
