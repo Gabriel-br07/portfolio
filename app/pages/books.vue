@@ -20,7 +20,11 @@ usePageSeo(() => ({
         description: '!mx-0 text-left',
         links: 'justify-start'
       }"
-    />
+    >
+      <template #title>
+        <span data-mascot-anchor="books-title">{{ t('livros.sectionTitle') }}</span>
+      </template>
+    </UPageHero>
     <UPageSection
       :ui="{
         container: '!pt-0'

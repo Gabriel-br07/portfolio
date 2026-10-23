@@ -7,7 +7,12 @@
     "about": "About"
   },
   "footer": {
-    "credits": "Built with Nuxt UI • © {year}"
+    "credits": "Built with Nuxt UI • © {year}",
+    "mascotsPause": "Pause mascot animations",
+    "mascotsResume": "Resume mascot animations"
+  },
+  "mascots": {
+    "greeting": "Hi!"
   },
   "error": {
     "title": "Page not found",

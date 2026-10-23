@@ -23,7 +23,10 @@ usePageSeo(() => ({
         container: '!pt-0'
       }"
     >
-      <div class="flex flex-col items-center justify-center py-16 lg:py-20">
+      <div
+        class="flex flex-col items-center justify-center py-16 lg:py-20"
+        data-mascot-anchor="blog-empty"
+      >
         <div class="text-center space-y-4">
           <div class="flex items-center justify-center gap-2">
             <h3 class="text-3xl lg:text-4xl font-semibold animate-pulse">

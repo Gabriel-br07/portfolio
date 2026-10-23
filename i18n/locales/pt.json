@@ -7,7 +7,12 @@
     "about": "Sobre mim"
   },
   "footer": {
-    "credits": "Feito com Nuxt UI • © {year}"
+    "credits": "Feito com Nuxt UI • © {year}",
+    "mascotsPause": "Pausar animações dos mascotes",
+    "mascotsResume": "Retomar animações dos mascotes"
+  },
+  "mascots": {
+    "greeting": "Oi!"
   },
   "error": {
     "title": "Página não encontrada",

@@ -79,6 +79,11 @@ const [{ data: navigation }, { data: files }] = useBlogSearchData()
   <UApp>
     <BackgroundSiteParticlesBackground />
 
+    <!-- Decorative mascot layer: client-only, teleported to <body>, pointer-events: none. -->
+    <ClientOnly>
+      <MascotsMascotWorld />
+    </ClientOnly>
+
     <NuxtLayout>
       <UMain class="relative">
         <NuxtPage />

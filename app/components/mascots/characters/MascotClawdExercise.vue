@@ -1,0 +1,197 @@
+<!--
+  Clawd exercising — adapted from the MIT-licensed clawd-emotes-skill "exercise" emote
+  (https://github.com/xixicc186/clawd-emotes-skill, Copyright (c) 2026 xixicc186,
+  see app/assets/mascots/CREDITS.md). Unofficial fan art, not the official Claude mascot.
+  Uses the skill coordinates (torso 2,6 11x7; ground y=15); pivots live in mascots.css.
+  Each dumbbell is ONE persistent group (never inside an arm group); the claws, arms and weights
+  are driven by keyframes generated in scripts/gen-mascot-exercise.py -> app/assets/css/mascots-exercise.css.
+-->
+<template>
+  <svg
+    class="mascot-char mascot-clawd"
+    viewBox="-8 1 31 17"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    focusable="false"
+  >
+    <g
+      class="cw-sw cw-sw-a"
+      fill="#7ec8ff"
+    ><g
+      class="cw-sweat"
+      style="--sd:0s;--tx:4px"
+    ><rect
+      x="13"
+      y="4"
+      width="1.2"
+      height="1.6"
+      rx=".6"
+    /></g></g>
+    <g
+      class="cw-sw cw-sw-b"
+      fill="#7ec8ff"
+    ><g
+      class="cw-sweat"
+      style="--sd:-.5s;--tx:-4px"
+    ><rect
+      x="0"
+      y="5"
+      width="1.2"
+      height="1.6"
+      rx=".6"
+    /></g></g>
+    <rect
+      class="cw-shadow"
+      x="3"
+      y="15"
+      width="9"
+      height="1"
+      fill="#000"
+      opacity=".5"
+    />
+    <g class="cw-body">
+      <g fill="#DE886D">
+        <rect
+          x="3"
+          y="13"
+          width="1"
+          height="2"
+        /><rect
+          x="5"
+          y="13"
+          width="1"
+          height="2"
+        />
+        <rect
+          x="9"
+          y="13"
+          width="1"
+          height="2"
+        /><rect
+          x="11"
+          y="13"
+          width="1"
+          height="2"
+        />
+      </g>
+      <rect
+        x="2"
+        y="6"
+        width="11"
+        height="7"
+        fill="#DE886D"
+      />
+      <rect
+        x="2"
+        y="6.3"
+        width="11"
+        height="1.3"
+        fill="#ff5555"
+      /><rect
+        x="2"
+        y="6.3"
+        width="11"
+        height=".5"
+        fill="#ff8888"
+      />
+      <g
+        class="cw-eyes"
+        fill="#000"
+      ><rect
+        x="4"
+        y="8"
+        width="1"
+        height="2"
+      /><rect
+        x="10"
+        y="8"
+        width="1"
+        height="2"
+      /></g>
+    </g>
+    <g class="cw-db cw-db-l">
+      <rect
+        x="-2.6"
+        y="-.45"
+        width="5.2"
+        height=".9"
+        fill="#a3a8b0"
+      />
+      <rect
+        x="-2.8"
+        y="-1.15"
+        width="1"
+        height="2.3"
+        rx=".2"
+        fill="#737982"
+      />
+      <rect
+        x="1.8"
+        y="-1.15"
+        width="1"
+        height="2.3"
+        rx=".2"
+        fill="#737982"
+      />
+    </g>
+    <g class="cw-db cw-db-r">
+      <rect
+        x="-2.6"
+        y="-.45"
+        width="5.2"
+        height=".9"
+        fill="#a3a8b0"
+      />
+      <rect
+        x="-2.8"
+        y="-1.15"
+        width="1"
+        height="2.3"
+        rx=".2"
+        fill="#737982"
+      />
+      <rect
+        x="1.8"
+        y="-1.15"
+        width="1"
+        height="2.3"
+        rx=".2"
+        fill="#737982"
+      />
+    </g>
+    <rect
+      class="cw-ex-arm cw-ex-arm-l"
+      x="0"
+      y="9"
+      width="2"
+      height="2"
+      fill="#DE886D"
+    />
+    <rect
+      class="cw-ex-arm cw-ex-arm-r"
+      x="13"
+      y="9"
+      width="2"
+      height="2"
+      fill="#DE886D"
+    />
+    <rect
+      class="cw-claw cw-claw-l"
+      x="-.8"
+      y="-1.1"
+      width="1.6"
+      height="2.2"
+      rx=".3"
+      fill="#DE886D"
+    />
+    <rect
+      class="cw-claw cw-claw-r"
+      x="-.8"
+      y="-1.1"
+      width="1.6"
+      height="2.2"
+      rx=".3"
+      fill="#DE886D"
+    />
+  </svg>
+</template>

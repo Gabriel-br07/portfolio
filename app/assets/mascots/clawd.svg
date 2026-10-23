@@ -1,0 +1,10 @@
+<svg class="mascot-char mascot-clawd" viewBox="10 22 24 20" width="150" height="150" xmlns="http://www.w3.org/2000/svg" role="img" >
+  <!--
+    Clawd-inspired pixel crab (idle pose) — walking adaptation of the
+    MIT-licensed clawd-emotes-skill artwork.
+    Source: https://github.com/xixicc186/clawd-emotes-skill (Copyright (c) 2026 xixicc186, MIT)
+    Unofficial fan art: not affiliated with or endorsed by Anthropic;
+    not the official Claude mascot. Full credits: app/assets/mascots/CREDITS.md
+    Animated version: app/components/mascots/characters/MascotClawd.vue
+  -->
+ <!-- ground shadow: separate so it never bobs with the body --> <rect class="cw-shadow" x="18" y="40" width="9" height="1" fill="#000" opacity=".5" /> <g class="cw-body"> <!-- feet: inside the body group so they never detach --> <g class="cw-legs-a" fill="#DE886D" > <rect x="18" y="38" width="1" height="2" /> <rect x="20" y="38" width="1" height="2" /> </g> <g class="cw-legs-b" fill="#DE886D" > <rect x="24" y="38" width="1" height="2" /> <rect x="26" y="38" width="1" height="2" /> </g> <!-- torso --> <rect x="17" y="31" width="11" height="7" fill="#DE886D" /> <!-- arms with a one-pixel claw notch --> <g class="cw-arm-l" fill="#DE886D" > <rect x="15" y="34" width="2" height="2" /> <rect x="14.4" y="33.4" width="1" height="1" /> </g> <g class="cw-arm-r" fill="#DE886D" > <rect x="28" y="34" width="2" height="2" /> <rect x="29.6" y="33.4" width="1" height="1" /> </g> <!-- eyes: outer group blinks, inner group shifts for "look" --> <g class="cw-eyes"> <g class="cw-pupils" fill="#000" > <rect x="19" y="33" width="1" height="2" /> <rect x="25" y="33" width="1" height="2" /> </g> </g> <rect class="cw-mouth" x="21.4" y="35.8" width="2.2" height="1" rx=".5" fill="#7a2230" /> </g> <!-- celebrate sparks (hidden unless the state animates them) --> <g class="cw-fx" fill="#F2B98E" opacity="0" > <rect x="30" y="28" width="1.2" height="1.2" /> <rect x="33" y="31" width="1" height="1" /> <rect x="31.5" y="25" width=".8" height=".8" /> </g> </svg>

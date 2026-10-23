@@ -1,0 +1,318 @@
+/* ==========================================================================
+   Mascots — decorative animated characters (Clawd).
+   Extra scenes: exercise keyframes are generated into ./mascots-exercise.css.
+
+   Follows the svg-mascot-creator conventions (see .claude/skills/svg-mascot-creator):
+   transform-only animations on stable SVG groups (never path `d`), pivots at
+   anatomical anchors via transform-box: view-box, subtle amplitudes
+   (bob <= 6px, sway <= 4deg), and every animation gated by
+   prefers-reduced-motion plus the global `.mascots-paused` switch.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Layer + actor shell
+   -------------------------------------------------------------------------- */
+
+.mascot-world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: clip;
+  pointer-events: none;
+  z-index: 30;
+}
+
+.mascot-actor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.45s ease;
+  will-change: transform;
+}
+
+.mascot-actor.is-hidden {
+  opacity: 0;
+}
+
+/* The walking translation — independent from the limb keyframes inside the SVG. */
+.mascot-actor.is-walking {
+  transition: opacity 0.45s ease, transform var(--mascot-walk-duration, 1.5s) linear;
+}
+
+/* Pause limbs when offscreen, paused by the user, or the tab is hidden. */
+.mascot-actor.offscreen *,
+.mascots-paused .mascot-actor * {
+  animation-play-state: paused;
+}
+
+.mascot-flip {
+  width: 100%;
+}
+
+.mascot-char {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* --------------------------------------------------------------------------
+   Clawd — pixel crab (canvas 45x45, shifted +15/+25 from the emote skill)
+   Pivots: body (22.5,38) shadow (22.5,40.5) eyes (22.5,34)
+           legs-a (20,38) legs-b (25,38) arm-l (17,35) arm-r (28,35)
+   -------------------------------------------------------------------------- */
+
+.mascot-clawd :is(.cw-body, .cw-shadow, .cw-eyes, .cw-pupils, .cw-legs-a, .cw-legs-b, .cw-arm-l, .cw-arm-r, .cw-mouth, .cw-fx) {
+  transform-box: view-box;
+}
+
+/* Blink runs in every state (outer group); "look" shifts the inner group. */
+.mascot-clawd .cw-eyes {
+  transform-origin: 22.5px 34px;
+  animation: cw-blink 3.7s ease-in-out infinite;
+}
+
+/* idle + look */
+.mascot-clawd[data-state='idle'] .cw-body,
+.mascot-clawd[data-state='look'] .cw-body,
+.mascot-clawd[data-state='wave'] .cw-body {
+  transform-origin: 22.5px 38px;
+  animation: cw-bob 3s ease-in-out infinite;
+}
+
+.mascot-clawd[data-state='idle'] .cw-shadow,
+.mascot-clawd[data-state='look'] .cw-shadow,
+.mascot-clawd[data-state='wave'] .cw-shadow {
+  transform-origin: 22.5px 40.5px;
+  animation: cw-shadow 3s ease-in-out infinite;
+}
+
+.mascot-clawd[data-state='look'] .cw-pupils {
+  transform: translateX(0.9px);
+}
+
+/* walk — pixel scuttle: leg pairs alternate, body bobs on the beat */
+.mascot-clawd:is([data-state='walk'], [data-state='bye']) .cw-legs-a {
+  transform-origin: 20px 38px;
+  animation: cw-step-a 0.56s linear infinite;
+}
+
+.mascot-clawd:is([data-state='walk'], [data-state='bye']) .cw-legs-b {
+  transform-origin: 25px 38px;
+  animation: cw-step-b 0.56s linear infinite;
+}
+
+.mascot-clawd:is([data-state='walk'], [data-state='bye']) .cw-body {
+  transform-origin: 22.5px 38px;
+  animation: cw-walkbob 0.28s linear infinite;
+}
+
+.mascot-clawd:is([data-state='walk'], [data-state='bye']) .cw-shadow {
+  transform-origin: 22.5px 40.5px;
+  animation: cw-shadow 0.28s linear infinite;
+}
+
+/* bye — same scuttle as walk, right claw keeps waving goodbye */
+.mascot-clawd[data-state='bye'] .cw-arm-r {
+  transform-origin: 28px 35px;
+  animation: cw-bye 0.7s ease-in-out infinite;
+}
+
+/* wave — one-shot raise + wiggle, returns to rest */
+.mascot-clawd[data-state='wave'] .cw-arm-r {
+  transform-origin: 28px 35px;
+  animation: cw-wave var(--mascot-wave-duration, 1.8s) ease-in-out 1 both;
+}
+
+/* celebrate — double hop, claws up, sparks */
+.mascot-clawd[data-state='celebrate'] .cw-body {
+  transform-origin: 22.5px 38px;
+  animation: cw-hop 1.4s ease-in-out 1 both;
+}
+
+.mascot-clawd[data-state='celebrate'] .cw-arm-l {
+  transform-origin: 17px 35px;
+  animation: cw-claw-l-up 1.4s ease-in-out 1 both;
+}
+
+.mascot-clawd[data-state='celebrate'] .cw-arm-r {
+  transform-origin: 28px 35px;
+  animation: cw-claw-r-up 1.4s ease-in-out 1 both;
+}
+
+.mascot-clawd[data-state='celebrate'] .cw-fx {
+  animation: cw-fx 1.4s ease-out 1 both;
+}
+
+.mascot-clawd[data-state='celebrate'] .cw-mouth {
+  transform-origin: 22.5px 36.3px;
+  animation: cw-mouth 1.4s ease-in-out 1 both;
+}
+
+/* --------------------------------------------------------------------------
+   Activity scenes (read; exercise lives in mascots-exercise.css).
+   Artwork uses the clawd-emotes-skill's own coordinates, NOT the +15/+25 shift:
+   body (7.5,13) shadow (7.5,15.5) eyes (7.5,9). It overrides the shifted
+   `.cw-eyes` blink pivot above, so its rules carry the [data-state] attribute.
+   -------------------------------------------------------------------------- */
+
+/* read — arms cup an open book, eyes scan, a page flips (4.2s loop) */
+.mascot-clawd[data-state='read'] .cw-body {
+  transform-origin: 7.5px 13px;
+  animation: cw-bob 4.2s ease-in-out infinite;
+}
+
+.mascot-clawd[data-state='read'] .cw-shadow {
+  transform-origin: 7.5px 15.5px;
+  animation: cw-shadow 4.2s ease-in-out infinite;
+}
+
+.mascot-clawd[data-state='read'] .cw-eyes {
+  transform-origin: 7.5px 9px;
+  animation: cw-scan 4.2s ease-in-out infinite;
+}
+
+.mascot-clawd[data-state='read'] .cw-page {
+  transform-box: view-box;
+  transform-origin: 7.5px 11px;
+  animation: cw-flip 4.2s ease-in-out infinite;
+}
+
+/* Greeter speech bubble (decorative, aria-hidden; copy comes from i18n) */
+.mascot-bubble {
+  position: absolute;
+  bottom: 100%;
+  left: calc(50% + 40px);
+  margin-bottom: -20px;
+  padding: 2px 10px;
+  border: 2px solid var(--ui-text, #1d1f24);
+  border-radius: 10px;
+  background: var(--ui-bg, #fff);
+  color: var(--ui-text, #1d1f24);
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(4px) scale(0.9);
+  transform-origin: 0 100%;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.mascot-bubble.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+.mascot-bubble::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 6px;
+  border: 6px solid transparent;
+  border-top: 9px solid var(--ui-text, #1d1f24);
+  border-bottom: 0;
+}
+
+@keyframes cw-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.5px); }
+}
+
+@keyframes cw-shadow {
+  0%, 100% { transform: scaleX(1); opacity: 0.5; }
+  50% { transform: scaleX(0.94); opacity: 0.42; }
+}
+
+@keyframes cw-blink {
+  0%, 92%, 100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+@keyframes cw-step-a {
+  0%, 100% { transform: translateX(-0.5px) rotate(-6deg); }
+  50% { transform: translateX(0.5px) rotate(6deg); }
+}
+
+@keyframes cw-step-b {
+  0%, 100% { transform: translateX(0.5px) rotate(6deg); }
+  50% { transform: translateX(-0.5px) rotate(-6deg); }
+}
+
+@keyframes cw-walkbob {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50% { transform: translateY(-0.5px) rotate(1.5deg); }
+}
+
+@keyframes cw-wave {
+  0% { transform: rotate(0deg); }
+  15% { transform: rotate(-80deg); }
+  30% { transform: rotate(-95deg); }
+  45% { transform: rotate(-70deg); }
+  60% { transform: rotate(-95deg); }
+  75% { transform: rotate(-70deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes cw-hop {
+  0%, 100% { transform: translateY(0); }
+  20% { transform: translateY(-2.6px); }
+  40% { transform: translateY(0); }
+  60% { transform: translateY(-2px); }
+  80% { transform: translateY(0); }
+}
+
+@keyframes cw-claw-l-up {
+  0%, 100% { transform: rotate(0deg); }
+  25%, 75% { transform: rotate(70deg); }
+}
+
+@keyframes cw-claw-r-up {
+  0%, 100% { transform: rotate(0deg); }
+  25%, 75% { transform: rotate(-70deg); }
+}
+
+@keyframes cw-fx {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  40% { opacity: 1; transform: scale(1.1); }
+}
+
+@keyframes cw-mouth {
+  0%, 100% { transform: scaleY(1); }
+  30%, 75% { transform: scaleY(1.7); }
+}
+
+@keyframes cw-bye {
+  0%, 100% { transform: rotate(-75deg); }
+  50% { transform: rotate(-100deg); }
+}
+
+@keyframes cw-scan {
+  0%, 8% { transform: translateX(-0.9px) scaleY(1); }
+  12% { transform: translateX(-0.9px) scaleY(0.15); }
+  16%, 42% { transform: translateX(-0.9px) scaleY(1); }
+  50%, 90% { transform: translateX(0.9px) scaleY(1); }
+  100% { transform: translateX(-0.9px) scaleY(1); }
+}
+
+@keyframes cw-flip {
+  0%, 72%, 100% { transform: scaleX(1); }
+  80% { transform: scaleX(0.08); }
+  88% { transform: scaleX(1); }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion: mascots stay visible but completely still.
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot-actor,
+  .mascot-actor *,
+  .mascot-actor *::before,
+  .mascot-actor *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
