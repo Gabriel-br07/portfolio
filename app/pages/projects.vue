@@ -43,6 +43,9 @@ usePageSeo(() => page.value)
         links: 'justify-start'
       }"
     >
+      <template #title>
+        <span data-mascot-anchor="projects-title">{{ page.title }}</span>
+      </template>
       <template #links>
         <div
           v-if="page.links"

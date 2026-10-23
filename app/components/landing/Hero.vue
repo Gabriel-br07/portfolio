@@ -118,6 +118,7 @@ const heroSocialLinks = computed(() => {
         <div
           v-if="page.hero.links"
           class="flex items-center gap-2"
+          data-mascot-anchor="hero-links"
         >
           <UButton v-bind="page.hero.links[0]" />
           <UButton
@@ -127,6 +128,7 @@ const heroSocialLinks = computed(() => {
             class="gap-2"
             :class="{ 'opacity-80': !global.available }"
             :label="global.available ? t('hero.available') : t('hero.unavailable')"
+            data-mascot-trigger="availability"
             @click="openContactModal()"
           >
             <template #leading>

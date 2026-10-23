@@ -3,6 +3,10 @@ const { t } = useI18n()
 const { footer } = useAppConfig()
 const year = new Date().getFullYear()
 const { open: openContactModal } = useContactModal()
+const { active: mascotsActive, restore: restoreMascots, setActive: setMascotsActive } = useMascots()
+
+// Restores the persisted preference after hydration (never during SSR).
+onMounted(restoreMascots)
 </script>
 
 <template>
@@ -36,6 +40,15 @@ const { open: openContactModal } = useContactModal()
           />
         </template>
       </template>
+      <UButton
+        size="xs"
+        color="neutral"
+        variant="ghost"
+        :icon="mascotsActive ? 'i-lucide-pause' : 'i-lucide-play'"
+        :aria-label="mascotsActive ? t('footer.mascotsPause') : t('footer.mascotsResume')"
+        :title="mascotsActive ? t('footer.mascotsPause') : t('footer.mascotsResume')"
+        @click="setMascotsActive(!mascotsActive)"
+      />
     </template>
   </UFooter>
 </template>
