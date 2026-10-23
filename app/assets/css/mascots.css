@@ -1,6 +1,6 @@
 /* ==========================================================================
    Mascots — decorative animated characters (Clawd).
-   Extra scenes: exercise keyframes are generated into ./mascots-exercise.css.
+   Extra scenes: exercise and reading keyframes are generated into ./mascots-exercise.css and ./mascots-reader.css.
 
    Follows the svg-mascot-creator conventions (see .claude/skills/svg-mascot-creator):
    transform-only animations on stable SVG groups (never path `d`), pivots at
@@ -151,35 +151,6 @@
   animation: cw-mouth 1.4s ease-in-out 1 both;
 }
 
-/* --------------------------------------------------------------------------
-   Activity scenes (read; exercise lives in mascots-exercise.css).
-   Artwork uses the clawd-emotes-skill's own coordinates, NOT the +15/+25 shift:
-   body (7.5,13) shadow (7.5,15.5) eyes (7.5,9). It overrides the shifted
-   `.cw-eyes` blink pivot above, so its rules carry the [data-state] attribute.
-   -------------------------------------------------------------------------- */
-
-/* read — arms cup an open book, eyes scan, a page flips (4.2s loop) */
-.mascot-clawd[data-state='read'] .cw-body {
-  transform-origin: 7.5px 13px;
-  animation: cw-bob 4.2s ease-in-out infinite;
-}
-
-.mascot-clawd[data-state='read'] .cw-shadow {
-  transform-origin: 7.5px 15.5px;
-  animation: cw-shadow 4.2s ease-in-out infinite;
-}
-
-.mascot-clawd[data-state='read'] .cw-eyes {
-  transform-origin: 7.5px 9px;
-  animation: cw-scan 4.2s ease-in-out infinite;
-}
-
-.mascot-clawd[data-state='read'] .cw-page {
-  transform-box: view-box;
-  transform-origin: 7.5px 11px;
-  animation: cw-flip 4.2s ease-in-out infinite;
-}
-
 /* Greeter speech bubble (decorative, aria-hidden; copy comes from i18n) */
 .mascot-bubble {
   position: absolute;
@@ -287,20 +258,6 @@
 @keyframes cw-bye {
   0%, 100% { transform: rotate(-75deg); }
   50% { transform: rotate(-100deg); }
-}
-
-@keyframes cw-scan {
-  0%, 8% { transform: translateX(-0.9px) scaleY(1); }
-  12% { transform: translateX(-0.9px) scaleY(0.15); }
-  16%, 42% { transform: translateX(-0.9px) scaleY(1); }
-  50%, 90% { transform: translateX(0.9px) scaleY(1); }
-  100% { transform: translateX(-0.9px) scaleY(1); }
-}
-
-@keyframes cw-flip {
-  0%, 72%, 100% { transform: scaleX(1); }
-  80% { transform: scaleX(0.08); }
-  88% { transform: scaleX(1); }
 }
 
 /* --------------------------------------------------------------------------

@@ -97,8 +97,8 @@ const SCENES: Record<string, ActorSpec[]> = {
     {
       id: 'books-clawd',
       width: 140,
-      aspect: 14 / 21,
-      baseline: 0.93,
+      aspect: 17 / 21,
+      baseline: 0.94,
       anchor: 'books-title',
       strategy: 'right-of',
       gap: 20,
