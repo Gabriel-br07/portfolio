@@ -128,7 +128,6 @@ const heroSocialLinks = computed(() => {
             class="gap-2"
             :class="{ 'opacity-80': !global.available }"
             :label="global.available ? t('hero.available') : t('hero.unavailable')"
-            data-mascot-trigger="availability"
             @click="openContactModal()"
           >
             <template #leading>

@@ -95,4 +95,5 @@ You are working in a Nuxt 4 application using Vue 3.5, Vite 7, Nitro 2, and pnpm
 
 ## Skills
 Project skills live in `.claude/skills/`: `create-nuxt-page`, `create-vue-component`,
-`create-composable`, `audit-nuxt-ssr`, `review-vue-nuxt-architecture`, `seo-audit`.
+`create-composable`, `audit-nuxt-ssr`, `review-vue-nuxt-architecture`, `seo-audit`,
+`svg-mascot-creator` (conventions for the decorative Clawd mascot layer in `app/components/mascots/`).

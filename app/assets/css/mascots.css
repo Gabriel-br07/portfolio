@@ -64,52 +64,46 @@
            legs-a (20,38) legs-b (25,38) arm-l (17,35) arm-r (28,35)
    -------------------------------------------------------------------------- */
 
-.mascot-clawd :is(.cw-body, .cw-shadow, .cw-eyes, .cw-pupils, .cw-legs-a, .cw-legs-b, .cw-arm-l, .cw-arm-r, .cw-mouth, .cw-fx) {
+.mascot-clawd :is(.cw-body, .cw-shadow, .cw-eyes, .cw-legs-a, .cw-legs-b, .cw-arm-l, .cw-arm-r) {
   transform-box: view-box;
 }
 
-/* Blink runs in every state (outer group); "look" shifts the inner group. */
+/* Blink runs in every state (outer group). */
 .mascot-clawd .cw-eyes {
   transform-origin: 22.5px 34px;
   animation: cw-blink 3.7s ease-in-out infinite;
 }
 
-/* idle + look */
+/* idle + wave */
 .mascot-clawd[data-state='idle'] .cw-body,
-.mascot-clawd[data-state='look'] .cw-body,
 .mascot-clawd[data-state='wave'] .cw-body {
   transform-origin: 22.5px 38px;
   animation: cw-bob 3s ease-in-out infinite;
 }
 
 .mascot-clawd[data-state='idle'] .cw-shadow,
-.mascot-clawd[data-state='look'] .cw-shadow,
 .mascot-clawd[data-state='wave'] .cw-shadow {
   transform-origin: 22.5px 40.5px;
   animation: cw-shadow 3s ease-in-out infinite;
 }
 
-.mascot-clawd[data-state='look'] .cw-pupils {
-  transform: translateX(0.9px);
-}
-
-/* walk — pixel scuttle: leg pairs alternate, body bobs on the beat */
-.mascot-clawd:is([data-state='walk'], [data-state='bye']) .cw-legs-a {
+/* bye — pixel scuttle: leg pairs alternate, body bobs on the beat */
+.mascot-clawd[data-state='bye'] .cw-legs-a {
   transform-origin: 20px 38px;
   animation: cw-step-a 0.56s linear infinite;
 }
 
-.mascot-clawd:is([data-state='walk'], [data-state='bye']) .cw-legs-b {
+.mascot-clawd[data-state='bye'] .cw-legs-b {
   transform-origin: 25px 38px;
   animation: cw-step-b 0.56s linear infinite;
 }
 
-.mascot-clawd:is([data-state='walk'], [data-state='bye']) .cw-body {
+.mascot-clawd[data-state='bye'] .cw-body {
   transform-origin: 22.5px 38px;
   animation: cw-walkbob 0.28s linear infinite;
 }
 
-.mascot-clawd:is([data-state='walk'], [data-state='bye']) .cw-shadow {
+.mascot-clawd[data-state='bye'] .cw-shadow {
   transform-origin: 22.5px 40.5px;
   animation: cw-shadow 0.28s linear infinite;
 }
@@ -124,31 +118,6 @@
 .mascot-clawd[data-state='wave'] .cw-arm-r {
   transform-origin: 28px 35px;
   animation: cw-wave var(--mascot-wave-duration, 1.8s) ease-in-out 1 both;
-}
-
-/* celebrate — double hop, claws up, sparks */
-.mascot-clawd[data-state='celebrate'] .cw-body {
-  transform-origin: 22.5px 38px;
-  animation: cw-hop 1.4s ease-in-out 1 both;
-}
-
-.mascot-clawd[data-state='celebrate'] .cw-arm-l {
-  transform-origin: 17px 35px;
-  animation: cw-claw-l-up 1.4s ease-in-out 1 both;
-}
-
-.mascot-clawd[data-state='celebrate'] .cw-arm-r {
-  transform-origin: 28px 35px;
-  animation: cw-claw-r-up 1.4s ease-in-out 1 both;
-}
-
-.mascot-clawd[data-state='celebrate'] .cw-fx {
-  animation: cw-fx 1.4s ease-out 1 both;
-}
-
-.mascot-clawd[data-state='celebrate'] .cw-mouth {
-  transform-origin: 22.5px 36.3px;
-  animation: cw-mouth 1.4s ease-in-out 1 both;
 }
 
 /* Greeter speech bubble (decorative, aria-hidden; copy comes from i18n) */
@@ -225,34 +194,6 @@
   60% { transform: rotate(-95deg); }
   75% { transform: rotate(-70deg); }
   100% { transform: rotate(0deg); }
-}
-
-@keyframes cw-hop {
-  0%, 100% { transform: translateY(0); }
-  20% { transform: translateY(-2.6px); }
-  40% { transform: translateY(0); }
-  60% { transform: translateY(-2px); }
-  80% { transform: translateY(0); }
-}
-
-@keyframes cw-claw-l-up {
-  0%, 100% { transform: rotate(0deg); }
-  25%, 75% { transform: rotate(70deg); }
-}
-
-@keyframes cw-claw-r-up {
-  0%, 100% { transform: rotate(0deg); }
-  25%, 75% { transform: rotate(-70deg); }
-}
-
-@keyframes cw-fx {
-  0%, 100% { opacity: 0; transform: scale(0.6); }
-  40% { opacity: 1; transform: scale(1.1); }
-}
-
-@keyframes cw-mouth {
-  0%, 100% { transform: scaleY(1); }
-  30%, 75% { transform: scaleY(1.7); }
 }
 
 @keyframes cw-bye {

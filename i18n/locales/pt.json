@@ -8,6 +8,7 @@
   },
   "footer": {
     "credits": "Feito com Nuxt UI • © {year}",
+    "mascotCredit": "Mascote: fan art não oficial inspirada no Clawd, adaptada de clawd-emotes-skill (MIT), sem afiliação com a Anthropic",
     "mascotsPause": "Pausar animações dos mascotes",
     "mascotsResume": "Retomar animações dos mascotes"
   },

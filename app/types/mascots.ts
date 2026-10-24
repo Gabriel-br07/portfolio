@@ -1,1 +1,1 @@
-export type MascotState = 'idle' | 'walk' | 'look' | 'wave' | 'celebrate' | 'bye' | 'read' | 'exercise'
+export type MascotState = 'idle' | 'wave' | 'bye' | 'read' | 'exercise'
