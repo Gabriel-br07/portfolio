@@ -110,7 +110,7 @@ const [{ data: navigation }, { data: files }] = useBlogSearchData()
         </UMain>
       </NuxtLayout>
 
-      <ContactModal />
+      <LazyContactModal hydrate-on-idle />
 
       <ClientOnly>
         <LazyUContentSearch
