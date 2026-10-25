@@ -5,6 +5,10 @@
   "scripts": {
     "clean": "nuxi cleanup",
     "build": "nuxt build",
+    "build:audit": "NUXT_SOURCEMAP=true nuxt build",
+    "analyze": "nuxt analyze",
+    "analyze:chunks": "source-map-explorer '.output/public/_nuxt/*.js' --html .lighthouse/bundle.html",
+    "audit:perf": "bash scripts/audit-lighthouse.sh",
     "dev": "nuxt dev",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -35,6 +39,7 @@
     "@nuxtjs/robots": "^6.1.1",
     "@nuxtjs/sitemap": "^8.2.1",
     "eslint": "^9.39.2",
+    "source-map-explorer": "^2.5.3",
     "typescript": "^5.9.3",
     "vue-tsc": "^3.2.1"
   },
