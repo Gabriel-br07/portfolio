@@ -67,6 +67,13 @@ export default defineNuxtConfig({
     '/es/livros/': { redirect: { to: '/es/books', statusCode: 308 } }
   },
 
+  // Client sourcemaps are opt-in (audit builds only) so production does not
+  // publish the source. See docs/performance.md.
+  sourcemap: {
+    client: process.env.NUXT_SOURCEMAP === 'true',
+    server: false
+  },
+
   compatibilityDate: '2024-11-01',
 
   nitro: {
