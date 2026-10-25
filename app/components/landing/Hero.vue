@@ -31,89 +31,26 @@ const heroSocialLinks = computed(() => {
     }"
   >
     <template #headline>
-      <Motion
-        :initial="{
-          scale: 1.1,
-          opacity: 0,
-          filter: 'blur(20px)'
-        }"
-        :animate="{
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)'
-        }"
-        :transition="{
-          duration: 0.6,
-          delay: 0.1
-        }"
-      >
-        <UColorModeAvatar
-          class="size-18 ring ring-default ring-offset-3 ring-offset-(--ui-bg)"
-          :light="global.picture?.light!"
-          :dark="global.picture?.dark!"
-          :alt="t('hero.profileAlt')"
-        />
-      </Motion>
+      <UColorModeAvatar
+        class="size-18 ring ring-default ring-offset-3 ring-offset-(--ui-bg)"
+        :light="global.picture?.light!"
+        :dark="global.picture?.dark!"
+        :alt="t('hero.profileAlt')"
+      />
     </template>
 
     <template #title>
-      <Motion
-        :initial="{
-          scale: 1.1,
-          opacity: 0,
-          filter: 'blur(20px)'
-        }"
-        :animate="{
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)'
-        }"
-        :transition="{
-          duration: 0.6,
-          delay: 0.1
-        }"
-      >
-        {{ page.title }}
-      </Motion>
+      {{ page.title }}
     </template>
 
     <template #description>
-      <Motion
-        :initial="{
-          scale: 1.1,
-          opacity: 0,
-          filter: 'blur(20px)'
-        }"
-        :animate="{
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)'
-        }"
-        :transition="{
-          duration: 0.6,
-          delay: 0.3
-        }"
-      >
-        {{ page.description }}
-      </Motion>
+      {{ page.description }}
     </template>
 
     <template #links>
-      <Motion
-        :initial="{
-          scale: 1.1,
-          opacity: 0,
-          filter: 'blur(20px)'
-        }"
-        :animate="{
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)'
-        }"
-        :transition="{
-          duration: 0.6,
-          delay: 0.5
-        }"
+      <div
+        class="hero-enter"
+        style="--hero-delay: 0.2s"
       >
         <div
           v-if="page.hero.links"
@@ -144,30 +81,17 @@ const heroSocialLinks = computed(() => {
             </template>
           </UButton>
         </div>
-      </Motion>
+      </div>
 
       <div
         v-if="heroSocialLinks.length"
         class="gap-x-4 inline-flex mt-4"
       >
-        <Motion
+        <div
           v-for="(link, index) of heroSocialLinks"
           :key="index"
-
-          :initial="{
-            scale: 1.1,
-            opacity: 0,
-            filter: 'blur(20px)'
-          }"
-          :animate="{
-            scale: 1,
-            opacity: 1,
-            filter: 'blur(0px)'
-          }"
-          :transition="{
-            duration: 0.6,
-            delay: 0.5 + index * 0.1
-          }"
+          class="hero-enter"
+          :style="{ '--hero-delay': `${0.2 + index * 0.05}s` }"
         >
           <UButton
             v-if="isMailLink(link)"
@@ -183,7 +107,7 @@ const heroSocialLinks = computed(() => {
             v-else
             v-bind="{ size: 'md', color: 'neutral', variant: 'ghost', ...link }"
           />
-        </Motion>
+        </div>
       </div>
     </template>
 
@@ -191,23 +115,11 @@ const heroSocialLinks = computed(() => {
       pause-on-hover
       class="py-2 -mx-8 sm:-mx-12 lg:-mx-16 [--duration:40s]"
     >
-      <Motion
+      <div
         v-for="(img, index) in page.hero.images"
         :key="index"
-        :initial="{
-          scale: 1.1,
-          opacity: 0,
-          filter: 'blur(20px)'
-        }"
-        :animate="{
-          scale: 1,
-          opacity: 1,
-          filter: 'blur(0px)'
-        }"
-        :transition="{
-          duration: 0.6,
-          delay: index * 0.1
-        }"
+        class="hero-enter"
+        :style="{ '--hero-delay': `${index * 0.05}s` }"
       >
         <NuxtImg
           width="234"
@@ -216,7 +128,7 @@ const heroSocialLinks = computed(() => {
           :class="index % 2 === 0 ? '-rotate-2' : 'rotate-2'"
           v-bind="img"
         />
-      </Motion>
+      </div>
     </UMarquee>
   </UPageHero>
 </template>
