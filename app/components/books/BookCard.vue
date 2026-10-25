@@ -71,6 +71,7 @@ function toggleWhyRead() {
           width="168"
           height="252"
           sizes="168px"
+          format="webp"
           loading="lazy"
           decoding="async"
           class="aspect-[2/3] h-auto w-full object-cover"
