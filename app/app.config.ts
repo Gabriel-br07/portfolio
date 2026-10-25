@@ -1,8 +1,8 @@
 export default defineAppConfig({
   global: {
     picture: {
-      dark: '/images/profile/avatar.jpeg',
-      light: '/images/profile/avatar.jpeg',
+      dark: '/images/profile/avatar.webp',
+      light: '/images/profile/avatar.webp',
       alt: 'My profile picture'
     },
     email: 'bielfaria2003@gmail.com',

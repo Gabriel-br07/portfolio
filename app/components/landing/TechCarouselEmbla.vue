@@ -131,7 +131,7 @@ function tileClass(slideKey: string) {
                   :class="mediaClass(slideKey, item.invertOnDark)"
                   width="36"
                   height="36"
-                  loading="eager"
+                  loading="lazy"
                   decoding="async"
                   draggable="false"
                 >
