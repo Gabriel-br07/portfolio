@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import MascotClawd from './characters/MascotClawd.vue'
-import MascotClawdReader from './characters/MascotClawdReader.vue'
 import type { Component } from 'vue'
 import type { MascotState } from '~/types/mascots'
 
@@ -16,7 +15,8 @@ const props = withDefaults(defineProps<{
 
 /** Activity scenes have their own artwork; every other state uses the walking rig. */
 const SCENE_COMPONENTS: Partial<Record<MascotState, Component>> = {
-  read: MascotClawdReader,
+  // Its ~54 KB of generated keyframes only ship with the /books chunk.
+  read: defineAsyncComponent(() => import('./characters/MascotClawdReader.vue')),
   // Its ~109 KB of generated keyframes only ship with the /projects chunk.
   exercise: defineAsyncComponent(() => import('./characters/MascotClawdExercise.vue'))
 }
