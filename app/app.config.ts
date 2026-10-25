@@ -1,13 +1,28 @@
 export default defineAppConfig({
   global: {
     picture: {
-      dark: 'https://i.imgur.com/5prWFBk.jpeg',
-      light: 'https://i.imgur.com/5prWFBk.jpeg',
+      dark: '/images/profile/avatar.jpeg',
+      light: '/images/profile/avatar.jpeg',
       alt: 'My profile picture'
     },
     email: 'bielfaria2003@gmail.com',
     available: true,
-    meetingLink: 'https://cal.com/gabriel-faria07'
+    meetingLink: 'https://cal.com/gabriel-faria07',
+    // Topics exposed as `knowsAbout` in the Person JSON-LD (technologies used in the projects).
+    knowsAbout: [
+      'Back-end development',
+      'Full-stack development',
+      'Rust',
+      'Axum',
+      'Python',
+      'FastAPI',
+      'Prefect',
+      'PostgreSQL',
+      'OpenSearch',
+      'Vue',
+      'Nuxt',
+      'OAuth2'
+    ]
   },
   ui: {
     colors: {

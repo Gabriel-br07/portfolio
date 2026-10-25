@@ -195,3 +195,5 @@
     />
   </svg>
 </template>
+
+<style src="~/assets/css/mascots-exercise.css" />

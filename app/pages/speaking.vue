@@ -31,6 +31,9 @@ if (!page.value) {
 
 usePageSeo(() => page.value)
 
+// Placeholder events: keep this page out of search indexes until real ones are listed.
+useRobotsRule('noindex, nofollow')
+
 const { global } = useAppConfig()
 
 const groupedEvents = computed((): Record<Event['category'], Event[]> => {

@@ -9,7 +9,6 @@
  * greeter), books (reader), projects (exerciser), blog (waving greeter).
  * Existing page/components opt in via data attributes only:
  *   - `data-mascot-anchor="key"`: placement reference element
- *   - `data-mascot-trigger="key"`: hover/focus reaction source
  */
 import MascotActor from './MascotActor.vue'
 import type { MascotState } from '~/types/mascots'
@@ -21,7 +20,7 @@ const ASPECT = 20 / 24
 const BASELINE = 0.92
 
 /** Smallest width an actor may shrink to when squeezed beside its anchor. */
-const MIN_FIT_WIDTH = 64
+const MIN_FIT_WIDTH = 48
 
 /** Home greeter: fades in at its spot, waves with a bubble, then walks off to the right and fades. */
 const GREET = {
@@ -32,19 +31,16 @@ const GREET = {
   sessionKey: 'mascot-greeted'
 }
 
-type Strategy = 'right-of' | 'below-center'
-
 interface ActorSpec {
   id: string
   width: number
   anchor: string
-  strategy: Strategy
   gap?: number
   /** Height / width of the character's viewBox (defaults to the walking rig). */
   aspect?: number
   /** Fraction of the box height where the ground line sits (defaults to BASELINE). */
   baseline?: number
-  /** When it does not fit beside the anchor, shrink into the free room instead of dropping below. */
+  /** When it does not fit beside the anchor, shrink into the free room; hide if even that is too small. */
   shrinkToFit?: boolean
   /** Below this viewport width the actor stays hidden (walks need free space). */
   minWidth?: number
@@ -53,8 +49,6 @@ interface ActorSpec {
   initState?: MascotState
   /** One-shot state played once the actor becomes visible. */
   greet?: MascotState
-  reactState?: MascotState
-  triggers?: string[]
 }
 
 interface ActorData {
@@ -69,6 +63,8 @@ interface ActorData {
   state: MascotState
   visible: boolean
   placed: boolean
+  /** False when a shrink-to-fit actor has no free room beside its anchor; it hides instead of covering text. */
+  fits: boolean
   walking: boolean
   arrived: boolean
   /** Greeter sequence stage; `null` when idle or finished. */
@@ -77,7 +73,6 @@ interface ActorData {
   startX: number
   walkDuration: number
   offscreen: boolean
-  cooldownUntil: number
   timers: ReturnType<typeof setTimeout>[]
 }
 
@@ -87,7 +82,6 @@ const SCENES: Record<string, ActorSpec[]> = {
       id: 'hero-clawd',
       width: 150,
       anchor: 'hero-links',
-      strategy: 'right-of',
       gap: 34,
       minWidth: 1024,
       greeter: true
@@ -100,7 +94,6 @@ const SCENES: Record<string, ActorSpec[]> = {
       aspect: 17 / 21,
       baseline: 0.94,
       anchor: 'books-title',
-      strategy: 'right-of',
       gap: 20,
       shrinkToFit: true,
       initState: 'read'
@@ -113,7 +106,6 @@ const SCENES: Record<string, ActorSpec[]> = {
       aspect: 17 / 31,
       baseline: 0.88,
       anchor: 'projects-title',
-      strategy: 'right-of',
       gap: 20,
       shrinkToFit: true,
       initState: 'exercise'
@@ -124,7 +116,6 @@ const SCENES: Record<string, ActorSpec[]> = {
       id: 'blog-clawd',
       width: 132,
       anchor: 'blog-empty',
-      strategy: 'right-of',
       gap: 24,
       greet: 'wave'
     }
@@ -149,12 +140,13 @@ const { active, reducedMotion } = useMascots()
 const actors = ref<ActorData[]>([])
 const layerHeight = ref(0)
 const hiddenTab = ref(false)
+const layerEl = ref<HTMLElement | null>(null)
 
 let anchorIOs: IntersectionObserver[] = []
 let actorIO: IntersectionObserver | null = null
 let resizeDebounce: ReturnType<typeof setTimeout> | null = null
 let heightDebounce: ReturnType<typeof setTimeout> | null = null
-let lastTriggerEl: Element | null = null
+let bodyObserver: ResizeObserver | null = null
 let disposed = false
 
 function motionAllowed() {
@@ -173,7 +165,12 @@ function teardown() {
   actorIO?.disconnect()
   actorIO = null
   actors.value = []
-  lastTriggerEl = null
+  if (heightDebounce)
+    clearTimeout(heightDebounce)
+  if (resizeDebounce)
+    clearTimeout(resizeDebounce)
+  heightDebounce = null
+  resizeDebounce = null
 }
 
 function placeActor(a: ActorData) {
@@ -200,38 +197,34 @@ function placeActor(a: ActorData) {
   const gap = a.spec.gap ?? 24
   let x = 0
   let y = 0
+  a.fits = true
 
-  switch (a.spec.strategy) {
-    case 'right-of': {
-      x = rect.right + sx + gap
+  x = rect.right + sx + gap
+  y = rect.top + sy + rect.height - h * (a.spec.baseline ?? BASELINE)
+  if (x + w > vw - 8) {
+    const room = vw - 8 - (rect.right + 8)
+    if (a.spec.shrinkToFit && room >= MIN_FIT_WIDTH) {
+      w = Math.round(room)
+      h = Math.round(w * (a.spec.aspect ?? ASPECT))
+      a.width = w
+      a.height = h
+      x = rect.right + sx + 8
       y = rect.top + sy + rect.height - h * (a.spec.baseline ?? BASELINE)
-      if (x + w > vw - 8) {
-        const room = vw - 8 - (rect.right + 8)
-        if (a.spec.shrinkToFit && room >= MIN_FIT_WIDTH) {
-          w = Math.round(room)
-          h = Math.round(w * (a.spec.aspect ?? ASPECT))
-          a.width = w
-          a.height = h
-          x = rect.right + sx + 8
-          y = rect.top + sy + rect.height - h * (a.spec.baseline ?? BASELINE)
-        } else {
-          x = rect.left + sx + (rect.width - w) / 2
-          y = rect.bottom + sy + gap
-        }
-      }
-      break
-    }
-    case 'below-center': {
+    } else if (a.spec.shrinkToFit) {
+      // Dropping below the anchor would sit on top of the text under it: hide instead.
+      a.fits = false
+    } else {
       x = rect.left + sx + (rect.width - w) / 2
       y = rect.bottom + sy + gap
-      break
     }
   }
 
   a.targetX = Math.round(x)
   a.targetY = Math.round(y)
   a.y = a.targetY
-  a.x = a.targetX
+  // A late re-place must not drag an actor that is mid-walk (e.g. the greeter exiting) back.
+  if (!a.walking && a.stage !== 'out')
+    a.x = a.targetX
   a.placed = true
 }
 
@@ -269,8 +262,9 @@ async function nextPaint() {
 function startGreeter(a: ActorData) {
   if (!a.placed || a.arrived || !motionAllowed() || greeterSeen())
     return
+  // Re-measure now: the hero entrance animation has settled, unlike at scene build.
+  placeActor(a)
   a.arrived = true
-  markGreeterSeen()
   a.startX = Math.min(a.targetX + GREET.exitDx, window.innerWidth + 10)
   a.x = a.targetX
   a.facing = 1
@@ -283,6 +277,7 @@ function startGreeter(a: ActorData) {
 
 /** Stage 2: walk off to the right edge, fading out on the way. */
 async function leaveGreeter(a: ActorData) {
+  markGreeterSeen()
   a.bubble = false
   a.stage = 'out'
   a.state = 'bye'
@@ -311,6 +306,8 @@ function cancelGreeter(a: ActorData) {
   if (!a.stage)
     return
   clearActorTimers(a)
+  // Cancelled before the wave finished: the greeting was not seen, let it retry.
+  a.arrived = a.stage === 'out'
   a.stage = null
   a.walking = false
   a.bubble = false
@@ -348,42 +345,17 @@ function reveal(a: ActorData) {
   }
 }
 
-function react(a: ActorData) {
-  if (!motionAllowed() || !a.placed || a.walking)
+function onVisibilityChange() {
+  hiddenTab.value = document.hidden
+  if (document.hidden) {
+    finishAllWalks()
     return
-  if (Date.now() < a.cooldownUntil)
-    return
-  a.cooldownUntil = Date.now() + 20000
-  a.state = a.spec.reactState ?? 'wave'
-  a.timers.push(setTimeout(() => {
-    if (!a.walking)
-      a.state = a.spec.initState ?? 'idle'
-  }, 1800))
-}
-
-function fireTrigger(key: string | null) {
-  if (!key || !motionAllowed())
-    return
+  }
+  // Opened in a background tab: the greeting was skipped, play it now.
   actors.value.forEach((a) => {
-    if (a.spec.triggers?.includes(key))
-      react(a)
+    if (a.spec.greeter && a.placed && !a.arrived)
+      a.timers.push(setTimeout(() => startGreeter(a), 300))
   })
-}
-
-function onPointerOver(event: PointerEvent) {
-  const target = event.target as Element | null
-  const el = target?.closest?.('[data-mascot-trigger]') ?? null
-  if (!el || el === lastTriggerEl)
-    return
-  lastTriggerEl = el
-  fireTrigger(el.getAttribute('data-mascot-trigger'))
-}
-
-function onFocusIn(event: FocusEvent) {
-  const el = (event.target as Element | null)?.closest?.('[data-mascot-trigger]') ?? null
-  if (!el)
-    return
-  fireTrigger(el.getAttribute('data-mascot-trigger'))
 }
 
 function onTransitionEnd(event: TransitionEvent) {
@@ -438,7 +410,15 @@ function observeActorsOffscreen() {
 }
 
 function syncHeight() {
-  layerHeight.value = document.documentElement.scrollHeight
+  // The layer's own box counts toward the scroll height, so collapse it before measuring,
+  // otherwise the document could never shrink after navigating to a shorter page.
+  const el = layerEl.value
+  if (el)
+    el.style.height = '0px'
+  const height = document.documentElement.scrollHeight
+  if (el)
+    el.style.height = `${height}px`
+  layerHeight.value = height
 }
 
 function buildScene() {
@@ -458,6 +438,7 @@ function buildScene() {
     state: spec.initState ?? 'idle',
     visible: false,
     placed: false,
+    fits: true,
     walking: false,
     arrived: false,
     stage: null,
@@ -465,7 +446,6 @@ function buildScene() {
     startX: 0,
     walkDuration: 1.5,
     offscreen: false,
-    cooldownUntil: 0,
     timers: []
   }))
   placeAll()
@@ -476,7 +456,7 @@ function buildScene() {
     // Home: the greeter walks in shortly after the hero settles (once per session).
     const greeter = actors.value.find(a => a.spec.greeter)
     if (greeter?.placed)
-      greeter.timers.push(setTimeout(() => startGreeter(greeter), 650))
+      greeter.timers.push(setTimeout(() => startGreeter(greeter), 1200))
   })
 }
 
@@ -522,29 +502,20 @@ watch(reducedMotion, (value) => {
 })
 
 onMounted(() => {
-  document.addEventListener('pointerover', onPointerOver, { passive: true })
-  document.addEventListener('focusin', onFocusIn, { passive: true })
   window.addEventListener('resize', scheduleReplace, { passive: true })
   window.addEventListener('load', scheduleRebuild, { passive: true })
-  document.addEventListener('visibilitychange', () => {
-    hiddenTab.value = document.hidden
-    if (document.hidden)
-      finishAllWalks()
-  })
-  const ro = new ResizeObserver(scheduleRebuild)
-  ro.observe(document.body)
+  document.addEventListener('visibilitychange', onVisibilityChange)
+  bodyObserver = new ResizeObserver(scheduleRebuild)
+  bodyObserver.observe(document.body)
   buildScene()
 })
 
 onBeforeUnmount(() => {
   disposed = true
   teardown()
-  if (heightDebounce)
-    clearTimeout(heightDebounce)
-  if (resizeDebounce)
-    clearTimeout(resizeDebounce)
-  document.removeEventListener('pointerover', onPointerOver)
-  document.removeEventListener('focusin', onFocusIn)
+  bodyObserver?.disconnect()
+  bodyObserver = null
+  document.removeEventListener('visibilitychange', onVisibilityChange)
   window.removeEventListener('resize', scheduleReplace)
   window.removeEventListener('load', scheduleRebuild)
 })
@@ -553,6 +524,7 @@ onBeforeUnmount(() => {
 <template>
   <Teleport to="body">
     <div
+      ref="layerEl"
       class="mascot-world"
       :class="{ 'mascots-paused': !active || hiddenTab }"
       :style="{ height: `${layerHeight}px` }"
@@ -566,7 +538,7 @@ onBeforeUnmount(() => {
         class="mascot-actor"
         :class="[
           a.walking && 'is-walking',
-          !a.visible && 'is-hidden',
+          (!a.visible || !a.fits) && 'is-hidden',
           a.offscreen && 'offscreen'
         ]"
         :style="{

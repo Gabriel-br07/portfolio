@@ -8,7 +8,7 @@
   here (user units stay >= 0) and the viewBox is cropped tight around the
   character so it fills its box at small render sizes.
   Rig (stable groups): cw-shadow (outside body), cw-body > cw-legs-a,
-  cw-legs-b, torso, cw-arm-l, cw-arm-r, cw-eyes > cw-pupils, cw-mouth, cw-fx.
+  cw-legs-b, torso, cw-arm-l, cw-arm-r, cw-eyes > cw-pupils, cw-mouth.
 -->
 <template>
   <svg
@@ -95,7 +95,7 @@
           height="2"
         />
       </g>
-      <!-- eyes: outer group blinks, inner group shifts for "look" -->
+      <!-- eyes: the group blinks -->
       <g class="cw-eyes">
         <g
           class="cw-pupils"
@@ -116,38 +116,12 @@
         </g>
       </g>
       <rect
-        class="cw-mouth"
         x="21.4"
         y="35.8"
         width="2.2"
         height="1"
         rx=".5"
         fill="#7a2230"
-      />
-    </g>
-    <!-- celebrate sparks (hidden unless the state animates them) -->
-    <g
-      class="cw-fx"
-      fill="#F2B98E"
-      opacity="0"
-    >
-      <rect
-        x="30"
-        y="28"
-        width="1.2"
-        height="1.2"
-      />
-      <rect
-        x="33"
-        y="31"
-        width="1"
-        height="1"
-      />
-      <rect
-        x="31.5"
-        y="25"
-        width=".8"
-        height=".8"
       />
     </g>
   </svg>

@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 @import "./mascots.css";
-@import "./mascots-exercise.css";
 
 @source "../../../content/**/*";
 

@@ -29,6 +29,37 @@ const { data: projects } = await useProjectsCollection()
 const { open: openContactModal } = useContactModal()
 
 usePageSeo(() => page.value)
+
+// ItemList JSON-LD so search engines and LLMs can read the project catalogue.
+const projectsJsonLd = computed(() => ({
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  'itemListElement': (projects.value ?? []).map((project, index) => {
+    const isRepository = project.url.includes('github.com')
+    return {
+      '@type': 'ListItem',
+      'position': index + 1,
+      'item': {
+        '@type': isRepository ? 'SoftwareSourceCode' : 'CreativeWork',
+        'name': project.title,
+        'description': project.description,
+        'keywords': project.tags.join(', '),
+        'dateCreated': new Date(project.date).toISOString().slice(0, 10),
+        ...(isRepository ? { codeRepository: project.url } : { url: project.url })
+      }
+    }
+  })
+}))
+
+useHead(() => ({
+  script: [
+    {
+      key: 'projects-jsonld',
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify(projectsJsonLd.value)
+    }
+  ]
+}))
 </script>
 
 <template>

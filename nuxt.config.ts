@@ -4,7 +4,7 @@
 // and `runtimeConfig.public.siteUrl`. A production build/generate must never ship the
 // `https://example.com` template placeholder: it is always rejected. Resolution order
 // is env override → production default domain → localhost (development only).
-const PRODUCTION_SITE_URL = 'https://gabriel07.vercel.app'
+const PRODUCTION_SITE_URL = 'https://gabrielfaria.dev.br'
 const PLACEHOLDER_SITE_URL = 'https://example.com'
 const rawSiteUrl = process.env.NUXT_PUBLIC_SITE_URL?.trim()
 
@@ -31,7 +31,9 @@ export default defineNuxtConfig({
     '@nuxtjs/sitemap',
     '@nuxtjs/robots',
     '@vueuse/nuxt',
-    'motion-v/nuxt'
+    'motion-v/nuxt',
+    // Real-user Web Vitals; client-only, no-op until enabled in the Vercel dashboard.
+    '@vercel/speed-insights/nuxt'
   ],
 
   devtools: {
@@ -72,7 +74,8 @@ export default defineNuxtConfig({
       routes: [
         '/',
         '/pt',
-        '/es'
+        '/es',
+        '/llms.txt'
       ],
       crawlLinks: true
     }
@@ -109,5 +112,11 @@ export default defineNuxtConfig({
       cookieKey: 'i18n_redirected',
       redirectOn: 'root'
     }
+  },
+
+  // Speaking events are placeholders for now: keep the page out of the sitemap
+  // (the page itself sets noindex via `useRobotsRule`). Remove once real events are listed.
+  sitemap: {
+    exclude: ['/speaking', '/pt/speaking', '/es/speaking']
   }
 })

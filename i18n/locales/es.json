@@ -8,6 +8,7 @@
   },
   "footer": {
     "credits": "Hecho con Nuxt UI • © {year}",
+    "mascotCredit": "Mascota: fan art no oficial inspirado en Clawd, adaptado de clawd-emotes-skill (MIT), sin afiliación con Anthropic",
     "mascotsPause": "Pausar animaciones de las mascotas",
     "mascotsResume": "Reanudar animaciones de las mascotas"
   },
@@ -53,7 +54,9 @@
   },
   "seo": {
     "siteTitle": "Portafolio Gabriel Oliveira",
-    "titleWithPage": "{title} — Portafolio Gabriel Oliveira"
+    "titleWithPage": "{title} — Portafolio Gabriel Oliveira",
+    "jobTitle": "Desarrollador Fullstack y Back-End",
+    "personDescription": "Desarrollador que construye soluciones digitales fiables, mantenibles y con impacto, con foco en la claridad, el trabajo colaborativo y el software bien estructurado."
   },
   "home": {
     "techCarouselTitle": "Tecnologías con las que he trabajado"

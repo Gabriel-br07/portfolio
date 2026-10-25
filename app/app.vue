@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
-const { t } = useI18n()
+const { t, locale } = useI18n()
 const i18nHead = useLocaleHead()
 const appConfig = useAppConfig()
 const { public: { siteUrl } } = useRuntimeConfig()
@@ -18,10 +18,19 @@ const jsonLd = computed(() => ({
   '@graph': [
     {
       '@type': 'Person',
+      '@id': `${siteUrl}/#person`,
       'name': 'Gabriel Oliveira',
+      'jobTitle': t('seo.jobTitle'),
+      'description': t('seo.personDescription'),
       'email': appConfig.global?.email,
       'url': siteUrl,
       'image': `${siteUrl}${appConfig.global?.picture?.dark ?? ''}`,
+      'knowsAbout': appConfig.global?.knowsAbout,
+      'worksFor': {
+        '@type': 'Organization',
+        'name': 'DW Corp',
+        'url': 'https://dwcorp.com.br/'
+      },
       'sameAs': (appConfig.footer?.links ?? [])
         .map(link => link.to)
         .filter((to): to is string => typeof to === 'string' && to.startsWith('http'))
@@ -29,7 +38,9 @@ const jsonLd = computed(() => ({
     {
       '@type': 'WebSite',
       'name': t('seo.siteTitle'),
-      'url': siteUrl
+      'url': siteUrl,
+      'inLanguage': locale.value,
+      'author': { '@id': `${siteUrl}/#person` }
     }
   ]
 }))
@@ -76,30 +87,33 @@ const [{ data: navigation }, { data: files }] = useBlogSearchData()
 </script>
 
 <template>
-  <UApp>
-    <BackgroundSiteParticlesBackground />
+  <!-- `reducedMotion="user"` makes every motion-v animation honour prefers-reduced-motion. -->
+  <MotionConfig reduced-motion="user">
+    <UApp>
+      <BackgroundSiteParticlesBackground />
 
-    <!-- Decorative mascot layer: client-only, teleported to <body>, pointer-events: none. -->
-    <ClientOnly>
-      <MascotsMascotWorld />
-    </ClientOnly>
+      <!-- Decorative mascot layer: client-only, teleported to <body>, pointer-events: none. -->
+      <ClientOnly>
+        <MascotsMascotWorld />
+      </ClientOnly>
 
-    <NuxtLayout>
-      <UMain class="relative">
-        <NuxtPage />
-      </UMain>
-    </NuxtLayout>
+      <NuxtLayout>
+        <UMain class="relative">
+          <NuxtPage />
+        </UMain>
+      </NuxtLayout>
 
-    <ContactModal />
+      <ContactModal />
 
-    <ClientOnly>
-      <LazyUContentSearch
-        :files="files"
-        :navigation="navigation"
-        shortcut="meta_k"
-        :links="links"
-        :fuse="{ resultLimit: 42 }"
-      />
-    </ClientOnly>
-  </UApp>
+      <ClientOnly>
+        <LazyUContentSearch
+          :files="files"
+          :navigation="navigation"
+          shortcut="meta_k"
+          :links="links"
+          :fuse="{ resultLimit: 42 }"
+        />
+      </ClientOnly>
+    </UApp>
+  </MotionConfig>
 </template>

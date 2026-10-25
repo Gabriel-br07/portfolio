@@ -36,4 +36,4 @@ jobs:
       - name: Build
         run: pnpm run build
         env:
-          NUXT_PUBLIC_SITE_URL: https://gabriel07.vercel.app
+          NUXT_PUBLIC_SITE_URL: https://gabrielfaria.dev.br

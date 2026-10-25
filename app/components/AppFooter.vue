@@ -16,6 +16,13 @@ onMounted(restoreMascots)
   >
     <template #left>
       {{ t('footer.credits', { year }) }}
+      <span class="block">
+        <ULink
+          to="https://github.com/xixicc186/clawd-emotes-skill"
+          target="_blank"
+          rel="noopener noreferrer"
+        >{{ t('footer.mascotCredit') }}</ULink>
+      </span>
     </template>
 
     <template #right>

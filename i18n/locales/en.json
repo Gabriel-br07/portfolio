@@ -8,6 +8,7 @@
   },
   "footer": {
     "credits": "Built with Nuxt UI • © {year}",
+    "mascotCredit": "Mascot: unofficial Clawd-inspired fan art adapted from clawd-emotes-skill (MIT), not affiliated with Anthropic",
     "mascotsPause": "Pause mascot animations",
     "mascotsResume": "Resume mascot animations"
   },
@@ -53,7 +54,9 @@
   },
   "seo": {
     "siteTitle": "Gabriel Oliveira Portfolio",
-    "titleWithPage": "{title} — Gabriel Oliveira Portfolio"
+    "titleWithPage": "{title} — Gabriel Oliveira Portfolio",
+    "jobTitle": "Fullstack & Back-End Developer",
+    "personDescription": "Developer who builds reliable, maintainable, and impactful digital solutions, focused on clarity, collaborative problem-solving, and well-structured software."
   },
   "home": {
     "techCarouselTitle": "Technologies I've worked with"
