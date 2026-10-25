@@ -42,10 +42,19 @@ usePageSeo(() => page.value)
       }"
     >
       <LandingAbout :page />
-      <LandingWorkExperience :page />
+      <LazyLandingWorkExperience
+        hydrate-on-visible
+        :page
+      />
     </UPageSection>
     <LandingBlog />
-    <LandingTestimonials :page />
-    <LandingFAQ :page />
+    <LazyLandingTestimonials
+      hydrate-on-visible
+      :page
+    />
+    <LazyLandingFAQ
+      hydrate-on-visible
+      :page
+    />
   </UPage>
 </template>
