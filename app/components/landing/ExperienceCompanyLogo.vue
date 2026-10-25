@@ -82,10 +82,10 @@ const wrapperClass = computed(() => {
         </template>
       </ClientOnly>
       <img
+        v-else
         width="256"
         height="111"
         decoding="async"
-        v-else
         :src="getLogoPath(props.experience)"
         :alt="props.experience.company.name + ' logo'"
         :class="[
