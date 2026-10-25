@@ -84,10 +84,12 @@ const staticMediaHover
   >
     <template #description>
       <div class="mt-4 -mx-4 sm:-mx-6 overflow-hidden">
-        <!-- SSR + pre-mount + reduced-motion: static grid only (no Embla in SSR HTML). -->
+        <!-- SSR + pre-mount + reduced-motion: static grid only (no Embla in SSR HTML). Pre-mount it is
+             clipped to the carousel's row height (60px / 71px from sm) so swapping to Embla causes no layout shift. -->
         <div
           v-if="!showAnimatedCarousel"
           class="mx-auto max-w-6xl px-4 sm:px-6"
+          :class="{ 'h-15 sm:h-[4.4375rem] overflow-hidden': !hasMounted }"
           :aria-hidden="showAnimatedCarousel"
         >
           <ul
