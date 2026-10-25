@@ -90,6 +90,8 @@ const [{ data: navigation }, { data: files }] = useBlogSearchData()
   <!-- `reducedMotion="user"` makes every motion-v animation honour prefers-reduced-motion. -->
   <MotionConfig reduced-motion="user">
     <UApp>
+      <AppSkipLink />
+
       <BackgroundSiteParticlesBackground />
 
       <!-- Decorative mascot layer: client-only, teleported to <body>, pointer-events: none. -->
@@ -98,7 +100,12 @@ const [{ data: navigation }, { data: files }] = useBlogSearchData()
       </ClientOnly>
 
       <NuxtLayout>
-        <UMain class="relative">
+        <UMain
+          id="main-content"
+          as="main"
+          tabindex="-1"
+          class="relative focus:outline-none"
+        >
           <NuxtPage />
         </UMain>
       </NuxtLayout>

@@ -1,4 +1,8 @@
 {
+  "a11y": {
+    "skipToMain": "Saltar al contenido principal",
+    "mainNavigation": "Navegación principal"
+  },
   "nav": {
     "home": "Inicio",
     "projects": "Proyectos",
