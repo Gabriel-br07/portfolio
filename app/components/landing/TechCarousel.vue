@@ -114,7 +114,7 @@ const staticMediaHover
           </ul>
         </div>
         <!-- Mount only when animated — viewport has real dimensions (see script comment). -->
-        <LandingTechCarouselEmbla
+        <LazyLandingTechCarouselEmbla
           v-else
           :slides="emblaSlides"
           :aria-hidden="!showAnimatedCarousel"
