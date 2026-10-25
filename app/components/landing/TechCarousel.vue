@@ -38,7 +38,7 @@ const techItems: readonly TechItem[] = [
   { key: 'vue', src: '/icons/tech/vue.svg', label: 'Vue', alt: 'Vue' },
   { key: 'nuxt', src: '/icons/tech/nuxt.svg', label: 'Nuxt', alt: 'Nuxt' },
   { key: 'go', src: '/icons/tech/go-gopher.svg', label: 'Go', alt: 'Go Gopher' },
-  { key: 'rust', src: '/icons/tech/rust-ferris.png', label: 'Rust', alt: 'Ferris, the Rust mascot' },
+  { key: 'rust', src: '/icons/tech/rust-ferris.webp', label: 'Rust', alt: 'Ferris, the Rust mascot' },
   { key: 'docker', src: '/icons/tech/docker.svg', label: 'Docker', alt: 'Docker' },
   { key: 'postgresql', src: '/icons/tech/postgresql.svg', label: 'PostgreSQL', alt: 'PostgreSQL' },
   { key: 'mongodb', src: '/icons/tech/mongodb.svg', label: 'MongoDB', alt: 'MongoDB' },

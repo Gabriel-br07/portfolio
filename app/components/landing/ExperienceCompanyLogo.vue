@@ -27,7 +27,7 @@ function getLogoPath(experience: ExperienceItem) {
   if (!logo) return ''
   if (isDWCorp(experience)) {
     return isDarkTheme.value
-      ? '/logos/DW-Corp-logo-white-transparent.png'
+      ? '/logos/DW-Corp-logo-white-transparent.webp'
       : logo
   }
   return logo
@@ -51,6 +51,9 @@ const wrapperClass = computed(() => {
     <template v-if="props.experience.company.logo.startsWith('/')">
       <ClientOnly v-if="isDWCorp(props.experience)">
         <img
+          width="256"
+          height="111"
+          decoding="async"
           :src="getLogoPath(props.experience)"
           :alt="props.experience.company.name + ' logo'"
           :class="[
@@ -63,6 +66,9 @@ const wrapperClass = computed(() => {
         >
         <template #fallback>
           <img
+            width="256"
+            height="111"
+            decoding="async"
             :src="props.experience.company.logo"
             :alt="props.experience.company.name + ' logo'"
             :class="[
@@ -76,6 +82,9 @@ const wrapperClass = computed(() => {
         </template>
       </ClientOnly>
       <img
+        width="256"
+        height="111"
+        decoding="async"
         v-else
         :src="getLogoPath(props.experience)"
         :alt="props.experience.company.name + ' logo'"
