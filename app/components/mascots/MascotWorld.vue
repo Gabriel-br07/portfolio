@@ -12,6 +12,7 @@
  */
 import MascotActor from './MascotActor.vue'
 import type { MascotState } from '~/types/mascots'
+import type { MascotSceneKey } from '~/composables/useMascotScene'
 
 /** Default Clawd viewBox aspect (height / width); scenes with other artwork override it. */
 const ASPECT = 20 / 24
@@ -76,7 +77,7 @@ interface ActorData {
   timers: ReturnType<typeof setTimeout>[]
 }
 
-const SCENES: Record<string, ActorSpec[]> = {
+const SCENES: Record<MascotSceneKey, ActorSpec[]> = {
   home: [
     {
       id: 'hero-clawd',
@@ -125,12 +126,6 @@ const SCENES: Record<string, ActorSpec[]> = {
 /** Scenes scale down on narrower viewports but stay visible. */
 function scaleFor(vw: number) {
   return vw < 640 ? 0.7 : vw < 1024 ? 0.85 : 1
-}
-
-/** Route path → scene key, with the i18n prefix (/pt, /es) stripped. */
-function sceneKeyFor(path: string): string {
-  const stripped = path.replace(/^\/(?:pt|es)(?=\/|$)/, '')
-  return stripped.replace(/^\//, '').replace(/\/$/, '') || 'home'
 }
 
 const route = useRoute()
@@ -425,7 +420,8 @@ function buildScene() {
   if (disposed)
     return
   teardown()
-  const specs = SCENES[sceneKeyFor(route.path)] ?? []
+  const key = sceneKeyFor(route.path)
+  const specs = isMascotSceneKey(key) ? SCENES[key] : []
   actors.value = specs.map(spec => ({
     spec,
     width: spec.width,
@@ -564,3 +560,5 @@ onBeforeUnmount(() => {
     </div>
   </Teleport>
 </template>
+
+<style src="~/assets/css/mascots.css" />

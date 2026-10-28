@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
-@import "./mascots.css";
 
 @source "../../../content/**/*";
 
@@ -46,8 +45,22 @@
   animation: hero-enter 0.4s ease-out var(--hero-delay, 0s) backwards;
 }
 
+/* Experience timeline rows fade up with CSS only, so the homepage does not
+   need motion-v (it is used only on /projects). Delay per row via --experience-delay. */
+@keyframes experience-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+.experience-enter {
+  animation: experience-enter 0.4s ease-out var(--experience-delay, 0s) backwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-enter {
+  .hero-enter,
+  .experience-enter {
     animation: none;
   }
 }

@@ -100,7 +100,7 @@ useHead(() => ({
         container: '!pt-0'
       }"
     >
-      <Motion
+      <MotionReveal
         v-for="(project, index) in projects"
         :key="project.title"
         :initial="{ opacity: 0, transform: 'translateY(10px)' }"
@@ -165,7 +165,7 @@ useHead(() => ({
             decoding="async"
           />
         </UPageCard>
-      </Motion>
+      </MotionReveal>
     </UPageSection>
   </UPage>
 </template>

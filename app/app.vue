@@ -3,6 +3,7 @@ const colorMode = useColorMode()
 const { t, locale } = useI18n()
 const i18nHead = useLocaleHead()
 const appConfig = useAppConfig()
+const { mounted: mascotsMounted } = useMascotLayer()
 const { public: { siteUrl } } = useRuntimeConfig()
 
 const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
@@ -81,46 +82,30 @@ useSeoMeta({
   twitterImage: ogImageUrl,
   twitterCard: 'summary_large_image'
 })
-
-const links = useNavLinks()
-const [{ data: navigation }, { data: files }] = useBlogSearchData()
 </script>
 
 <template>
-  <!-- `reducedMotion="user"` makes every motion-v animation honour prefers-reduced-motion. -->
-  <MotionConfig reduced-motion="user">
-    <UApp>
-      <AppSkipLink />
+  <UApp>
+    <AppSkipLink />
 
-      <BackgroundSiteParticlesBackground />
+    <BackgroundSiteParticlesBackground />
 
-      <!-- Decorative mascot layer: client-only, teleported to <body>, pointer-events: none. -->
-      <ClientOnly>
-        <MascotsMascotWorld />
-      </ClientOnly>
+    <!-- Decorative mascot layer: client-only, teleported to <body>, pointer-events: none. -->
+    <ClientOnly>
+      <LazyMascotsMascotWorld v-if="mascotsMounted" />
+    </ClientOnly>
 
-      <NuxtLayout>
-        <UMain
-          id="main-content"
-          as="main"
-          tabindex="-1"
-          class="relative focus:outline-none"
-        >
-          <NuxtPage />
-        </UMain>
-      </NuxtLayout>
+    <NuxtLayout>
+      <UMain
+        id="main-content"
+        as="main"
+        tabindex="-1"
+        class="relative focus:outline-none"
+      >
+        <NuxtPage />
+      </UMain>
+    </NuxtLayout>
 
-      <LazyContactModal hydrate-on-idle />
-
-      <ClientOnly>
-        <LazyUContentSearch
-          :files="files"
-          :navigation="navigation"
-          shortcut="meta_k"
-          :links="links"
-          :fuse="{ resultLimit: 42 }"
-        />
-      </ClientOnly>
-    </UApp>
-  </MotionConfig>
+    <LazyContactModal hydrate-on-idle />
+  </UApp>
 </template>
