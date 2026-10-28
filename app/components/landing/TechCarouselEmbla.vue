@@ -116,9 +116,10 @@ function tileClass(slideKey: string) {
             class="embla__container flex flex-row items-stretch gap-x-3 sm:gap-x-4 lg:gap-x-[18px]"
           >
             <div
-              v-for="{ item, slideKey } in props.slides"
+              v-for="{ item, slideKey, decorative } in props.slides"
               :key="slideKey"
               class="embla__slide flex min-w-[4.25rem] shrink-0 flex-col sm:min-w-[4.5rem] lg:min-w-[5rem]"
+              :aria-hidden="decorative ? 'true' : undefined"
             >
               <div
                 :class="tileClass(slideKey)"

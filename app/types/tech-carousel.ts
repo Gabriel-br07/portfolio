@@ -10,4 +10,6 @@ export type TechItem = {
 export type TechCarouselSlide = {
   item: TechItem
   slideKey: string
+  /** Repeated copies exist only for the loop; hide them from assistive tech. */
+  decorative?: boolean
 }

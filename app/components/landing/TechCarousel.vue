@@ -20,8 +20,8 @@ const showAnimatedCarousel = computed(
   () => hasMounted.value && prefersReducedMotion.value === 'no-preference'
 )
 
-/** Enough repeats for `loop: true` on wide viewports (Embla needs sufficient scroll length) */
-const EMBLA_REPEAT_COUNT = 5
+/** Two copies of the list: one viewport (max 768px) is far narrower than one copy, so `loop: true` seams stay off-screen. */
+const EMBLA_REPEAT_COUNT = 2
 
 const sectionUi = {
   container: '!pt-8 !pb-6 sm:!pt-10 sm:!pb-8',
@@ -61,11 +61,15 @@ const techItems: readonly TechItem[] = [
 ]
 
 const emblaSlides = computed((): TechCarouselSlide[] => {
-  const repeated: TechItem[] = []
+  const repeated: TechCarouselSlide[] = []
   for (let r = 0; r < EMBLA_REPEAT_COUNT; r++) {
-    repeated.push(...techItems)
+    repeated.push(...techItems.map(item => ({
+      item,
+      slideKey: `${item.key}-${r}`,
+      decorative: r > 0
+    })))
   }
-  return repeated.map((item, index) => ({ item, slideKey: `${item.key}-${index}` }))
+  return repeated
 })
 
 /** Shared size + motion for icons and images (carousel + reduced-motion parity) */

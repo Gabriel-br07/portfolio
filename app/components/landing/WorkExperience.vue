@@ -25,14 +25,11 @@ const items = computed(() => props.page.experience.items)
   >
     <template #description>
       <div class="flex flex-col gap-0">
-        <Motion
+        <div
           v-for="(experience, index) in items"
           :key="index"
-          :initial="{ opacity: 0, transform: 'translateY(20px)' }"
-          :while-in-view="{ opacity: 1, transform: 'translateY(0)' }"
-          :transition="{ delay: 0.4 + 0.2 * Number(index) }"
-          :in-view-options="{ once: true }"
-          class="text-muted flex items-center text-nowrap gap-2"
+          class="experience-enter text-muted flex items-center text-nowrap gap-2"
+          :style="{ '--experience-delay': `${0.4 + 0.2 * Number(index)}s` }"
         >
           <p class="text-sm">
             {{ experience.date }}
@@ -62,7 +59,7 @@ const items = computed(() => props.page.experience.items)
               />
             </div>
           </template>
-        </Motion>
+        </div>
       </div>
     </template>
   </UPageSection>

@@ -103,6 +103,16 @@ export default defineNuxtConfig({
       }
     }
   },
+
+  // Only the faces the site renders: no italic (no <em>/blockquote content), latin subset
+  // (all content and UI strings fit in it). 700 stays for Nuxt UI `font-bold` and the mascot bubble.
+  // Public Sans's latin file is the only font preloaded; it is a variable file covering 400-700.
+  fonts: {
+    families: [
+      { name: 'Public Sans', weights: [400, 500, 600, 700], styles: ['normal'], subsets: ['latin'], preload: true },
+      { name: 'Instrument Serif', weights: [400], styles: ['normal'], subsets: ['latin'], preload: false }
+    ]
+  },
   i18n: {
     baseUrl: siteUrl,
     defaultLocale: 'en',
