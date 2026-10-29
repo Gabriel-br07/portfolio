@@ -14,14 +14,7 @@
     "credits": "Built with Nuxt UI • © {year}",
     "mascotCredit": "Mascot: unofficial Clawd-inspired fan art adapted from clawd-emotes-skill (MIT), not affiliated with Anthropic",
     "mascotsPause": "Pause mascot animations",
-    "mascotsResume": "Resume mascot animations",
-    "cookieSettings": "Cookie settings"
-  },
-  "consent": {
-    "title": "Analytics cookies",
-    "description": "I use Google Analytics to understand how the site is used. It only loads if you accept.",
-    "accept": "Accept",
-    "decline": "Decline"
+    "mascotsResume": "Resume mascot animations"
   },
   "mascots": {
     "greeting": "Hi!"
