@@ -93,7 +93,10 @@ export default defineNuxtConfig({
         '/es',
         '/llms.txt'
       ],
-      crawlLinks: true
+      crawlLinks: true,
+      // The crawler also finds `/pt/` and `/es/`; on Vercel that trailing-slash copy replaces the
+      // `/pt` and `/es` static overrides, so the real URLs fall through to the SSR function and 404.
+      ignore: [/^\/(pt|es)\/$/]
     }
   },
 
