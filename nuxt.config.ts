@@ -51,6 +51,15 @@ export default defineNuxtConfig({
     preference: 'dark',
     fallback: 'dark'
   },
+
+  // Generate Nuxt UI themes (and so Tailwind utilities) only for the components the app uses:
+  // the 112 theme files otherwise add ~190 KB of unused utilities to the render-blocking entry CSS.
+  // List dynamically resolved components here if one loses its styles.
+  ui: {
+    experimental: {
+      componentDetection: true
+    }
+  },
   runtimeConfig: {
     public: {
       siteUrl,
@@ -129,6 +138,16 @@ export default defineNuxtConfig({
       cookieKey: 'i18n_redirected',
       redirectOn: 'root'
     }
+  },
+
+  // Icons never go through api.iconify.design: scanned icons are bundled in the client.
+  // `ColorModeButton` builds its name dynamically, so the scan cannot see sun/moon.
+  icon: {
+    clientBundle: {
+      scan: true,
+      icons: ['lucide:sun', 'lucide:moon']
+    },
+    fallbackToApi: false
   },
 
   // Speaking events are placeholders for now: keep the page out of the sitemap
