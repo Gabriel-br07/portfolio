@@ -14,7 +14,14 @@
     "credits": "Feito com Nuxt UI • © {year}",
     "mascotCredit": "Mascote: fan art não oficial inspirada no Clawd, adaptada de clawd-emotes-skill (MIT), sem afiliação com a Anthropic",
     "mascotsPause": "Pausar animações dos mascotes",
-    "mascotsResume": "Retomar animações dos mascotes"
+    "mascotsResume": "Retomar animações dos mascotes",
+    "cookieSettings": "Configurações de cookies"
+  },
+  "consent": {
+    "title": "Cookies de análise",
+    "description": "Uso o Google Analytics para entender como o site é usado. Ele só é carregado se você aceitar.",
+    "accept": "Aceitar",
+    "decline": "Recusar"
   },
   "mascots": {
     "greeting": "Oi!"
