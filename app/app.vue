@@ -107,5 +107,9 @@ useSeoMeta({
     </NuxtLayout>
 
     <LazyContactModal hydrate-on-idle />
+
+    <ClientOnly>
+      <AppConsentBanner />
+    </ClientOnly>
   </UApp>
 </template>

@@ -3,6 +3,8 @@ const { t } = useI18n()
 const { footer } = useAppConfig()
 const year = new Date().getFullYear()
 const { open: openContactModal } = useContactModal()
+const { public: { gaMeasurementId } } = useRuntimeConfig()
+const { revoke: revokeConsent } = useAnalyticsConsent()
 const { active: mascotsActive, restore: restoreMascots, setActive: setMascotsActive } = useMascots()
 
 // Restores the persisted preference after hydration (never during SSR).
@@ -47,6 +49,16 @@ onMounted(restoreMascots)
           />
         </template>
       </template>
+      <UButton
+        v-if="gaMeasurementId"
+        size="xs"
+        color="neutral"
+        variant="ghost"
+        icon="i-lucide-cookie"
+        :aria-label="t('footer.cookieSettings')"
+        :title="t('footer.cookieSettings')"
+        @click="revokeConsent()"
+      />
       <UButton
         size="xs"
         color="neutral"
