@@ -29,8 +29,8 @@ const jsonLd = computed(() => ({
       'knowsAbout': appConfig.global?.knowsAbout,
       'worksFor': {
         '@type': 'Organization',
-        'name': 'DW Corp',
-        'url': 'https://dwcorp.com.br/'
+        'name': 'Oby Capital',
+        'url': 'https://www.obycapital.com.br/'
       },
       'sameAs': (appConfig.footer?.links ?? [])
         .map(link => link.to)

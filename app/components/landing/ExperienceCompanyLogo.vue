@@ -20,6 +20,12 @@ function isDWCorp(experience: ExperienceItem) {
   return name.includes('dw corp') || logo.includes('dw-corp')
 }
 
+function isOby(experience: ExperienceItem) {
+  const name = (experience.company?.name || '').toLowerCase()
+  const logo = (experience.company?.logo || '').toLowerCase()
+  return name.includes('oby capital') || logo.includes('oby-capital')
+}
+
 const isDarkTheme = computed(() => colorMode.value === 'dark')
 
 function getLogoPath(experience: ExperienceItem) {
@@ -34,9 +40,14 @@ function getLogoPath(experience: ExperienceItem) {
 }
 
 const wrapperClass = computed(() => {
-  const base = 'relative shrink-0 h-7 w-7 sm:h-8 sm:w-8 overflow-visible'
+  const base = isOby(props.experience)
+    ? 'relative shrink-0 h-7 w-16 sm:h-8 sm:w-[4.5rem] overflow-visible'
+    : 'relative shrink-0 h-7 w-7 sm:h-8 sm:w-8 overflow-visible'
   if (props.variant === 'plain') {
     return base
+  }
+  if (isOby(props.experience)) {
+    return [base, '-ml-1']
   }
   return [base, isDWCorp(props.experience) ? 'ml-4' : 'ml-3']
 })
@@ -81,6 +92,24 @@ const wrapperClass = computed(() => {
           >
         </template>
       </ClientOnly>
+      <template v-else-if="isOby(props.experience)">
+        <img
+          width="256"
+          height="109"
+          decoding="async"
+          :src="props.experience.company.logo"
+          :alt="props.experience.company.name + ' logo'"
+          class="absolute inset-0 h-full w-full object-contain dark:hidden"
+        >
+        <img
+          width="256"
+          height="109"
+          decoding="async"
+          src="/logos/oby-capital-logo-white-transparent.webp"
+          :alt="props.experience.company.name + ' logo'"
+          class="absolute inset-0 hidden h-full w-full object-contain dark:block"
+        >
+      </template>
       <img
         v-else
         width="256"
