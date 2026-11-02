@@ -14,7 +14,7 @@ interface ProjectEntry {
  * Prerendered (see `nitro.prerender.routes`), so it ships as a static file.
  * Base URL follows `runtimeConfig.public.siteUrl`; projects come from the English
  * `projects` content collection so the list never drifts from the site.
- * `/speaking` (placeholder events) and `/blog` (coming soon) are intentionally omitted.
+ * `/speaking` (placeholder events) is intentionally omitted.
  */
 export default defineEventHandler(async (event) => {
   const { public: { siteUrl } } = useRuntimeConfig(event)
@@ -39,6 +39,7 @@ export default defineEventHandler(async (event) => {
     `- [About](${siteUrl}/about): background and interests`,
     `- [Projects](${siteUrl}/projects): selected projects with stack and links`,
     `- [Books](${siteUrl}/books): recommended software engineering books`,
+    `- [Blog](${siteUrl}/blog): articles on software engineering, cloud and Vue, published on Arandu`,
     `- [Portuguese version](${siteUrl}/pt)`,
     `- [Spanish version](${siteUrl}/es)`,
     '',

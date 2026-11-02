@@ -1,0 +1,184 @@
+[
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/technical-intentions-for-distributed-systems",
+    "title": "Technical Intentions for Distributed Systems",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/technical-intentions-for-distributed-systems",
+    "excerpt": "Learn how to turn business requirements into technical intentions, desired states, policies, and validation for distributed systems.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/59da3faf-ccef-4130-9b.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-10-28T07:32:23.000Z",
+    "categories": [
+      "Programming",
+      "Best Practices",
+      "performance"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/cloud-tasks-pub-sub-or-cloud-run-jobs",
+    "title": "Cloud Tasks, Pub/Sub, and Cloud Run Jobs: How to Choose the Right Service for Asynchronous Processing in Node.js Applications on GCP",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/cloud-tasks-pub-sub-or-cloud-run-jobs",
+    "excerpt": "Saiba como escolher entre Cloud Tasks, Pub/Sub e Cloud Run Jobs para processamento assíncrono com Node.js na GCP.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/Arquitetura_ass_ncron.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-10-23T22:24:05.000Z",
+    "categories": [
+      "GCP",
+      "DevOps",
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/introduction-to-the-cli-a-practical-guide",
+    "title": "Introduction to the CLI",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/introduction-to-the-cli-a-practical-guide",
+    "excerpt": "Learn CLI fundamentals, from shells and commands to navigation, pipes, redirection, and everyday terminal habits.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_pzGK26t.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-07-02T12:00:00.000Z",
+    "categories": [
+      "CLI #!",
+      "bash",
+      "terminal"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/only-postgres-a-safer-default-for-mvps",
+    "title": "Only Postgres: Why Your MVP May Not Need Redis, Elasticsearch, or a Vector Database Yet",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/only-postgres-a-safer-default-for-mvps",
+    "excerpt": "Discover why many MVPs can start with PostgreSQL alone—and when Redis, Elasticsearch, queues, or vector databases become necessary.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_g0pHreI.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-06-25T12:00:00.000Z",
+    "categories": [
+      "Programming",
+      "Best Practices",
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/vue-best-practices-for-maintainable-components",
+    "title": "Vue Best Practices",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/vue-best-practices-for-maintainable-components",
+    "excerpt": "Practical Vue best practices for building components that are easier to read, test, reuse, and maintain.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_nUYkVsa.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-05-31T12:00:00.000Z",
+    "categories": [
+      "Vue",
+      "frontend",
+      "Best Practices"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/secure-production-on-digitalocean-droplets",
+    "title": "Best practices for running production applications on DigitalOcean with security, availability, observability, and cost control",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/secure-production-on-digitalocean-droplets",
+    "excerpt": "Practical practices for running DigitalOcean Droplets with better security, availability, observability, recovery, and cost control.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_bKnydP8.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-04-08T12:00:00.000Z",
+    "categories": [
+      "Digital Ocean",
+      "SRE",
+      "infrastructure"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/productive-on-a-new-machine-before-coffee-gets-cold",
+    "title": "Productive on a New Machine Before the Coffee Gets Cold",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/productive-on-a-new-machine-before-coffee-gets-cold",
+    "excerpt": "Learn how dotfiles, version managers, containers, and secret management make a new development machine reproducible in minutes.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_TUJ8wm7.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-03-05T12:00:00.000Z",
+    "categories": [
+      "CLI #!",
+      "bash",
+      "terminal"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/ai-agents-every-abstraction-creates-new-debt",
+    "title": "From Programming Languages to AI Agents: Every Abstraction Creates New Debt",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/ai-agents-every-abstraction-creates-new-debt",
+    "excerpt": "AI agents boost development speed, but create new technical debts. Learn how to validate generated code and use AI responsibly.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_eCzmUWK.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-02-26T12:00:00.000Z",
+    "categories": [
+      "Software Craftsmanship",
+      "practices",
+      "learning"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/vue-3-composition-api-guia-pratico",
+    "title": "Vue 3: Composition API in Practice — Organizing Real-World Logic in Vue Components",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/vue-3-composition-api-guia-pratico",
+    "excerpt": "Aprenda a organizar lógica de busca, filtros e paginação em componentes Vue 3 usando Composition API e composables reutilizáveis.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_QqIPsxn.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-01-04T12:00:00.000Z",
+    "categories": [
+      "Vue",
+      "framework",
+      "frontend"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/backend-stack-choice-in-the-ai-era",
+    "title": "AI Accelerated the Start, Making Backend Stack Choices Even More Important",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/backend-stack-choice-in-the-ai-era",
+    "excerpt": "Learn how to choose a backend stack in the AI era based on product context, team skills, operations, cost, and long-term evolution.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_ZALxG4f.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2025-11-12T12:00:00.000Z",
+    "categories": [
+      "Programming",
+      "backend",
+      "Best Practices"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/vue-introduction-reactivity-components",
+    "title": "Introduction to Vue",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/vue-introduction-reactivity-components",
+    "excerpt": "Learn Vue’s core concepts, including reactivity, templates, APIs, Single-File Components, and when Vue is a good choice.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_eIbSUpx.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2025-11-09T12:00:00.000Z",
+    "categories": [
+      "Vue",
+      "framework",
+      "frontend"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/claude-code-how-to-choose-the-right-tier",
+    "title": "Claude Code in Practice: How to Choose the Right Tier (Plan and Model) for AI-Assisted Programming",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/claude-code-how-to-choose-the-right-tier",
+    "excerpt": "Learn how to choose the right Claude Code plan and model, from Pro with Sonnet to Max and Opus, based on your workflow.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/claude-ai.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2025-10-13T12:00:00.000Z",
+    "categories": [
+      "Tools",
+      "automation",
+      "productivity"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/rest-demystified-understand-apis-in-practice",
+    "title": "REST Demystified: Understand APIs in Practice",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/rest-demystified-understand-apis-in-practice",
+    "excerpt": "Understand REST APIs with practical examples of HTTP methods, status codes, JSON, tokens, curl, and Postman.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_7SYQMgy.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2025-09-03T12:00:00.000Z",
+    "categories": [
+      "Programming",
+      "API",
+      "backend"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/en/artigo/curupira-identity-provider-in-rust",
+    "title": "Curupira, Our Identity Provider in Rust",
+    "url": "https://dwcorp.com.br/arandu/en/artigo/curupira-identity-provider-in-rust",
+    "excerpt": "Learn how Curupira provides multi-tenant OAuth2 and OIDC authentication in Rust with mandatory PKCE and per-application RSA keys.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_gZaPOaS.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2025-04-12T12:00:00.000Z",
+    "categories": [
+      "DW Corp",
+      "backend",
+      "Open Source"
+    ]
+  }
+]

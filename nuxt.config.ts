@@ -65,6 +65,10 @@ export default defineNuxtConfig({
       siteUrl,
       gaMeasurementId: '',
       web3formsAccessKey: process.env.NUXT_PUBLIC_WEB3FORMS_ACCESS_KEY ?? ''
+    },
+    // Overridable with NUXT_ARANDU_FEED_URL. `{lang}` is replaced per locale (see server/utils/arandu.ts).
+    arandu: {
+      feedUrl: 'https://dwcorp.com.br/arandu/{lang}/autor/gabriel-faria/feed'
     }
   },
 
@@ -74,7 +78,10 @@ export default defineNuxtConfig({
     '/pt/livros': { redirect: { to: '/pt/books', statusCode: 308 } },
     '/pt/livros/': { redirect: { to: '/pt/books', statusCode: 308 } },
     '/es/livros': { redirect: { to: '/es/books', statusCode: 308 } },
-    '/es/livros/': { redirect: { to: '/es/books', statusCode: 308 } }
+    '/es/livros/': { redirect: { to: '/es/books', statusCode: 308 } },
+    '/blog': { isr: 3600 },
+    '/pt/blog': { isr: 3600 },
+    '/es/blog': { isr: 3600 }
   },
 
   // Client sourcemaps are opt-in (audit builds only) so production does not
@@ -152,6 +159,11 @@ export default defineNuxtConfig({
       icons: ['lucide:sun', 'lucide:moon']
     },
     fallbackToApi: false
+  },
+
+  // Article covers are hotlinked from Arandu (see app/components/blog/ArticleCard.vue).
+  image: {
+    domains: ['dwcorp.com.br']
   },
 
   // Speaking events are placeholders for now: keep the page out of the sitemap

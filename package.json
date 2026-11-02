@@ -12,6 +12,7 @@
     "dev": "nuxt dev",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
+    "sync:articles": "node --experimental-strip-types scripts/sync-articles.mts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "nuxt typecheck"
@@ -30,6 +31,7 @@
     "better-sqlite3": "^12.5.0",
     "embla-carousel-auto-scroll": "^8.6.0",
     "embla-carousel-vue": "^8.6.0",
+    "fast-xml-parser": "^5.11.2",
     "motion-v": "^1.7.3",
     "nuxt": "^4.2.2",
     "typed.js": "^3.0.0"
