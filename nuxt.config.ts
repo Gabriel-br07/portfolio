@@ -161,7 +161,7 @@ export default defineNuxtConfig({
     fallbackToApi: false
   },
 
-  // Article covers are hotlinked from Arandu (see app/components/blog/ArticleCard.vue).
+  // Article covers are hotlinked from Arandu (see app/components/blog/BlogArticleCard.vue).
   image: {
     domains: ['dwcorp.com.br']
   },

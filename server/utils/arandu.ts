@@ -6,7 +6,7 @@ const FEED_LANG: Record<ArticleLocale, string> = { en: 'en', pt: 'br', es: 'es' 
 export const ARTICLE_LOCALES = Object.keys(FEED_LANG) as ArticleLocale[]
 
 export function isArticleLocale(value: unknown): value is ArticleLocale {
-  return typeof value === 'string' && value in FEED_LANG
+  return typeof value === 'string' && Object.hasOwn(FEED_LANG, value)
 }
 
 // `content:encoded` (full article HTML, the bulk of the feed) is left as a raw string so it is never parsed.
@@ -23,6 +23,12 @@ const text = (value: unknown): string => typeof value === 'string' ? value : typ
 
 function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+}
+
+// Cuts on code points (not UTF-16 units) so an emoji is never split into a lone surrogate.
+function truncate(value: string, max: number): string {
+  const chars = Array.from(value)
+  return chars.length > max ? `${chars.slice(0, max - 3).join('').trimEnd()}…` : value
 }
 
 function safeHttpsUrl(value: unknown): string | null {
@@ -42,7 +48,9 @@ function guidText(guid: unknown): string {
   return text(guid)
 }
 
-// Uses the global `fetch` (not Nitro's `$fetch`) so the sync script in step 11 can reuse this file under plain Node.
+// Uses the global `fetch` (not Nitro's `$fetch`) so scripts/sync-articles.mts can reuse this file under plain Node.
+// Throws on a non-2xx response or a feed with no usable items (e.g. an HTML challenge page served with 200),
+// so callers fall back to the committed snapshot instead of caching an empty list.
 export async function fetchAranduArticles(locale: ArticleLocale, feedUrl: string): Promise<Article[]> {
   const response = await fetch(feedUrl.replace('{lang}', FEED_LANG[locale]), {
     signal: AbortSignal.timeout(8000),
@@ -70,11 +78,15 @@ export async function fetchAranduArticles(locale: ArticleLocale, feedUrl: string
       id: guidText(item.guid) || url,
       title,
       url,
-      excerpt: excerpt.length > 220 ? `${excerpt.slice(0, 217).trimEnd()}…` : excerpt,
+      excerpt: truncate(excerpt, 220),
       cover: safeHttpsUrl(media?.['@_url']),
       publishedAt: published.toISOString(),
       categories: toArray<unknown>(item.category).map(c => stripHtml(text(c))).filter(Boolean)
     })
+  }
+
+  if (articles.length === 0) {
+    throw new Error('Arandu feed contained no articles')
   }
 
   return articles.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
