@@ -1,0 +1,184 @@
+[
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/intencoes-tecnicas-para-sistemas-distribuidos",
+    "title": "Intenções técnicas para sistemas distribuídos",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/intencoes-tecnicas-para-sistemas-distribuidos",
+    "excerpt": "Transforme requisitos de negócio em intenções técnicas para sistemas distribuídos: defina estado desejado, políticas, métricas e validação antes de escolher tecnologia.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/59da3faf-ccef-4130-9b.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-10-28T07:32:22.000Z",
+    "categories": [
+      "Programação",
+      "Boas práticas",
+      "Segurança"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/processamento-assincrono-nodejs-gcp",
+    "title": "Cloud Tasks, Pub/Sub e Cloud Run Jobs: como escolher o serviço certo para processamento assíncrono em aplicações Node.js na GCP",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/processamento-assincrono-nodejs-gcp",
+    "excerpt": "Guia prático para escolher entre Cloud Tasks, Pub/Sub e Cloud Run Jobs para processamento assíncrono com Node.js na GCP. Exemplos, trade-offs e dicas de idempotência.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/Arquitetura_ass_ncron.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-10-23T22:24:05.000Z",
+    "categories": [
+      "GCP",
+      "escalabilidade",
+      "devops"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/introducao-a-cli",
+    "title": "Introdução à CLI",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/introducao-a-cli",
+    "excerpt": "Introdução à CLI: supere o medo do terminal com comandos essenciais, pipes e hábitos práticos. Comece hoje e ganhe velocidade e automação no seu fluxo.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_pzGK26t.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-07-02T12:00:00.000Z",
+    "categories": [
+      "CLI #!",
+      "automação",
+      "bash"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/only-postgres-por-que-seu-mvp-talvez-nao-precise-de-redis-elasticsearch-ou-banco-vetorial-ainda",
+    "title": "Only Postgres: por que seu MVP talvez não precise de Redis, Elasticsearch ou banco vetorial ainda",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/only-postgres-por-que-seu-mvp-talvez-nao-precise-de-redis-elasticsearch-ou-banco-vetorial-ainda",
+    "excerpt": "Only Postgres em MVP — comece simples: Postgres resolve cache, busca, filas e RAG iniciais. Só adicione Redis/Elastic/banco vetorial quando necessário.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_g0pHreI.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-06-25T12:00:00.000Z",
+    "categories": [
+      "Programação",
+      "backend",
+      "Boas práticas"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/boas-praticas-no-vue",
+    "title": "Boas práticas no Vue",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/boas-praticas-no-vue",
+    "excerpt": "Aprenda boas práticas no Vue para componentes menores, props tipadas, script setup, Pinia e keys estáveis — torne seu código previsível e mais fácil de manter.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_nUYkVsa.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-05-31T12:00:00.000Z",
+    "categories": [
+      "Vue",
+      "framework",
+      "Boas práticas"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/boas-praticas-para-executar-aplicacoes-em-producao-na-digitalocean-com-seguranca-disponibilidade-observabilidade-e-controle-de-custos",
+    "title": "Boas práticas para executar aplicações em produção na DigitalOcean com segurança, disponibilidade, observabilidade e controle de custos.",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/boas-praticas-para-executar-aplicacoes-em-producao-na-digitalocean-com-seguranca-disponibilidade-observabilidade-e-controle-de-custos",
+    "excerpt": "Guia prático para operar produção na DigitalOcean com Droplets: segurança, disponibilidade, observabilidade e controle de custos, com checklist acionável.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_bKnydP8.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-04-08T12:00:00.000Z",
+    "categories": [
+      "Digital Ocean",
+      "infraestrutura",
+      "devops"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/maquina-nova-produtiva-ate-o-cafe-esfriar",
+    "title": "Máquina nova produtiva antes do café esfriar",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/maquina-nova-produtiva-ate-o-cafe-esfriar",
+    "excerpt": "Máquina nova produtiva: transforme dotfiles, gerenciadores de versão e devcontainers em código para voltar a produzir em minutos, sem vazar segredos no Git.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_TUJ8wm7.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-03-05T12:00:00.000Z",
+    "categories": [
+      "CLI #!",
+      "automação",
+      "terminal"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/da-linguagem-de-programacao-aos-agentes-de-ia-toda-abstracao-cria-uma-nova-divida",
+    "title": "Da linguagem de programação aos agentes de IA: toda abstração cria uma nova dívida",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/da-linguagem-de-programacao-aos-agentes-de-ia-toda-abstracao-cria-uma-nova-divida",
+    "excerpt": "IA como nova abstração de programação: entenda como ela acelera entregas e cria dívidas técnicas — como validar, testar e assumir riscos.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_eCzmUWK.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-02-26T12:00:00.000Z",
+    "categories": [
+      "Software Craftsmanship",
+      "práticas",
+      "aprendizado"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/vue-3-composition-api-in-practice",
+    "title": "Vue 3: Composition API in Practice",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/vue-3-composition-api-in-practice",
+    "excerpt": "Use Vue 3: Composition API in Practice para organizar lógica por funcionalidade, criar composables reutilizáveis e reduzir a complexidade de componentes.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_QqIPsxn.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2026-01-04T12:00:00.000Z",
+    "categories": [
+      "Vue",
+      "framework",
+      "api"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/ia-acelerou-o-comeco-mas-isso-so-tornou-a-escolha-da-stack-backend-ainda-mais-importante",
+    "title": "IA acelerou o começo, mas isso só tornou a escolha da stack backend ainda mais importante.",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/ia-acelerou-o-comeco-mas-isso-so-tornou-a-escolha-da-stack-backend-ainda-mais-importante",
+    "excerpt": "Guia prático sobre escolha de stack backend na era da IA: critérios para produto, time, operação e custos para decisões mais conscientes.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_ZALxG4f.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2025-11-12T12:00:00.000Z",
+    "categories": [
+      "Programação",
+      "Boas práticas",
+      "LLM"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/introducao-ao-vue",
+    "title": "Introdução ao Vue",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/introducao-ao-vue",
+    "excerpt": "Aprenda os conceitos essenciais em uma Introdução ao Vue: reatividade, templates, Composition API e Single-File Components para começar com confiança.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_eIbSUpx.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2025-11-09T12:00:00.000Z",
+    "categories": [
+      "Vue",
+      "framework",
+      "frontend"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/claude-code-na-pratica-como-escolher-o-tier-certo-assinatura-e-modelo-para-programar-com-ia",
+    "title": "Claude Code na prática: como escolher o tier certo (assinatura e modelo) para programar com IA",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/claude-code-na-pratica-como-escolher-o-tier-certo-assinatura-e-modelo-para-programar-com-ia",
+    "excerpt": "Descubra como escolher o tier do Claude Code para programar com IA. Guia prático sobre planos (Pro/Max), modelos (Haiku/Sonnet/Opus) e economia de uso.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/claude-ai.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2025-10-13T12:00:00.000Z",
+    "categories": [
+      "Ferramentas",
+      "modelos",
+      "automação"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/rest-sem-misterio",
+    "title": "REST sem mistério: a API é só um garçom",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/rest-sem-misterio",
+    "excerpt": "Desmistifique REST sem mistério: entenda recursos, métodos HTTP, status codes, stateless e tokens com exemplos práticos usando curl e Postman.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_7SYQMgy.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2025-09-03T12:00:00.000Z",
+    "categories": [
+      "Programação",
+      "api",
+      "arquitetura"
+    ]
+  },
+  {
+    "id": "https://dwcorp.com.br/arandu/br/artigo/curupira-nosso-identity-provider-em-rust",
+    "title": "Curupira, nosso Identity Provider em Rust",
+    "url": "https://dwcorp.com.br/arandu/br/artigo/curupira-nosso-identity-provider-em-rust",
+    "excerpt": "Curupira Identity Provider em Rust: IdP multi-tenant com PKCE obrigatório, chaves RSA por aplicação e segurança pronta para produção.",
+    "cover": "https://buckets.dwcorp.com.br/arandu/media/arandu/images/hero-banner_gZaPOaS.2e16d0ba.fill-1200x630.format-jpeg.jpg",
+    "publishedAt": "2025-04-12T12:00:00.000Z",
+    "categories": [
+      "DW Corp",
+      "Segurança",
+      "backend"
+    ]
+  }
+]

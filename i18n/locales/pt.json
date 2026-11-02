@@ -33,7 +33,13 @@
     "sectionTitle": "Artigos recentes",
     "sectionDescription": "Reflexões sobre desenvolvimento, colaboração e aprendizado prático.",
     "seoTitle": "Blog",
-    "seoDescription": "Artigos sobre desenvolvimento, design e tecnologia. Novo conteúdo em breve."
+    "seoDescription": "Artigos sobre engenharia de software, cloud e Vue, publicados no Arandu.",
+    "loading": "Carregando artigos…",
+    "error": "Não foi possível carregar os artigos agora. Tente novamente em instantes.",
+    "retry": "Tentar novamente",
+    "empty": "Nenhum artigo publicado ainda.",
+    "readOn": "Ler no Arandu",
+    "externalLink": "(abre em nova aba)"
   },
   "livros": {
     "sectionTitle": "Livros que recomendo",
