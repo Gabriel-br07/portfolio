@@ -37,9 +37,14 @@
     "loading": "Loading articles…",
     "error": "Couldn't load the articles right now. Please try again in a moment.",
     "retry": "Try again",
-    "empty": "No articles published yet.",
     "readOn": "Read on Arandu",
-    "externalLink": "(opens in a new tab)"
+    "externalLink": "(opens in a new tab)",
+    "title": "Blog",
+    "subtitle": "Articles on software engineering, distributed systems, architecture and development.",
+    "allArticles": "All articles",
+    "featured": "Featured",
+    "viewAll": "View all articles",
+    "readArticle": "Read article"
   },
   "livros": {
     "sectionTitle": "Books I recommend",

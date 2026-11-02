@@ -13,7 +13,7 @@ You are working in a Nuxt 4 application using Vue 3.5, Vite 7, Nitro 2, and pnpm
 - `pnpm build` / `pnpm preview` — production build / preview
 - `pnpm lint` / `pnpm lint:fix` — ESLint
 - `pnpm typecheck` — `nuxt typecheck` (vue-tsc)
-- No test runner is configured.
+- `pnpm test` — vitest (unit tests in `tests/`, currently the article selection helpers).
 
 ## Conventions observed in this repo
 - Components are **PascalCase**, grouped by feature: `app/components/<feature>/Name.vue`.

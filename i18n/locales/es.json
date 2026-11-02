@@ -37,9 +37,14 @@
     "loading": "Cargando artículos…",
     "error": "No se pudieron cargar los artículos ahora. Inténtalo de nuevo en unos instantes.",
     "retry": "Reintentar",
-    "empty": "Aún no hay artículos publicados.",
     "readOn": "Leer en Arandu",
-    "externalLink": "(se abre en una pestaña nueva)"
+    "externalLink": "(se abre en una pestaña nueva)",
+    "title": "Blog",
+    "subtitle": "Artículos sobre ingeniería de software, sistemas distribuidos, arquitectura y desarrollo.",
+    "allArticles": "Todos los artículos",
+    "featured": "Destacado",
+    "viewAll": "Ver todos los artículos",
+    "readArticle": "Leer artículo"
   },
   "livros": {
     "sectionTitle": "Libros que recomiendo",

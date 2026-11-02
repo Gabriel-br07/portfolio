@@ -15,7 +15,8 @@
     "sync:articles": "node --experimental-strip-types scripts/sync-articles.mts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "test": "vitest run"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.82",
@@ -43,6 +44,7 @@
     "eslint": "^9.39.2",
     "source-map-explorer": "^2.5.3",
     "typescript": "^5.9.3",
+    "vitest": "^5.1.0",
     "vue-tsc": "^3.2.1"
   },
   "packageManager": "pnpm@10.26.1"
