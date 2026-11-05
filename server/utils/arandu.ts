@@ -40,6 +40,22 @@ function safeHttpsUrl(value: unknown): string | null {
   }
 }
 
+// Tracking params added to every article link shown on the site (cards, featured block, JSON-LD).
+const SHARE_UTM: Record<string, string> = {
+  utm_source: 'whatsapp',
+  utm_medium: 'social',
+  utm_campaign: 'article-share'
+}
+
+// Idempotent: setting the same params again leaves the URL unchanged.
+export function withShareUtm(link: string): string {
+  const url = new URL(link)
+  for (const [key, value] of Object.entries(SHARE_UTM)) {
+    url.searchParams.set(key, value)
+  }
+  return url.toString()
+}
+
 // `guid` is an object when it carries an `isPermaLink` attribute, a plain string otherwise.
 function guidText(guid: unknown): string {
   if (typeof guid === 'object' && guid !== null) {
@@ -66,18 +82,18 @@ export async function fetchAranduArticles(locale: ArticleLocale, feedUrl: string
 
   const articles: Article[] = []
   for (const item of items) {
-    const url = safeHttpsUrl(item.link)
+    const link = safeHttpsUrl(item.link)
     const title = stripHtml(text(item.title))
     const published = new Date(text(item.pubDate))
-    if (!url || !title || Number.isNaN(published.getTime())) continue
+    if (!link || !title || Number.isNaN(published.getTime())) continue
 
     const media = toArray<Record<string, unknown>>(item['media:content'] as Record<string, unknown>[] | undefined)[0]
     const excerpt = stripHtml(text(item.description))
 
     articles.push({
-      id: guidText(item.guid) || url,
+      id: guidText(item.guid) || link,
       title,
-      url,
+      url: withShareUtm(link),
       excerpt: truncate(excerpt, 220),
       cover: safeHttpsUrl(media?.['@_url']),
       publishedAt: published.toISOString(),
