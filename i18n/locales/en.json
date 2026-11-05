@@ -50,7 +50,7 @@
     "sectionTitle": "Books I recommend",
     "sectionDescription": "Short notes on each title and why it matters in practice — including what I'm reading now.",
     "seoTitle": "Books",
-    "seoDescription": "Books on agile delivery, software craftsmanship, and clean architecture — recommendations from my reading list.",
+    "seoDescription": "Books on agile delivery, software craftsmanship, clean architecture, refactoring, and algorithms — recommendations from my reading list.",
     "buy": "Buy",
     "whyRead": "Why read?",
     "whyReadHeading": "Why it's worth reading",
@@ -63,9 +63,17 @@
         "whyRead": "More than good practices, this book explains what it means to be a software professional.\n\nIt covers ideas like TDD and XP, but what stands out is the author’s real experience and strong focus on community — sharing knowledge, helping others, and growing together.\n\nI recommend it if you want to grow not only technically but also as a professional in the software ecosystem."
       },
       "clean-architecture-pt": {
-        "whyRead": "I’m still reading, so the full recommendation will come soon.\n\nSo far the book seems to offer solid ideas about organizing and structuring software. When I finish, I’ll update this with a fuller review."
+        "whyRead": "I strongly recommend Clean Architecture. It covers software development in a broad way, without tying the ideas to specific languages or frameworks.\n\nIt explains how to organize a system, split it into modules and components, define responsibilities, and understand the role of each part of the system. It also presents principles and good development practices.\n\nDepending on your experience level, you won't be able to connect every concept to practice right away. Some ideas will make sense immediately, while others will become clearer as you gain experience. I think that is part of the process.\n\nIn my view, the book's greatest value is how it shapes the way you think about software, especially when dividing responsibilities, organizing components, and making architectural decisions.\n\nThe author also explains the history behind these principles. Many of these good practices appeared because developers faced real problems for decades, and that is why many of these concepts became established.\n\nI think it's important not to treat everything as an absolute rule. Not every application needs many layers or abstractions. The goal is to understand the principles and know when it makes sense to apply them."
+      },
+      "refactoring": {
+        "whyRead": "I'm reading it now. The full recommendation will come when I finish."
+      },
+      "python-classic-cs-problems": {
+        "whyRead": "It's next on my reading list. The full recommendation will come after I read it."
       }
-    }
+    },
+    "read": "Read",
+    "nextReading": "Up next"
   },
   "seo": {
     "siteTitle": "Gabriel Oliveira Portfolio",

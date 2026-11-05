@@ -50,7 +50,7 @@
     "sectionTitle": "Libros que recomiendo",
     "sectionDescription": "Notas breves sobre cada título y por qué importa en la práctica — incluido lo que estoy leyendo ahora.",
     "seoTitle": "Libros",
-    "seoDescription": "Libros sobre entregas ágiles, artesanía del software y arquitectura limpia — recomendaciones de mi lectura.",
+    "seoDescription": "Libros sobre entregas ágiles, artesanía del software, arquitectura limpia, refactorización y algoritmos — recomendaciones de mi lectura.",
     "buy": "Comprar",
     "whyRead": "¿Por qué leerlo?",
     "whyReadHeading": "Por qué merece la pena",
@@ -63,9 +63,17 @@
         "whyRead": "Más que buenas prácticas, este libro explica qué significa ser un profesional del software.\n\nAborda ideas como TDD y XP, pero lo que destaca es la experiencia real del autor y el énfasis en la comunidad: compartir conocimiento, ayudar a otros y crecer juntos.\n\nLo recomiendo si quieres crecer no solo a nivel técnico, sino también como profesional dentro del ecosistema de desarrollo."
       },
       "clean-architecture-pt": {
-        "whyRead": "Todavía lo estoy leyendo, así que la recomendación completa llegará pronto.\n\nHasta ahora el libro parece aportar buenas ideas sobre organización y estructura del software. Cuando lo termine, actualizaré con un análisis más completo."
+        "whyRead": "Recomiendo mucho el libro Arquitectura Limpia, porque aborda el desarrollo de software de una forma más amplia, sin quedarse atado a lenguajes o frameworks específicos.\n\nHabla mucho de cómo organizar un software, dividir módulos y componentes, definir responsabilidades y entender el papel de cada parte del sistema, además de presentar principios y buenas prácticas de desarrollo.\n\nCreo que, según tu nivel de experiencia, no vas a poder asociar todos los conceptos con la práctica de primeras. Algunas cosas tendrán sentido de inmediato, mientras que otras probablemente se aclararán a medida que ganes experiencia. Pero creo que eso forma parte del proceso.\n\nPara mí, el mayor valor del libro es que cambia la forma en que piensas sobre el software, sobre todo a la hora de repartir responsabilidades, organizar componentes y tomar decisiones de arquitectura.\n\nOtra cosa interesante es que el autor cuenta un poco la historia detrás de estos principios. Muchas de estas buenas prácticas surgieron porque los desarrolladores enfrentaron problemas reales durante décadas. No es casualidad que varios de estos conceptos se hayan consolidado.\n\nSolo creo que es importante no tratar todo como una regla absoluta. No toda aplicación necesita muchas capas o abstracciones. Lo interesante es entender los principios y saber cuándo tiene sentido aplicarlos."
+      },
+      "refactoring": {
+        "whyRead": "Lo estoy leyendo ahora. La recomendación completa llegará cuando termine."
+      },
+      "python-classic-cs-problems": {
+        "whyRead": "Es la próxima de mi lista de lectura. La recomendación completa llegará después de leerlo."
       }
-    }
+    },
+    "read": "Leído",
+    "nextReading": "Próxima lectura"
   },
   "seo": {
     "siteTitle": "Portafolio Gabriel Oliveira",
