@@ -1,5 +1,7 @@
 import { XMLParser } from 'fast-xml-parser'
 import type { Article, ArticleLocale } from '../../shared/types/article'
+// Explicit relative import: scripts/sync-articles.mts runs this file under plain Node (no Nuxt auto-imports).
+import { withShareUtm } from '../../shared/utils/article-utm'
 
 const FEED_LANG: Record<ArticleLocale, string> = { en: 'en', pt: 'br', es: 'es' }
 
@@ -40,22 +42,6 @@ function safeHttpsUrl(value: unknown): string | null {
   }
 }
 
-// Tracking params added to every article link shown on the site (cards, featured block, JSON-LD).
-const SHARE_UTM: Record<string, string> = {
-  utm_source: 'whatsapp',
-  utm_medium: 'social',
-  utm_campaign: 'article-share'
-}
-
-// Idempotent: setting the same params again leaves the URL unchanged.
-export function withShareUtm(link: string): string {
-  const url = new URL(link)
-  for (const [key, value] of Object.entries(SHARE_UTM)) {
-    url.searchParams.set(key, value)
-  }
-  return url.toString()
-}
-
 // `guid` is an object when it carries an `isPermaLink` attribute, a plain string otherwise.
 function guidText(guid: unknown): string {
   if (typeof guid === 'object' && guid !== null) {
@@ -93,6 +79,7 @@ export async function fetchAranduArticles(locale: ArticleLocale, feedUrl: string
     articles.push({
       id: guidText(item.guid) || link,
       title,
+      // Share links carry UTM params (cards, featured block, homepage preview); structured data uses `canonicalArticleUrl`.
       url: withShareUtm(link),
       excerpt: truncate(excerpt, 220),
       cover: safeHttpsUrl(media?.['@_url']),

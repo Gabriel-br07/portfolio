@@ -23,7 +23,7 @@ useHead(() => ({
         'blogPost': [split.value.featured, ...split.value.rest].filter(a => a !== null).map(a => ({
           '@type': 'BlogPosting',
           'headline': a.title,
-          'url': a.url,
+          'url': canonicalArticleUrl(a.url),
           'datePublished': a.publishedAt,
           'description': a.excerpt,
           'keywords': a.categories.join(', '),
