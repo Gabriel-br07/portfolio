@@ -11,16 +11,22 @@ defineProps({
 const { t } = useI18n()
 const i18nHead = useLocaleHead()
 
+// Only `lang`/`dir`: an error page has no canonical URL or language alternates.
 useHead(() => ({
   htmlAttrs: {
     ...i18nHead.value.htmlAttrs
-  },
-  link: [...(i18nHead.value.link || [])]
+  }
 }))
+
+// Error pages must never be indexed. @nuxtjs/robots does not apply its rules to the error
+// renderer, so set the meta tag and (server-side) the X-Robots-Tag header explicitly.
+const robotsHeader = useResponseHeader('X-Robots-Tag')
+if (import.meta.server) robotsHeader.value = 'noindex, nofollow'
 
 useSeoMeta({
   title: () => t('error.title'),
-  description: () => t('error.description')
+  description: () => t('error.description'),
+  robots: 'noindex, nofollow'
 })
 
 const links = useNavLinks()

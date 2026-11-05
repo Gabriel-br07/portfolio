@@ -1,9 +1,17 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
 const { footer } = useAppConfig()
 const year = new Date().getFullYear()
 const { open: openContactModal } = useContactModal()
 const { active: mascotsActive, restore: restoreMascots, setActive: setMascotsActive } = useMascots()
+
+// Plain crawlable links to the same page in every language (the header dropdown only renders on click).
+const localeLinks = [
+  { code: 'en', label: 'EN' },
+  { code: 'pt', label: 'PT' },
+  { code: 'es', label: 'ESP' }
+] as const
 
 // Restores the persisted preference after hydration (never during SSR).
 onMounted(restoreMascots)
@@ -23,6 +31,22 @@ onMounted(restoreMascots)
           rel="noopener noreferrer"
         >{{ t('footer.mascotCredit') }}</ULink>
       </span>
+      <nav
+        :aria-label="t('locale.ariaSwitch')"
+        class="mt-1 flex gap-3"
+      >
+        <NuxtLink
+          v-for="item in localeLinks"
+          :key="item.code"
+          :to="switchLocalePath(item.code)"
+          :hreflang="item.code"
+          :lang="item.code"
+          :aria-current="item.code === locale ? 'true' : undefined"
+          class="hover:text-default aria-[current=true]:font-semibold aria-[current=true]:text-default"
+        >
+          {{ item.label }}
+        </NuxtLink>
+      </nav>
     </template>
 
     <template #right>
