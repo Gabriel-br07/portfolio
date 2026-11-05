@@ -35,7 +35,7 @@ watch(showWhyRead, (open) => {
   }
 })
 
-/** Re-type in the new locale if the panel is open. */
+/** Re-type in the new locale if the modal is open. */
 watch(locale, async () => {
   if (!showWhyRead.value) return
   stop()
@@ -43,12 +43,9 @@ watch(locale, async () => {
   await start()
 })
 
+/** The typed target only exists once the modal content is mounted and has finished entering. */
 async function onWhyReadAfterEnter() {
   await start()
-}
-
-function toggleWhyRead() {
-  showWhyRead.value = !showWhyRead.value
 }
 </script>
 
@@ -113,61 +110,46 @@ function toggleWhyRead() {
             color="neutral"
             variant="ghost"
             size="sm"
-            :aria-expanded="showWhyRead"
-            :icon="showWhyRead ? 'i-lucide-chevron-up' : 'i-lucide-sparkles'"
-            @click="toggleWhyRead"
+            aria-haspopup="dialog"
+            icon="i-lucide-sparkles"
+            @click="showWhyRead = true"
           >
             {{ t('livros.whyRead') }}
           </UButton>
         </div>
 
-        <Transition
-          name="book-why"
-          @after-enter="onWhyReadAfterEnter"
+        <!-- Teleported to <body> by Nuxt UI, so it sits above the neighbouring cards instead of growing this one. -->
+        <UModal
+          v-model:open="showWhyRead"
+          :title="book.title"
+          :description="t('livros.whyReadHeading')"
+          :close="{ 'aria-label': t('livros.close') }"
+          :ui="{ content: 'book-why-modal' }"
+          @after:enter="onWhyReadAfterEnter"
         >
-          <div
-            v-if="showWhyRead"
-            class="book-why-panel mt-4 border-t border-default pt-4 text-left"
-          >
-            <p class="mb-2 text-xs font-medium uppercase tracking-wide text-muted">
-              {{ t('livros.whyReadHeading') }}
-            </p>
+          <template #body>
             <!-- typed.js coloca o cursor como irmão do nó: inline evita o cursor “descer” para a linha seguinte -->
-            <div
-              class="typed-wrap min-h-[4.5rem] text-sm leading-relaxed text-default"
-            >
+            <div class="typed-wrap min-h-[4.5rem] text-sm leading-relaxed text-default">
               <span
                 ref="typedTargetRef"
                 class="typed-target inline"
               />
             </div>
-          </div>
-        </Transition>
+          </template>
+        </UModal>
       </div>
     </div>
   </UCard>
 </template>
 
-<style scoped>
-.book-why-enter-active,
-.book-why-leave-active {
-  transition:
-    opacity 0.28s ease,
-    transform 0.28s ease;
-}
-
-.book-why-enter-from,
-.book-why-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
-}
-
-.typed-wrap {
+<!-- Not scoped: the modal content is teleported out of this component's DOM subtree. -->
+<style>
+.book-why-modal .typed-wrap {
   white-space: pre-line;
   word-break: break-word;
 }
 
-.typed-wrap :deep(.typed-cursor) {
+.book-why-modal .typed-wrap .typed-cursor {
   display: inline;
   vertical-align: baseline;
   opacity: 0.85;
