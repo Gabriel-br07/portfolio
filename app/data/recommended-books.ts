@@ -45,8 +45,7 @@ export const recommendedBooks: RecommendedBook[] = [
     coverSrc: '/books/arquitetura-limpa.jpg',
     coverAlt:
       'Capa de Arquitetura Limpa: galáxia espiral em tons de azul e branco no espaço',
-    buyUrl: 'https://www.amazon.com.br/s?k=Arquitetura+Limpa+Robert+C+Martin',
-    status: 'read'
+    buyUrl: 'https://www.amazon.com.br/s?k=Arquitetura+Limpa+Robert+C+Martin'
   },
   {
     id: 'refactoring',
