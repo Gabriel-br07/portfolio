@@ -14,6 +14,19 @@ const whyReadText = computed(() =>
   t(`livros.books.${props.book.id}.whyRead`)
 )
 
+const statusBadge = computed(() => {
+  switch (props.book.status) {
+    case 'read':
+      return { label: t('livros.read'), color: 'success' as const }
+    case 'reading':
+      return { label: t('livros.currentlyReading'), color: 'primary' as const }
+    case 'next':
+      return { label: t('livros.nextReading'), color: 'neutral' as const }
+    default:
+      return null
+  }
+})
+
 const { start, stop } = useTypedHumanized(typedTargetRef, () => whyReadText.value)
 
 watch(showWhyRead, (open) => {
@@ -52,13 +65,13 @@ function toggleWhyRead() {
       <!-- Reserved top row: same height on every card; badge only for the active book. -->
       <div class="flex h-7 shrink-0 items-center justify-center">
         <UBadge
-          v-if="book.currentlyReading"
-          color="primary"
+          v-if="statusBadge"
+          :color="statusBadge.color"
           variant="subtle"
           size="sm"
           class="font-medium"
         >
-          {{ t('livros.currentlyReading') }}
+          {{ statusBadge.label }}
         </UBadge>
       </div>
 
