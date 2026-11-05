@@ -1,5 +1,7 @@
 import { XMLParser } from 'fast-xml-parser'
 import type { Article, ArticleLocale } from '../../shared/types/article'
+// Explicit relative import: scripts/sync-articles.mts runs this file under plain Node (no Nuxt auto-imports).
+import { withShareUtm } from '../../shared/utils/article-utm'
 
 const FEED_LANG: Record<ArticleLocale, string> = { en: 'en', pt: 'br', es: 'es' }
 
@@ -66,18 +68,19 @@ export async function fetchAranduArticles(locale: ArticleLocale, feedUrl: string
 
   const articles: Article[] = []
   for (const item of items) {
-    const url = safeHttpsUrl(item.link)
+    const link = safeHttpsUrl(item.link)
     const title = stripHtml(text(item.title))
     const published = new Date(text(item.pubDate))
-    if (!url || !title || Number.isNaN(published.getTime())) continue
+    if (!link || !title || Number.isNaN(published.getTime())) continue
 
     const media = toArray<Record<string, unknown>>(item['media:content'] as Record<string, unknown>[] | undefined)[0]
     const excerpt = stripHtml(text(item.description))
 
     articles.push({
-      id: guidText(item.guid) || url,
+      id: guidText(item.guid) || link,
       title,
-      url,
+      // Share links carry UTM params (cards, featured block, homepage preview); structured data uses `canonicalArticleUrl`.
+      url: withShareUtm(link),
       excerpt: truncate(excerpt, 220),
       cover: safeHttpsUrl(media?.['@_url']),
       publishedAt: published.toISOString(),
