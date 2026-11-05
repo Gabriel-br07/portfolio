@@ -16,6 +16,12 @@
     "mascotsPause": "Pause mascot animations",
     "mascotsResume": "Resume mascot animations"
   },
+  "consent": {
+    "title": "Analytics cookies",
+    "description": "I use Google Analytics to understand how the site is used. It only loads if you accept.",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
   "mascots": {
     "greeting": "Hi!"
   },
