@@ -16,6 +16,12 @@
     "mascotsPause": "Pausar animaciones de las mascotas",
     "mascotsResume": "Reanudar animaciones de las mascotas"
   },
+  "consent": {
+    "title": "Cookies de análisis",
+    "description": "Uso Google Analytics para entender cómo se usa el sitio. Solo se carga si aceptas.",
+    "accept": "Aceptar",
+    "decline": "Rechazar"
+  },
   "mascots": {
     "greeting": "¡Hola!"
   },
