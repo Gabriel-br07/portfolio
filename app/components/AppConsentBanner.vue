@@ -3,8 +3,11 @@ const { t } = useI18n()
 const { public: { gaMeasurementId } } = useRuntimeConfig()
 const { consent, accept, decline } = useAnalyticsConsent()
 
+// Same validation as the gtag plugin, so the banner only shows when accepting would load the tag.
+const gaId = resolveGaMeasurementId(gaMeasurementId)
+
 // Only rendered inside <ClientOnly>: the prerendered page cannot know the visitor's cookie.
-const visible = computed(() => Boolean(gaMeasurementId) && consent.value === null)
+const visible = computed(() => Boolean(gaId) && consent.value === null)
 </script>
 
 <template>

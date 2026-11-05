@@ -2,10 +2,10 @@
 // the consent banner. Nothing is added to the prerendered HTML.
 export default defineNuxtPlugin(() => {
   const { public: { gaMeasurementId } } = useRuntimeConfig()
-  const id = typeof gaMeasurementId === 'string' ? gaMeasurementId.trim() : ''
+  const id = resolveGaMeasurementId(gaMeasurementId)
 
-  // The ID is interpolated into a script URL, so reject anything that is not a GA4 ID.
-  if (import.meta.dev || !/^G-[A-Z0-9]+$/.test(id)) return
+  // The ID is interpolated into a script URL, so anything that is not a GA4 ID resolves to ''.
+  if (import.meta.dev || !id) return
 
   const { consent } = useAnalyticsConsent()
   const disableKey = `ga-disable-${id}`
