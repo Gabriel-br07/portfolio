@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { t, locale } = useI18n()
+const { public: { siteUrl } } = useRuntimeConfig()
 
 usePageSeo(() => ({
   title: t('blog.seoTitle'),
@@ -28,7 +29,7 @@ useHead(() => ({
           'description': a.excerpt,
           'keywords': a.categories.join(', '),
           ...(a.cover ? { image: a.cover } : {}),
-          'author': { '@type': 'Person', 'name': 'Gabriel Faria' }
+          'author': { '@type': 'Person', '@id': `${siteUrl}/#person`, 'name': 'Gabriel Faria' }
         }))
       })
     }
