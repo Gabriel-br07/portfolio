@@ -13,6 +13,23 @@ const localeLinks = [
   { code: 'es', label: 'ESP' }
 ] as const
 
+const { track, trackContactLink } = useAnalytics()
+
+function onLocaleClick(code: string) {
+  if (code === locale.value) return
+  track('change_language', { language_from: locale.value, language_to: code, placement: 'footer' })
+}
+
+function onMailClick() {
+  track('click_contact', { method: 'email', placement: 'footer' })
+  openContactModal()
+}
+
+function toggleMascots() {
+  setMascotsActive(!mascotsActive.value)
+  track('toggle_mascots', { active: mascotsActive.value })
+}
+
 // Restores the persisted preference after hydration (never during SSR).
 onMounted(restoreMascots)
 </script>
@@ -43,6 +60,7 @@ onMounted(restoreMascots)
           :lang="item.code"
           :aria-current="item.code === locale ? 'true' : undefined"
           class="hover:text-default aria-[current=true]:font-semibold aria-[current=true]:text-default"
+          @click="onLocaleClick(item.code)"
         >
           {{ item.label }}
         </NuxtLink>
@@ -63,11 +81,12 @@ onMounted(restoreMascots)
             variant="ghost"
             :icon="link.icon"
             :aria-label="link['aria-label']"
-            @click="openContactModal()"
+            @click="onMailClick"
           />
           <UButton
             v-else
             v-bind="{ size: 'xs', color: 'neutral', variant: 'ghost', ...link }"
+            @click="trackContactLink(link.to, 'footer')"
           />
         </template>
       </template>
@@ -78,7 +97,7 @@ onMounted(restoreMascots)
         :icon="mascotsActive ? 'i-lucide-pause' : 'i-lucide-play'"
         :aria-label="mascotsActive ? t('footer.mascotsPause') : t('footer.mascotsResume')"
         :title="mascotsActive ? t('footer.mascotsPause') : t('footer.mascotsResume')"
-        @click="setMascotsActive(!mascotsActive)"
+        @click="toggleMascots"
       />
     </template>
   </UFooter>

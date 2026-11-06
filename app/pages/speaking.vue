@@ -35,6 +35,7 @@ usePageSeo(() => page.value)
 useRobotsRule('noindex, nofollow')
 
 const { global } = useAppConfig()
+const { track } = useAnalytics()
 
 const groupedEvents = computed((): Record<Event['category'], Event[]> => {
   const events = page.value?.events || []
@@ -79,6 +80,7 @@ function formatDate(dateString: string): string {
           v-if="page.links"
           :to="`mailto:${global.email}`"
           v-bind="page.links[0]"
+          @click="track('click_contact', { method: 'email', placement: 'speaking' })"
         />
       </template>
     </UPageHero>

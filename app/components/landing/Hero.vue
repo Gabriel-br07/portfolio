@@ -4,6 +4,12 @@ import type { IndexCollectionItem } from '@nuxt/content'
 const { footer, global } = useAppConfig()
 const { t } = useI18n()
 const { open: openContactModal } = useContactModal()
+const { track, trackContactLink } = useAnalytics()
+
+function onMailClick() {
+  track('click_contact', { method: 'email', placement: 'hero' })
+  openContactModal()
+}
 
 defineProps<{
   page: IndexCollectionItem
@@ -57,7 +63,10 @@ const heroSocialLinks = computed(() => {
           class="flex items-center gap-2"
           data-mascot-anchor="hero-links"
         >
-          <UButton v-bind="page.hero.links[0]" />
+          <UButton
+            v-bind="page.hero.links[0]"
+            @click="trackContactLink(page.hero.links[0]?.to, 'hero')"
+          />
           <UButton
             :disabled="!global.available"
             :color="global.available ? 'success' : 'error'"
@@ -101,11 +110,12 @@ const heroSocialLinks = computed(() => {
             variant="ghost"
             :icon="link.icon"
             :aria-label="link['aria-label']"
-            @click="openContactModal()"
+            @click="onMailClick"
           />
           <UButton
             v-else
             v-bind="{ size: 'md', color: 'neutral', variant: 'ghost', ...link }"
+            @click="trackContactLink(link.to, 'hero')"
           />
         </div>
       </div>

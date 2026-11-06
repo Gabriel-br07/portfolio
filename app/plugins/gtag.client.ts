@@ -9,24 +9,27 @@ export default defineNuxtPlugin(() => {
 
   const { consent } = useAnalyticsConsent()
   const disableKey = `ga-disable-${id}`
-  const win = window as unknown as Record<string, unknown> & {
-    dataLayer: unknown[]
-    gtag: (...args: unknown[]) => void
-  }
-  let loaded = false
+  let initialized = false
+  let scriptAdded = false
 
-  function load() {
-    if (loaded) return
-    loaded = true
-    win.dataLayer = win.dataLayer || []
+  // Creates the dataLayer and the gtag stub right away so events fired before the script
+  // finishes loading are queued (gtag.js replays the queue in order).
+  function init() {
+    if (initialized) return
+    initialized = true
+    window.dataLayer = window.dataLayer || []
     // gtag.js only understands the `arguments` object, not a rest-parameter array.
-    win.gtag = function () {
+    window.gtag = function () {
       // eslint-disable-next-line prefer-rest-params
-      win.dataLayer.push(arguments)
+      window.dataLayer!.push(arguments)
     }
-    win.gtag('js', new Date())
-    win.gtag('config', id)
+    window.gtag('js', new Date())
+    window.gtag('config', id)
+  }
 
+  function addScript() {
+    if (scriptAdded) return
+    scriptAdded = true
     const script = document.createElement('script')
     script.id = 'gtag-js'
     script.async = true
@@ -35,15 +38,18 @@ export default defineNuxtPlugin(() => {
   }
 
   // Keeps the tag off the hydration window for returning, already-consented visitors.
-  function loadWhenIdle() {
+  function addScriptWhenIdle() {
     onNuxtReady(() => {
-      if ('requestIdleCallback' in window) window.requestIdleCallback(load)
-      else setTimeout(load, 2000)
+      if ('requestIdleCallback' in window) window.requestIdleCallback(addScript)
+      else setTimeout(addScript, 2000)
     })
   }
 
   watch(consent, (value) => {
-    win[disableKey] = value !== 'granted'
-    if (value === 'granted') loadWhenIdle()
+    (window as unknown as Record<string, unknown>)[disableKey] = value !== 'granted'
+    if (value === 'granted') {
+      init()
+      addScriptWhenIdle()
+    }
   }, { immediate: true })
 })

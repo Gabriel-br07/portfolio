@@ -3,8 +3,12 @@ const colorMode = useColorMode()
 
 const nextTheme = computed(() => (colorMode.value === 'dark' ? 'light' : 'dark'))
 
+const { track } = useAnalytics()
+
 const switchTheme = () => {
-  colorMode.preference = nextTheme.value
+  const theme = nextTheme.value
+  colorMode.preference = theme
+  track('toggle_theme', { theme })
 }
 
 const startViewTransition = (event: MouseEvent) => {

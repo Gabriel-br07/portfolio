@@ -3,6 +3,7 @@ import type { DropdownMenuItem } from '@nuxt/ui'
 
 const { locale } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
+const { track } = useAnalytics()
 
 const shortByCode: Record<string, string> = {
   en: 'EN',
@@ -18,7 +19,8 @@ const items = computed<DropdownMenuItem[][]>(() => {
     codes.map(code => ({
       label: shortByCode[code],
       disabled: locale.value === code,
-      to: switchLocalePath(code)
+      to: switchLocalePath(code),
+      onSelect: () => track('change_language', { language_from: locale.value, language_to: code, placement: 'header' })
     }))
   ]
 })
