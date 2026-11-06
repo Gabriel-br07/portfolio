@@ -21,6 +21,13 @@ function resolveSiteUrl(): string {
 
 const siteUrl = resolveSiteUrl()
 
+// Only the production deployment is indexable. Vercel preview/development builds set `VERCEL_ENV`;
+// outside Vercel (CI, local builds) the NODE_ENV decides. Non-indexable builds get `Disallow: /`
+// and `noindex` from @nuxtjs/robots, so previews never compete with the real domain.
+const isIndexable = process.env.VERCEL_ENV
+  ? process.env.VERCEL_ENV === 'production'
+  : process.env.NODE_ENV === 'production'
+
 export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
@@ -45,7 +52,8 @@ export default defineNuxtConfig({
   // Single source of truth for Nuxt SEO modules (sitemap, robots).
   site: {
     url: siteUrl,
-    name: 'Gabriel Oliveira Portfolio'
+    name: 'Gabriel Oliveira Portfolio',
+    indexable: isIndexable
   },
   colorMode: {
     preference: 'dark',
@@ -168,7 +176,13 @@ export default defineNuxtConfig({
 
   // Speaking events are placeholders for now: keep the page out of the sitemap
   // (the page itself sets noindex via `useRobotsRule`). Remove once real events are listed.
+  // `/livros*` are 308 redirects to `/books` (see routeRules), never canonical URLs.
+  // Images are not listed: the auto-discovered ones are decorative icons/avatars.
   sitemap: {
-    exclude: ['/speaking', '/pt/speaking', '/es/speaking']
+    exclude: [
+      '/speaking', '/pt/speaking', '/es/speaking',
+      '/livros', '/pt/livros', '/es/livros'
+    ],
+    discoverImages: false
   }
 })

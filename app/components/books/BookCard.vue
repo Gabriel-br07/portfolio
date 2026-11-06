@@ -127,10 +127,21 @@ async function onWhyReadAfterEnter() {
           v-model:open="showWhyRead"
           :title="book.title"
           :description="t('livros.whyReadHeading')"
-          :close="{ 'aria-label': t('livros.close') }"
           :ui="{ content: 'book-why-modal' }"
           @after:enter="onWhyReadAfterEnter"
         >
+          <!-- Same button as the Nuxt UI default, with this page's localized label (`close` prop only accepts ButtonProps). -->
+          <template #close="{ ui }">
+            <UButton
+              icon="i-lucide-x"
+              color="neutral"
+              variant="ghost"
+              data-slot="close"
+              :aria-label="t('livros.close')"
+              :class="ui.close()"
+            />
+          </template>
+
           <template #body>
             <!-- typed.js coloca o cursor como irmão do nó: inline evita o cursor “descer” para a linha seguinte -->
             <div class="typed-wrap min-h-[4.5rem] text-sm leading-relaxed text-default">

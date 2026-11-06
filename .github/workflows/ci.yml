@@ -37,3 +37,7 @@ jobs:
         run: pnpm run build
         env:
           NUXT_PUBLIC_SITE_URL: https://gabrielfaria.dev.br
+
+      # After the build: tests/seo.test.ts validates the generated sitemap and prerendered HTML.
+      - name: Test
+        run: pnpm run test

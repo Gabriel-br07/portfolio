@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const colorMode = useColorMode()
 const { t, locale } = useI18n()
+const localePath = useLocalePath()
+// Required: @nuxtjs/i18n does not inject canonical, hreflang alternates or <html lang> on its own.
 const i18nHead = useLocaleHead()
 const appConfig = useAppConfig()
 const { mounted: mascotsMounted } = useMascotLayer()
@@ -12,6 +14,9 @@ const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
 // (OG/Twitter/JSON-LD all require absolute URLs).
 const ogImageUrl = `${siteUrl}/images/seo/og-image.jpeg`
 
+// Home URL of the current locale, in the same form as the canonical (no trailing slash).
+const localeHomeUrl = computed(() => `${siteUrl}${localePath('/')}`.replace(/\/+$/, ''))
+
 // Person + WebSite structured data. `sameAs` is built from the public footer
 // profile links (mailto excluded), so social profiles stay in one place.
 const jsonLd = computed(() => ({
@@ -21,6 +26,8 @@ const jsonLd = computed(() => ({
       '@type': 'Person',
       '@id': `${siteUrl}/#person`,
       'name': 'Gabriel Oliveira',
+      // Byline used on Arandu articles (see blog/index.vue); links both names to one entity.
+      'alternateName': 'Gabriel Faria',
       'jobTitle': t('seo.jobTitle'),
       'description': t('seo.personDescription'),
       'email': appConfig.global?.email,
@@ -38,8 +45,9 @@ const jsonLd = computed(() => ({
     },
     {
       '@type': 'WebSite',
+      '@id': `${localeHomeUrl.value}/#website`,
       'name': t('seo.siteTitle'),
-      'url': siteUrl,
+      'url': localeHomeUrl.value,
       'inLanguage': locale.value,
       'author': { '@id': `${siteUrl}/#person` }
     }

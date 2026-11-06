@@ -1,11 +1,24 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
 const { footer } = useAppConfig()
 const year = new Date().getFullYear()
 const { open: openContactModal } = useContactModal()
 const { active: mascotsActive, restore: restoreMascots, setActive: setMascotsActive } = useMascots()
 
+// Plain crawlable links to the same page in every language (the header dropdown only renders on click).
+const localeLinks = [
+  { code: 'en', label: 'EN' },
+  { code: 'pt', label: 'PT' },
+  { code: 'es', label: 'ESP' }
+] as const
+
 const { track, trackContactLink } = useAnalytics()
+
+function onLocaleClick(code: string) {
+  if (code === locale.value) return
+  track('change_language', { language_from: locale.value, language_to: code, placement: 'footer' })
+}
 
 function onMailClick() {
   track('click_contact', { method: 'email', placement: 'footer' })
@@ -35,6 +48,23 @@ onMounted(restoreMascots)
           rel="noopener noreferrer"
         >{{ t('footer.mascotCredit') }}</ULink>
       </span>
+      <nav
+        :aria-label="t('locale.ariaSwitch')"
+        class="mt-1 flex gap-3"
+      >
+        <NuxtLink
+          v-for="item in localeLinks"
+          :key="item.code"
+          :to="switchLocalePath(item.code)"
+          :hreflang="item.code"
+          :lang="item.code"
+          :aria-current="item.code === locale ? 'true' : undefined"
+          class="hover:text-default aria-[current=true]:font-semibold aria-[current=true]:text-default"
+          @click="onLocaleClick(item.code)"
+        >
+          {{ item.label }}
+        </NuxtLink>
+      </nav>
     </template>
 
     <template #right>
