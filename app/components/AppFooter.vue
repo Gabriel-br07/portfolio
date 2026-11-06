@@ -5,6 +5,18 @@ const year = new Date().getFullYear()
 const { open: openContactModal } = useContactModal()
 const { active: mascotsActive, restore: restoreMascots, setActive: setMascotsActive } = useMascots()
 
+const { track, trackContactLink } = useAnalytics()
+
+function onMailClick() {
+  track('click_contact', { method: 'email', placement: 'footer' })
+  openContactModal()
+}
+
+function toggleMascots() {
+  setMascotsActive(!mascotsActive.value)
+  track('toggle_mascots', { active: mascotsActive.value })
+}
+
 // Restores the persisted preference after hydration (never during SSR).
 onMounted(restoreMascots)
 </script>
@@ -39,11 +51,12 @@ onMounted(restoreMascots)
             variant="ghost"
             :icon="link.icon"
             :aria-label="link['aria-label']"
-            @click="openContactModal()"
+            @click="onMailClick"
           />
           <UButton
             v-else
             v-bind="{ size: 'xs', color: 'neutral', variant: 'ghost', ...link }"
+            @click="trackContactLink(link.to, 'footer')"
           />
         </template>
       </template>
@@ -54,7 +67,7 @@ onMounted(restoreMascots)
         :icon="mascotsActive ? 'i-lucide-pause' : 'i-lucide-play'"
         :aria-label="mascotsActive ? t('footer.mascotsPause') : t('footer.mascotsResume')"
         :title="mascotsActive ? t('footer.mascotsPause') : t('footer.mascotsResume')"
-        @click="setMascotsActive(!mascotsActive)"
+        @click="toggleMascots"
       />
     </template>
   </UFooter>

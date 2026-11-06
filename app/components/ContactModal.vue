@@ -16,6 +16,7 @@ if (import.meta.dev) {
 
 const { isOpen, screen, open, close, reset } = useContactModal()
 const localePath = useLocalePath()
+const { track } = useAnalytics()
 
 const name = ref('')
 const email = ref('')
@@ -92,6 +93,7 @@ async function onSubmit() {
     )
     if (res.success) {
       screen.value = 'success'
+      track('generate_lead', { method: 'contact_form' })
       resetForm()
     } else {
       submitStatus.value = 'error'
@@ -148,6 +150,7 @@ const modalDescription = computed(() => {
               class="sm:flex-1"
               icon="i-lucide-calendar"
               :label="t('contactModal.bookMeeting')"
+              @click="track('click_contact', { method: 'meeting', placement: 'contact_modal' })"
             />
             <UButton
               color="neutral"

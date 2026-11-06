@@ -6,6 +6,7 @@ const props = defineProps<{
 }>()
 
 const { t, locale } = useI18n()
+const { track } = useAnalytics()
 
 const showWhyRead = ref(false)
 const typedTargetRef = ref<HTMLElement | null>(null)
@@ -30,7 +31,9 @@ const statusBadge = computed(() => {
 const { start, stop } = useTypedHumanized(typedTargetRef, () => whyReadText.value)
 
 watch(showWhyRead, (open) => {
-  if (!open) {
+  if (open) {
+    track('open_book_modal', { book: props.book.id })
+  } else {
     stop()
   }
 })
@@ -103,6 +106,7 @@ async function onWhyReadAfterEnter() {
             rel="noopener noreferrer"
             icon="i-lucide-shopping-cart"
             size="sm"
+            @click="track('click_book_buy', { book: book.id })"
           >
             {{ t('livros.buy') }}
           </UButton>

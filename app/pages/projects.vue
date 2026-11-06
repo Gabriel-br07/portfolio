@@ -27,6 +27,12 @@ if (!page.value) {
 const { data: projects } = await useProjectsCollection()
 
 const { open: openContactModal } = useContactModal()
+const { track, trackContactLink } = useAnalytics()
+
+function onMailClick() {
+  track('click_contact', { method: 'email', placement: 'projects' })
+  openContactModal()
+}
 
 usePageSeo(() => page.value)
 
@@ -85,12 +91,13 @@ useHead(() => ({
           <UButton
             :label="page.links[0]?.label"
             :color="page.links[0]?.color"
-            @click="openContactModal()"
+            @click="onMailClick"
           />
           <UButton
             v-bind="page.links[1]"
             target="_blank"
             rel="noopener noreferrer"
+            @click="trackContactLink(page.links[1]?.to, 'projects')"
           />
         </div>
       </template>
@@ -118,6 +125,7 @@ useHead(() => ({
           :ui="{
             wrapper: 'max-sm:order-last'
           }"
+          @click="track('click_project', { project: project.title, placement: 'card' })"
         >
           <template #leading>
             <span class="text-sm text-muted">
@@ -145,6 +153,7 @@ useHead(() => ({
             <ULink
               :to="project.url"
               class="text-sm text-primary flex items-center"
+              @click.stop="track('click_project', { project: project.title, placement: 'link' })"
             >
               {{ t('locale.viewProject') }}
               <UIcon

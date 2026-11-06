@@ -18,7 +18,7 @@
   },
   "consent": {
     "title": "Analytics cookies",
-    "description": "I use Google Analytics to understand how the site is used. It only loads if you accept.",
+    "description": "We request your permission to use analytics cookies. You may decline and continue browsing as normal.",
     "accept": "Accept",
     "decline": "Decline"
   },
