@@ -96,7 +96,12 @@ export default defineContentConfig({
         image: z.string().nonempty().editor({ input: 'media' }),
         url: z.string().nonempty(),
         tags: z.array(z.string()),
-        date: z.date()
+        date: z.date(),
+        // Optional case-study details shown in the project modal (facts only, see the CV profile).
+        problem: z.string().optional(),
+        role: z.string().optional(),
+        decisions: z.array(z.string()).optional(),
+        outcome: z.string().optional()
       })
     }),
     pages: defineCollection({

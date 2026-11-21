@@ -14,7 +14,9 @@
     "credits": "Built with Nuxt UI • © {year}",
     "mascotCredit": "Mascot: unofficial Clawd-inspired fan art adapted from clawd-emotes-skill (MIT), not affiliated with Anthropic",
     "mascotsPause": "Pause mascot animations",
-    "mascotsResume": "Resume mascot animations"
+    "mascotsResume": "Resume mascot animations",
+    "bookCall": "Book a call",
+    "linkedin": "LinkedIn"
   },
   "consent": {
     "title": "Analytics cookies",
@@ -89,12 +91,22 @@
     "personDescription": "Developer who builds reliable, maintainable, and impactful digital solutions, focused on clarity, collaborative problem-solving, and well-structured software."
   },
   "home": {
-    "techCarouselTitle": "Technologies I've worked with"
+    "techCarouselTitle": "Tools and technologies I've used"
   },
   "hero": {
     "available": "Available for new projects",
     "unavailable": "Not available at the moment",
     "profileAlt": "Gabriel Oliveira profile photo"
+  },
+  "projects": {
+    "viewDetails": "View details",
+    "detailsTitle": "Project details",
+    "close": "Close",
+    "context": "Context",
+    "role": "My role",
+    "decisions": "Technical decisions",
+    "outcome": "Outcome",
+    "stack": "Stack"
   },
   "locale": {
     "ariaSwitch": "Change language",

@@ -2,5 +2,11 @@ title: ETL B3 — pipeline de datos del mercado de valores (B3)
 description: "Pipeline ETL para datos del mercado de valores brasileño (B3): ingesta de fuentes de mercado, transformación y consolidación de series temporales y datos de referencia, y carga en PostgreSQL. Implementado en Python, con FastAPI para APIs y Prefect para orquestación de flujos, con foco en ingesta fiable y pipelines mantenibles."
 image: /projects/etl-b3.webp
 url: "https://github.com/Gabriel-br07/etl-b3"
-tags: ["Python", "FastAPI", "Prefect", "PostgreSQL"]
+tags: ["Python", "FastAPI", "Prefect", "PostgreSQL", "TimescaleDB", "Playwright", "Polars", "Alembic", "Docker"]
 date: "2026-03-15"
+problem: "Poner a disposición los datos públicos del mercado de valores brasileño (B3) de forma estructurada y consultable."
+role: "Proyecto personal, desarrollado por mí."
+decisions:
+  - "Cargas idempotentes (upserts) con tabla de registro de ejecuciones"
+  - "Flujos diario e intradiario programados y orquestados con Prefect"
+  - "Datos expuestos mediante una API REST, con migraciones versionadas"

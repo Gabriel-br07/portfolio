@@ -50,6 +50,7 @@ const heroSocialLinks = computed(() => {
     </template>
 
     <template #description>
+      <span class="mb-2 block font-medium text-default">{{ t('seo.jobTitle') }}</span>
       {{ page.description }}
     </template>
 

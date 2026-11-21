@@ -1,6 +1,13 @@
 title: Sistema RAG para pesquisa em direito penal brasileiro
-description: "Projeto e entrega de um sistema RAG ponta a ponta para pesquisa em direito penal brasileiro, com recuperação e síntese eficientes de precedentes de vários tribunais (STF, STJ, TRF4). Solução full stack com scraping automatizado, busca semântica com FAISS e OpenSearch e interface de chat responsiva com Nuxt 4 e Vue 3. A plataforma oferece consultas com RAG e consultas diretas ao LLM via serviço FastAPI em produção, com foco em escalabilidade, desempenho e precisão jurídica."
+description: "Sistema RAG ponta a ponta para pesquisa em direito penal brasileiro, desenvolvido em equipe como trabalho de conclusão de curso (TCC). Recupera e sintetiza precedentes de vários tribunais (STF, STJ, TRF4) combinando scraping automatizado, busca semântica com FAISS e OpenSearch e uma interface de chat feita com Nuxt 4 e Vue 3. Oferece consultas com RAG e consultas diretas ao LLM por meio de um serviço FastAPI."
 image: /projects/rag.webp
 url: "https://github.com/LabTechUDF/RAG-TCC"
-tags: ["Vue", "Nuxt", "FastAPI", "OpenSearch","Python"]
+tags: ["Vue", "Nuxt", "TypeScript", "FastAPI", "Python", "Scrapy", "Playwright", "FAISS", "OpenSearch", "Docker", "GitHub Actions"]
 date: "2025-02-01"
+problem: "Tornar mais rápida a pesquisa de jurisprudência brasileira, buscando precedentes de vários tribunais pelo sentido e não só por palavras-chave."
+role: "Projeto em equipe. Contribuí com a coleta de dados, a camada de busca vetorial e a interface de chat."
+decisions:
+  - "FAISS para busca vetorial, com OpenSearch como backend alternativo"
+  - "Documentos divididos em trechos com sobreposição antes da geração de embeddings"
+  - "Dois modos de chat: LLM direto e com RAG"
+outcome: "Cerca de 724 mil documentos indexados do STF, STJ, TRF4 e SEEU (valor aproximado)."

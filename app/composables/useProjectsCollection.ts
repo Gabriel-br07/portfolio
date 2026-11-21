@@ -5,6 +5,10 @@ export interface ProjectCollectionItem {
   url: string
   tags: string[]
   date: string | Date
+  problem?: string
+  role?: string
+  decisions?: string[]
+  outcome?: string
 }
 
 /**

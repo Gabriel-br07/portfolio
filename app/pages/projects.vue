@@ -150,6 +150,11 @@ useHead(() => ({
             </div>
           </template>
           <template #footer>
+            <ProjectsDetailsModal
+              v-if="project.problem || project.role || project.decisions?.length"
+              :project="project"
+              class="mr-3"
+            />
             <ULink
               :to="project.url"
               class="text-sm text-primary flex items-center"

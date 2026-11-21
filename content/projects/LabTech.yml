@@ -1,6 +1,11 @@
 title: LabTech
-description: "LabTech web platform with the organizer area, built in 2024, a year before my final-year project (TCC)."
+description: "LabTech web platform with the organizer area, built in 2024, a year before my final-year project (TCC). Its room allocation system is split into microservices (shared resources, Python services and teachers allocation), with a Go CLI to bootstrap them."
 image: /projects/labtech.webp
 url: "https://labtech.dwcorp.com.br/organizer"
-tags: []
+tags: ["Python", "Flask", "Go", "Docker"]
 date: "2024-02-01"
+problem: "Allocate rooms and teachers across a shared set of resources."
+role: "Team project. I worked on the Python services and built a Go CLI that bootstraps the microservices."
+decisions:
+  - "Independent services for shared resources, Python services and teachers allocation"
+  - "A Go CLI to bootstrap services and run the Docker Compose stack"

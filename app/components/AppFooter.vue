@@ -14,6 +14,12 @@ const localeLinks = [
 ] as const
 
 const { track, trackContactLink } = useAnalytics()
+const { global } = useAppConfig()
+
+// Plain-text contact links so the contact channels exist in the static HTML (the modal only renders on click).
+const linkedinUrl = computed(() =>
+  String((footer?.links ?? []).find(link => String((link as { to?: string }).to ?? '').includes('linkedin.com'))?.to ?? '')
+)
 
 function onLocaleClick(code: string) {
   if (code === locale.value) return
@@ -47,6 +53,21 @@ onMounted(restoreMascots)
           target="_blank"
           rel="noopener noreferrer"
         >{{ t('footer.mascotCredit') }}</ULink>
+      </span>
+      <span class="mt-1 flex gap-3">
+        <ULink
+          :to="global.meetingLink"
+          target="_blank"
+          rel="noopener noreferrer"
+          @click="trackContactLink(global.meetingLink, 'footer')"
+        >{{ t('footer.bookCall') }}</ULink>
+        <ULink
+          v-if="linkedinUrl"
+          :to="linkedinUrl"
+          target="_blank"
+          rel="noopener noreferrer"
+          @click="trackContactLink(linkedinUrl, 'footer')"
+        >{{ t('footer.linkedin') }}</ULink>
       </span>
       <nav
         :aria-label="t('locale.ariaSwitch')"
