@@ -1,6 +1,11 @@
 title: LabTech
-description: "Plataforma web do LabTech, com a área do organizador, criada em 2024, um ano antes do meu TCC."
+description: "Plataforma web do LabTech, com a área do organizador, criada em 2024, um ano antes do meu TCC. O sistema de alocação de salas é dividido em microsserviços (recursos compartilhados, serviços Python e alocação de professores), com uma CLI em Go para iniciá-los."
 image: /projects/labtech.webp
 url: "https://labtech.dwcorp.com.br/organizer"
-tags: []
+tags: ["Python", "Flask", "Go", "Docker"]
 date: "2024-02-01"
+problem: "Alocar salas e professores a partir de um conjunto compartilhado de recursos."
+role: "Projeto em equipe. Atuei nos serviços Python e construí uma CLI em Go que inicia os microsserviços."
+decisions:
+  - "Serviços independentes para recursos compartilhados, serviços Python e alocação de professores"
+  - "Uma CLI em Go para iniciar os serviços e executar a stack com Docker Compose"

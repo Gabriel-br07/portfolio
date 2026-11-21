@@ -17,6 +17,7 @@ export interface AnalyticsEvents {
   click_contact: { method: ContactMethod, placement: ContactPlacement }
   generate_lead: { method: 'contact_form' }
   click_project: { project: string, placement: 'card' | 'link' }
+  open_project_details: { project: string }
   open_book_modal: { book: string }
   click_book_buy: { book: string }
   change_language: { language_from: string, language_to: string, placement: 'header' | 'footer' }

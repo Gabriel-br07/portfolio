@@ -2,5 +2,11 @@ title: Curupira — Infraestrutura de Identidade para Aplicações Multi-Tenant
 description: "O Curupira é uma camada de controle de identidade para aplicações modernas e multi-tenant, centralizando tenants, aplicações, usuários, papéis, grupos de acesso, chaves de API e trilhas de auditoria em um único painel administrativo seguro. Baseado em OAuth2 com tokens de escopo definido e RBAC, garante isolamento entre tenants, monitora tentativas de login e registra cada operação relevante em logs de auditoria estruturados e exportáveis — transformando identidade em uma operação governável, observável e segura."
 image: /projects/curupira.webp
 url: "https://curupira.api.br"
-tags: ["Rust", "Axum", "PostgreSQL", "Nuxt", "OAuth2"]
+tags: ["Rust", "Axum", "PostgreSQL", "Nuxt", "OAuth2", "RBAC"]
 date: "2026-06-20"
+problem: "Aplicações multi-tenant precisam de um único lugar para gerenciar tenants, usuários, papéis e trilhas de auditoria."
+role: "Projeto em equipe. Contribuí com o backend e modelei o schema multi-tenant do banco de dados."
+decisions:
+  - "Dados isolados por tenant, com chaves estrangeiras e unicidade por tenant"
+  - "Controle de acesso por papéis (RBAC) por aplicação"
+  - "Migrations versionadas do banco de dados"

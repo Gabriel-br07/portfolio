@@ -1,6 +1,13 @@
 title: Sistema RAG para investigación en derecho penal brasileño
-description: "Diseño y entrega de un sistema RAG de extremo a extremo para investigación en derecho penal brasileño, con recuperación y síntesis eficientes de precedentes de varios tribunales (STF, STJ, TRF4). Solución full stack con scraping automatizado, búsqueda semántica con FAISS y OpenSearch e interfaz de chat responsive con Nuxt 4 y Vue 3. La plataforma admite consultas con RAG y consultas directas al LLM mediante un servicio FastAPI en producción, centrado en escalabilidad, rendimiento y precisión jurídica."
+description: "Sistema RAG de extremo a extremo para investigación en derecho penal brasileño, desarrollado en equipo como trabajo de fin de carrera (TCC). Recupera y sintetiza precedentes de varios tribunales (STF, STJ, TRF4) combinando scraping automatizado, búsqueda semántica con FAISS y OpenSearch y una interfaz de chat hecha con Nuxt 4 y Vue 3. Ofrece consultas con RAG y consultas directas al LLM mediante un servicio FastAPI."
 image: /projects/rag.webp
 url: "https://github.com/LabTechUDF/RAG-TCC"
-tags: ["Vue", "Nuxt", "FastAPI", "OpenSearch","Python"]
+tags: ["Vue", "Nuxt", "TypeScript", "FastAPI", "Python", "Scrapy", "Playwright", "FAISS", "OpenSearch", "Docker", "GitHub Actions"]
 date: "2025-02-01"
+problem: "Hacer más rápida la investigación de jurisprudencia brasileña, buscando precedentes de varios tribunales por su significado y no solo por palabras clave."
+role: "Proyecto en equipo. Contribuí con la recolección de datos, la capa de búsqueda vectorial y la interfaz de chat."
+decisions:
+  - "FAISS para la búsqueda vectorial, con OpenSearch como backend alternativo"
+  - "Documentos divididos en fragmentos con solapamiento antes de generar los embeddings"
+  - "Dos modos de chat: LLM directo y con RAG"
+outcome: "Alrededor de 724 mil documentos indexados del STF, STJ, TRF4 y SEEU (cifra aproximada)."

@@ -14,6 +14,12 @@ const localeLinks = [
 ] as const
 
 const { track, trackContactLink } = useAnalytics()
+const { global } = useAppConfig()
+
+// Plain-text contact links so the contact channels exist in the static HTML (the modal only renders on click).
+const linkedinUrl = computed(() =>
+  String((footer?.links ?? []).find(link => String((link as { to?: string }).to ?? '').includes('linkedin.com'))?.to ?? '')
+)
 
 function onLocaleClick(code: string) {
   if (code === locale.value) return
@@ -40,31 +46,46 @@ onMounted(restoreMascots)
     :ui="{ left: 'text-muted text-xs' }"
   >
     <template #left>
-      {{ t('footer.credits', { year }) }}
-      <span class="block">
+      <div class="flex flex-col items-center gap-1 text-center lg:items-start lg:text-left">
+        <span>{{ t('footer.credits', { year }) }}</span>
         <ULink
           to="https://github.com/xixicc186/clawd-emotes-skill"
           target="_blank"
           rel="noopener noreferrer"
         >{{ t('footer.mascotCredit') }}</ULink>
-      </span>
-      <nav
-        :aria-label="t('locale.ariaSwitch')"
-        class="mt-1 flex gap-3"
-      >
-        <NuxtLink
-          v-for="item in localeLinks"
-          :key="item.code"
-          :to="switchLocalePath(item.code)"
-          :hreflang="item.code"
-          :lang="item.code"
-          :aria-current="item.code === locale ? 'true' : undefined"
-          class="hover:text-default aria-[current=true]:font-semibold aria-[current=true]:text-default"
-          @click="onLocaleClick(item.code)"
+        <span class="flex gap-3">
+          <ULink
+            :to="global.meetingLink"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="trackContactLink(global.meetingLink, 'footer')"
+          >{{ t('footer.bookCall') }}</ULink>
+          <ULink
+            v-if="linkedinUrl"
+            :to="linkedinUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            @click="trackContactLink(linkedinUrl, 'footer')"
+          >{{ t('footer.linkedin') }}</ULink>
+        </span>
+        <nav
+          :aria-label="t('locale.ariaSwitch')"
+          class="flex gap-3"
         >
-          {{ item.label }}
-        </NuxtLink>
-      </nav>
+          <NuxtLink
+            v-for="item in localeLinks"
+            :key="item.code"
+            :to="switchLocalePath(item.code)"
+            :hreflang="item.code"
+            :lang="item.code"
+            :aria-current="item.code === locale ? 'true' : undefined"
+            class="hover:text-default aria-[current=true]:font-semibold aria-[current=true]:text-default"
+            @click="onLocaleClick(item.code)"
+          >
+            {{ item.label }}
+          </NuxtLink>
+        </nav>
+      </div>
     </template>
 
     <template #right>

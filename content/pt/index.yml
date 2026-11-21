@@ -27,20 +27,20 @@ about:
 experience:
   title: "Experiência profissional"
   items:
-    - position: "Desenvolvedor full stack na"
+    - position: "Desenvolvedor de software na"
       date: "jul. 2026 — atual"
       company:
         name: "Oby Capital"
         logo: "/logos/oby-capital-logo.webp"
         url: "https://www.obycapital.com.br/"
-    - position: "Desenvolvedor full stack na"
-      date: "fev. 2025 — jul. 2026"
+    - position: "Desenvolvedor backend / full stack na"
+      date: "jul. 2025 — jul. 2026"
       company:
         name: "DW Corp"
         logo: "/logos/DW-Corp-logo.svg"
         url: "https://dwcorp.com.br/"
     - position: "Estagiário na"
-      date: "mai. 2024 — fev. 2025"
+      date: "mai. 2024 — jul. 2025"
       company:
         name: "Serpro"
         logo: "/logos/serpro.svg"

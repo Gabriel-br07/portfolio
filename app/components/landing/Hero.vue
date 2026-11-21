@@ -39,6 +39,8 @@ const heroSocialLinks = computed(() => {
     <template #headline>
       <UColorModeAvatar
         class="size-18 ring ring-default ring-offset-3 ring-offset-(--ui-bg)"
+        width="72"
+        height="72"
         :light="global.picture?.light!"
         :dark="global.picture?.dark!"
         :alt="t('hero.profileAlt')"
@@ -50,6 +52,7 @@ const heroSocialLinks = computed(() => {
     </template>
 
     <template #description>
+      <span class="mb-2 block font-medium text-default">{{ t('seo.jobTitle') }}</span>
       {{ page.description }}
     </template>
 
