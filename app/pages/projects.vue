@@ -123,7 +123,8 @@ useHead(() => ({
           :reverse="index % 2 === 1"
           class="group"
           :ui="{
-            wrapper: 'max-sm:order-last'
+            wrapper: 'max-sm:order-last',
+            footer: 'relative z-10 flex items-center'
           }"
           @click="track('click_project', { project: project.title, placement: 'card' })"
         >
