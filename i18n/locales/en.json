@@ -19,10 +19,10 @@
     "linkedin": "LinkedIn"
   },
   "consent": {
-    "title": "Analytics cookies",
-    "description": "We request your permission to use analytics cookies. You may decline and continue browsing as normal.",
-    "accept": "Accept",
-    "decline": "Decline"
+    "title": "Cookies",
+    "description": "We use cookies to keep this site working and to understand how it is used. You can accept all or keep only the necessary ones.",
+    "acceptAll": "Accept all",
+    "onlyNecessary": "Only necessary"
   },
   "mascots": {
     "greeting": "Hi!"

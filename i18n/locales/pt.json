@@ -19,10 +19,10 @@
     "linkedin": "LinkedIn"
   },
   "consent": {
-    "title": "Cookies de análise",
-    "description": "Solicitamos sua autorização para utilizar cookies de análise. Você pode recusar e continuar navegando normalmente.",
-    "accept": "Aceitar",
-    "decline": "Recusar"
+    "title": "Cookies",
+    "description": "Usamos cookies para manter o site funcionando e entender como ele é usado. Você pode aceitar tudo ou manter apenas os necessários.",
+    "acceptAll": "Aceitar tudo",
+    "onlyNecessary": "Apenas necessários"
   },
   "mascots": {
     "greeting": "Oi!"

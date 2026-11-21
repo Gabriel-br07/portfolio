@@ -25,14 +25,14 @@ const visible = computed(() => Boolean(gaId) && consent.value === null)
         size="sm"
         color="neutral"
         variant="outline"
-        :label="t('consent.decline')"
+        :label="t('consent.onlyNecessary')"
         @click="decline()"
       />
       <UButton
         size="sm"
         color="neutral"
         variant="outline"
-        :label="t('consent.accept')"
+        :label="t('consent.acceptAll')"
         @click="accept()"
       />
     </div>
