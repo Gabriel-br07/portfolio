@@ -7,7 +7,8 @@ withDefaults(defineProps<{
 
 const root = ref<HTMLElement | null>(null)
 // Pauses the beam animations while the list is off screen.
-const visible = useElementVisibility(root)
+// Starts visible (SSR and first paint), the observer turns it off when the list is out of view.
+const visible = useElementVisibility(root, { initialValue: true })
 </script>
 
 <template>
@@ -17,12 +18,12 @@ const visible = useElementVisibility(root)
     :data-inview="visible"
   >
     <li
-      v-for="tag in tags"
-      :key="tag"
+      v-for="(tag, index) in tags"
+      :key="`${index}-${tag}`"
     >
       <TechTag
         :label="tag"
-        :icon="showIcons ? techIcon(tag) : undefined"
+        :icon="iconFor(tag, showIcons)"
       />
     </li>
   </ul>

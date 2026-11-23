@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { TECH_ICONS, techIcon } from '../app/utils/techIcons'
+import { TECH_ICONS, iconFor, techIcon } from '../app/utils/techIcons'
 
 const INDEXES = ['content/index.yml', 'content/pt/index.yml', 'content/es/index.yml']
 
@@ -9,7 +9,9 @@ const INDEXES = ['content/index.yml', 'content/pt/index.yml', 'content/es/index.
 function stackTechnologies(): string[] {
   return INDEXES.flatMap((path) => {
     const text = readFileSync(join(process.cwd(), path), 'utf8')
-    return [...text.matchAll(/^ {6}stack: \[(.*)\]$/gm)].flatMap(m =>
+    // A `stack:` written over several lines would be skipped by the regex below: fail instead of passing silently.
+    expect(text, `${path}: write each stack on one line (stack: [A, B])`).not.toMatch(/^\s+stack:\s*$/m)
+    return [...text.matchAll(/^\s+stack: \[(.*)\]$/gm)].flatMap(m =>
       m[1]!.split(',').map(item => item.trim().replace(/^"|"$/g, '')).filter(Boolean)
     )
   })
@@ -30,5 +32,11 @@ describe('techIcons', () => {
 
   it('returns undefined for an unknown technology', () => {
     expect(techIcon('NotATech')).toBeUndefined()
+  })
+
+  it('iconFor hides the icon when icons are off and returns it when on', () => {
+    expect(iconFor('Vue', false)).toBeUndefined()
+    expect(iconFor('Vue', true)).toBe(TECH_ICONS['Vue'])
+    expect(iconFor('NotATech', true)).toBeUndefined()
   })
 })

@@ -3,8 +3,9 @@
  *
  * Paths come from Simple Icons (CC0, https://simpleicons.org) and Lucide (ISC, for "Low-code"). They are embedded
  * here, not bundled through Nuxt Icon: the Nuxt Icon client bundle is part of the entry chunk, and 13 Simple Icons
- * paths added ~18 KB to the initial JS of the home. Imported only by the case-study components, these stay in the
- * `/experience/*` page chunk and in the mobile sheet chunk.
+ * paths added ~18 KB to the initial JS of the home. They are imported by `TechTagList`, so they ship with the chunks
+ * that render it: the home timeline, the case-study page and the mobile sheet. `/projects` also renders `TechTagList`
+ * (with `show-icons` off), so the table is part of that page's chunk too; keeping it out of the entry chunk is the point.
  *
  * `tests/techIcons.test.ts` fails when a technology used in a `stack` has no entry here.
  */
@@ -33,3 +34,6 @@ export const TECH_ICONS: Record<string, TechIcon> = {
 }
 
 export const techIcon = (tech: string): TechIcon | undefined => TECH_ICONS[tech]
+
+/** Icon to show in a tag, or none when icons are turned off for the list (e.g. project stacks). */
+export const iconFor = (tech: string, showIcons: boolean): TechIcon | undefined => showIcons ? techIcon(tech) : undefined
