@@ -24,6 +24,44 @@ export interface LlmsCase {
   themes: { title: string, paragraphs: string[] }[]
 }
 
+/** Long detail of a case study (`experiences` collection). `stem` tells the locale: `experience/oby`, `pt/experience/oby`. */
+export interface LlmsCaseDetail {
+  stem?: string
+  slug: string
+  title: string
+  themes: LlmsCase['themes']
+}
+
+/** Short item of the home timeline (`index.experience.items`). */
+export type LlmsHomeItem = Omit<LlmsCase, 'slug' | 'title' | 'themes'> & { slug?: string }
+
+/** Only the default-locale (English) content lives under `experience/`; pt/es have a locale prefix. */
+export const isEnglishStem = (stem?: string) => !!stem && stem.startsWith('experience/')
+
+/**
+ * Case studies in the order of the home timeline: each item that has a slug and an English detail with themes.
+ * Anything else (item without slug, detail missing, pt/es detail, detail without stem) is left out.
+ */
+export function pickCases(details: readonly LlmsCaseDetail[], items: readonly LlmsHomeItem[]): LlmsCase[] {
+  const english = details.filter(detail => isEnglishStem(detail.stem) && Array.isArray(detail.themes))
+  return items.flatMap((item): LlmsCase[] => {
+    const slug = item.slug
+    const detail = slug ? english.find(d => d.slug === slug) : undefined
+    if (!slug || !detail) return []
+    return [{
+      slug,
+      title: detail.title,
+      position: item.position,
+      date: item.date,
+      company: item.company,
+      summary: item.summary,
+      highlights: item.highlights,
+      stack: item.stack,
+      themes: detail.themes
+    }]
+  })
+}
+
 export interface LlmsInput {
   siteUrl: string
   projects: LlmsProject[]

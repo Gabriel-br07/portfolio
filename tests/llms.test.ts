@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildLlmsFullTxt, buildLlmsTxt } from '../server/utils/llms'
+import { buildLlmsFullTxt, buildLlmsTxt, isEnglishStem, pickCases } from '../server/utils/llms'
 
 const base = {
   siteUrl: 'https://example.test',
@@ -62,5 +62,66 @@ describe('buildLlmsFullTxt', () => {
   it('omits the stack line when there are no tags', () => {
     const text = buildLlmsFullTxt({ siteUrl: 'https://example.test', cases: [{ ...full, stack: [] }] })
     expect(text).not.toContain('Stack:')
+  })
+})
+
+describe('pickCases', () => {
+  const home = (slug?: string) => ({
+    slug,
+    position: 'Dev at',
+    date: '2026',
+    company: { name: slug ?? 'x' },
+    summary: 's',
+    highlights: ['h'],
+    stack: ['A']
+  })
+  const detail = (slug: string, stem?: string) => ({ stem, slug, title: `T ${slug}`, themes: [{ title: 'th', paragraphs: ['p'] }] })
+
+  it('keeps the order of the home timeline, not the order of the details', () => {
+    const result = pickCases([detail('b', 'experience/b'), detail('a', 'experience/a')], [home('a'), home('b')])
+    expect(result.map(c => c.slug)).toEqual(['a', 'b'])
+  })
+
+  it('joins title and themes from the detail with the rest from the home item', () => {
+    const [first] = pickCases([detail('a', 'experience/a')], [home('a')])
+    expect(first).toMatchObject({ slug: 'a', title: 'T a', position: 'Dev at', stack: ['A'] })
+    expect(first!.themes).toHaveLength(1)
+  })
+
+  it('ignores pt and es details even when they share the slug', () => {
+    const result = pickCases([detail('a', 'pt/experience/a'), detail('a', 'es/experience/a')], [home('a')])
+    expect(result).toEqual([])
+  })
+
+  it('prefers the English detail when all locales exist', () => {
+    const result = pickCases([detail('a', 'pt/experience/a'), { ...detail('a', 'experience/a'), title: 'English' }], [home('a')])
+    expect(result[0]!.title).toBe('English')
+  })
+
+  it('skips home items without a slug', () => {
+    expect(pickCases([detail('a', 'experience/a')], [home(undefined)])).toEqual([])
+  })
+
+  it('skips home items without a detail', () => {
+    expect(pickCases([detail('a', 'experience/a')], [home('a'), home('missing')]).map(c => c.slug)).toEqual(['a'])
+  })
+
+  it('discards details without a stem (the locale cannot be known)', () => {
+    expect(pickCases([detail('a')], [home('a')])).toEqual([])
+  })
+
+  it('discards details without themes', () => {
+    const broken = { stem: 'experience/a', slug: 'a', title: 't' } as unknown as Parameters<typeof pickCases>[0][number]
+    expect(pickCases([broken], [home('a')])).toEqual([])
+  })
+})
+
+describe('isEnglishStem', () => {
+  it('accepts only default-locale experience stems', () => {
+    expect(isEnglishStem('experience/oby')).toBe(true)
+    expect(isEnglishStem('pt/experience/oby')).toBe(false)
+    expect(isEnglishStem('es/experience/oby')).toBe(false)
+    expect(isEnglishStem(undefined)).toBe(false)
+    expect(isEnglishStem('')).toBe(false)
   })
 })
