@@ -26,6 +26,8 @@ export function railProgress(tops: readonly number[], probe: number, atBottom: b
     if (atBottom) return 1
     const next = tops[i + 1]!
     const span = next - top
+    // Two sections missing from the DOM have infinite tops (Infinity - Infinity): no progress, never NaN.
+    if (Number.isNaN(span)) return 0
     if (span <= 0) return probe >= next ? 1 : 0
     return Math.min(1, Math.max(0, (probe - top) / span))
   })

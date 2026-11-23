@@ -27,3 +27,11 @@ export interface ExperienceCaseDetail {
   description: string
   themes: ExperienceTheme[]
 }
+
+/** Case-study data for one role: short item from `index`, long detail from `experiences`, plus neighbours. */
+export interface ExperienceCase {
+  item: ExperienceItem
+  detail: ExperienceCaseDetail
+  newer: ExperienceItem | null
+  older: ExperienceItem | null
+}

@@ -63,10 +63,11 @@ const jsonLd = computed(() => {
       },
       {
         '@type': 'BreadcrumbList',
-        // Search engines ignore URL fragments (`/#experience`), so the schema lists Home → this page only.
+        // Search engines ignore URL fragments (`/#experience`), so the schema lists Home → this page only; the last
+        // name matches the visible crumb (the company).
         'itemListElement': [
           { '@type': 'ListItem', 'position': 1, 'name': t('experience.breadcrumbHome'), 'item': localeHome },
-          { '@type': 'ListItem', 'position': 2, 'name': data.value?.detail.title, 'item': url }
+          { '@type': 'ListItem', 'position': 2, 'name': company?.name ?? data.value?.detail.title, 'item': url }
         ]
       }
     ]
@@ -78,7 +79,7 @@ useHead(() => ({
     {
       key: `experience-${slug.value}-jsonld`,
       type: 'application/ld+json',
-      innerHTML: JSON.stringify(jsonLd.value)
+      innerHTML: serializeJsonLd(jsonLd.value)
     }
   ]
 }))

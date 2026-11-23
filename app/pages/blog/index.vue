@@ -16,7 +16,7 @@ useHead(() => ({
     {
       key: 'blog-jsonld',
       type: 'application/ld+json',
-      innerHTML: JSON.stringify({
+      innerHTML: serializeJsonLd({
         '@context': 'https://schema.org',
         '@type': 'Blog',
         'name': t('blog.sectionTitle'),

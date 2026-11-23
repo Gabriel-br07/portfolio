@@ -62,7 +62,7 @@ useHead(() => ({
     {
       key: 'projects-jsonld',
       type: 'application/ld+json',
-      innerHTML: JSON.stringify(projectsJsonLd.value)
+      innerHTML: serializeJsonLd(projectsJsonLd.value)
     }
   ]
 }))

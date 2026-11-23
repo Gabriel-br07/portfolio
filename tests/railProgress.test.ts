@@ -40,4 +40,12 @@ describe('railProgress', () => {
     railProgress(input, 450, false)
     expect(input).toEqual(before)
   })
+
+  it('never returns NaN when sections are missing from the DOM (infinite tops)', () => {
+    const inf = Number.POSITIVE_INFINITY
+    const result = railProgress([100, inf, inf], 500, false)
+    expect(result.segments.every(Number.isFinite)).toBe(true)
+    expect(result.segments).toEqual([0, 0])
+    expect(railProgress([inf, inf], 500, false).segments).toEqual([0])
+  })
 })

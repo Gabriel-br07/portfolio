@@ -20,7 +20,7 @@ export function useScrollSpy(ids: MaybeRefOrGetter<string[]>, probeRatio = 0.35)
     Object.assign(
       state,
       railProgress(tops, window.scrollY + window.innerHeight * probeRatio, atBottom),
-      { overall: max > 0 ? Math.min(1, window.scrollY / max) : 0 }
+      { overall: scrollOverall(window.scrollY, document.documentElement.scrollHeight, window.innerHeight) }
     )
   }
 

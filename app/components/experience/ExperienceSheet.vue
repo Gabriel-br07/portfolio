@@ -12,6 +12,8 @@ const { track } = useAnalytics()
 // Fetched on demand (client only) so the home never ships the long text.
 const { data, status, refresh } = useExperienceCase(() => props.slug, { lazy: true, server: false })
 
+const state = computed(() => sheetState(status.value, !!data.value))
+
 watch(open, (isOpen) => {
   if (isOpen) track('open_experience_details', { experience: props.slug, surface: 'sheet' })
 }, { immediate: true })
@@ -27,7 +29,7 @@ watch(open, (isOpen) => {
   >
     <template #body>
       <div
-        v-if="status === 'idle' || status === 'pending'"
+        v-if="state === 'loading'"
         class="space-y-3"
         role="status"
         :aria-label="t('experience.loading')"
@@ -38,7 +40,7 @@ watch(open, (isOpen) => {
         <USkeleton class="h-24 w-full" />
       </div>
       <div
-        v-else-if="!data"
+        v-else-if="state === 'error' || !data"
         class="space-y-3"
       >
         <p class="text-sm text-muted">

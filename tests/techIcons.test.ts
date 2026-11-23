@@ -19,6 +19,7 @@ function stackTechnologies(): string[] {
 
 describe('techIcons', () => {
   it('has an icon for every technology used in a stack', () => {
+    expect(stackTechnologies().length).toBeGreaterThan(0)
     const missing = [...new Set(stackTechnologies())].filter(tech => !techIcon(tech))
     expect(missing, `add these to app/utils/techIcons.ts: ${missing.join(', ')}`).toEqual([])
   })

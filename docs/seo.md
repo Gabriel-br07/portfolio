@@ -12,7 +12,7 @@ Domínio canônico: `https://gabrielfaria.dev.br` (`PRODUCTION_SITE_URL` em `nux
 | canonical | `useLocaleHead()` (`baseUrl` = site URL), sem barra final | `i18n.baseUrl` |
 | `og:*` / `twitter:*` / `og:locale` | `usePageSeo()` (`app/composables/usePageSeo.ts`); mapa `OG_LOCALES` | chaves `seo*` em `i18n/locales/*.json` |
 | robots.txt | `@nuxtjs/robots` (rota dinâmica, não há arquivo em `public/`) | `site.indexable` |
-| JSON-LD | `app/app.vue` (Person + WebSite por idioma), `projects.vue`, `blog/index.vue`, `experience/[slug].vue` (WebPage + BreadcrumbList) | |
+| JSON-LD | `app/app.vue` (Person + WebSite por idioma), `projects.vue`, `blog/index.vue`, `experience/[slug].vue` (WebPage + Role + BreadcrumbList, ligados à Person) | |
 
 Não existe `lastmod`, `priority` nem `changefreq`: o conteúdo não tem uma data real de alteração e o Google ignora os dois últimos. Se uma coleção ganhar um campo `updatedAt`, informe-o em `sitemap.sources`.
 
