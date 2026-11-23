@@ -88,7 +88,8 @@
     "siteTitle": "Gabriel Faria Portfolio",
     "titleWithPage": "{title} — Gabriel Faria Portfolio",
     "jobTitle": "Fullstack & Back-End Developer",
-    "personDescription": "Developer who builds reliable, maintainable, and impactful digital solutions, focused on clarity, collaborative problem-solving, and well-structured software."
+    "personDescription": "Developer who builds reliable, maintainable, and impactful digital solutions, focused on clarity, collaborative problem-solving, and well-structured software.",
+    "ogImageAlt": "Gabriel Faria, {jobTitle}"
   },
   "home": {
     "techCarouselTitle": "Tools and technologies I've used"
@@ -122,6 +123,7 @@
     "newerLabel": "Newer role: {company}",
     "olderLabel": "Previous role: {company}",
     "onThisPage": "On this page",
+    "ogImageAlt": "{role}, by Gabriel Faria",
     "breadcrumbHome": "Home",
     "breadcrumbExperience": "Experience",
     "pagination": "More roles",

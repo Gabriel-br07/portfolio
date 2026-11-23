@@ -12,7 +12,8 @@ const color = computed(() => colorMode.value === 'dark' ? '#020618' : 'white')
 
 // Self-hosted social image, resolved to an absolute URL from the normalized site URL
 // (OG/Twitter/JSON-LD all require absolute URLs).
-const ogImageUrl = `${siteUrl}/images/seo/og-image.jpeg`
+const ogImageUrl = resolveOgImage(siteUrl, '/images/seo/og-home.png')
+const ogImageAlt = computed(() => t('seo.ogImageAlt', { jobTitle: t('seo.jobTitle') }))
 
 // Home URL of the current locale, in the same form as the canonical (no trailing slash).
 const localeHomeUrl = computed(() => `${siteUrl}${localePath('/')}`.replace(/\/+$/, ''))
@@ -85,7 +86,11 @@ useSeoMeta({
     return t('seo.titleWithPage', { title: pageTitle })
   },
   ogImage: ogImageUrl,
+  ogImageWidth: OG_IMAGE_WIDTH,
+  ogImageHeight: OG_IMAGE_HEIGHT,
+  ogImageAlt: () => ogImageAlt.value,
   twitterImage: ogImageUrl,
+  twitterImageAlt: () => ogImageAlt.value,
   twitterCard: 'summary_large_image'
 })
 </script>

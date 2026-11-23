@@ -309,3 +309,39 @@ suite('public name', () => {
     for (const url of urls) expect(htmlFor(url), url).not.toMatch(/Oliveira/)
   })
 })
+
+suite('share images', () => {
+  const metaProperty = (html: string, property: string) =>
+    tags(html, new RegExp(`<meta[^>]*(?:property|name)="${property}"[^>]*content="([^"]*)"`, 'g'))
+  const homes = LOCALES.map(locale => `${SITE}${locale === DEFAULT_LOCALE ? '' : `/${locale}`}`)
+  const cases = built ? expectedUrls().filter(u => u.includes('/experience/')) : []
+
+  function check(url: string, expected: string) {
+    const html = htmlFor(url)
+    for (const property of ['og:image', 'twitter:image']) {
+      expect(metaProperty(html, property), `${url} ${property}`).toEqual([`${SITE}/images/seo/${expected}`])
+    }
+    expect(metaProperty(html, 'og:image:width'), `${url} width`).toEqual(['1200'])
+    expect(metaProperty(html, 'og:image:height'), `${url} height`).toEqual(['630'])
+    expect(metaProperty(html, 'og:image:alt')[0] ?? '', `${url} og:image:alt`).not.toBe('')
+    expect(metaProperty(html, 'twitter:image:alt')[0] ?? '', `${url} twitter:image:alt`).not.toBe('')
+    expect(existsSync(join(PUBLIC_DIR, 'images/seo', expected)), `${expected} in the build`).toBe(true)
+  }
+
+  it('uses og-home.png on the home of every locale', () => {
+    for (const url of homes) check(url, 'og-home.png')
+  })
+
+  it('uses the image of its own slug on every case study', () => {
+    expect(cases.length).toBeGreaterThan(0)
+    for (const url of cases) check(url, `og-${new URL(url).pathname.split('/').pop()}.png`)
+  })
+
+  it('declares the image in the case JSON-LD', () => {
+    for (const url of cases) {
+      const html = htmlFor(url)
+      const slug = new URL(url).pathname.split('/').pop()
+      expect(html, url).toContain(`"primaryImageOfPage":{"@type":"ImageObject","url":"${SITE}/images/seo/og-${slug}.png"`)
+    }
+  })
+})

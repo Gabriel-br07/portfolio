@@ -88,7 +88,8 @@
     "siteTitle": "Portfólio Gabriel Faria",
     "titleWithPage": "{title} — Portfólio Gabriel Faria",
     "jobTitle": "Desenvolvedor Fullstack e Back-End",
-    "personDescription": "Desenvolvedor que cria soluções digitais confiáveis, sustentáveis e com impacto, com foco em clareza, colaboração e software bem estruturado."
+    "personDescription": "Desenvolvedor que cria soluções digitais confiáveis, sustentáveis e com impacto, com foco em clareza, colaboração e software bem estruturado.",
+    "ogImageAlt": "Gabriel Faria, {jobTitle}"
   },
   "home": {
     "techCarouselTitle": "Ferramentas e tecnologias que já usei"
@@ -122,6 +123,7 @@
     "newerLabel": "Experiência mais recente: {company}",
     "olderLabel": "Experiência anterior: {company}",
     "onThisPage": "Nesta página",
+    "ogImageAlt": "{role}, por Gabriel Faria",
     "breadcrumbHome": "Início",
     "breadcrumbExperience": "Experiência",
     "pagination": "Outras experiências",
