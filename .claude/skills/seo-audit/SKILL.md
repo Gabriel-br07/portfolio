@@ -36,3 +36,4 @@ Every page sets SEO through the shared **`usePageSeo()`** composable (`app/compo
 - [ ] Page appears in `/sitemap.xml` and is not blocked by `robots.txt`.
 - [ ] Any new i18n SEO key added to en/pt/es.
 - [ ] Images use `NuxtImg` with dimensions; remote host allow-listed.
+- [ ] Person name matches the domain ("Gabriel Faria"); no `alternateName` and no other spelling of the name.

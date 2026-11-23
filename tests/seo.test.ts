@@ -285,3 +285,27 @@ suite('experience case studies', () => {
     }
   })
 })
+
+suite('public name', () => {
+  const jsonLd = (html: string): Record<string, unknown>[] =>
+    [...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)]
+      .flatMap((m) => {
+        const data = JSON.parse(m[1]!) as Record<string, unknown>
+        return (data['@graph'] as Record<string, unknown>[] | undefined) ?? [data]
+      })
+
+  it('names the Person "Gabriel Faria", without alternateName, in every locale', () => {
+    for (const locale of LOCALES) {
+      const url = `${SITE}${locale === DEFAULT_LOCALE ? '' : `/${locale}`}`
+      const person = jsonLd(htmlFor(url)).find(node => node['@type'] === 'Person')
+      expect(person?.name, url).toBe('Gabriel Faria')
+      expect(person?.alternateName, url).toBeUndefined()
+    }
+  })
+
+  it('never shows "Oliveira" in the prerendered home and case pages', () => {
+    const urls = expectedUrls().filter(u => /^\/(pt\/|es\/)?(experience\/[a-z]+)?$/.test(new URL(u).pathname))
+    expect(urls.length).toBeGreaterThan(0)
+    for (const url of urls) expect(htmlFor(url), url).not.toMatch(/Oliveira/)
+  })
+})

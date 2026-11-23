@@ -16,6 +16,10 @@ Domínio canônico: `https://gabrielfaria.dev.br` (`PRODUCTION_SITE_URL` em `nux
 
 Não existe `lastmod`, `priority` nem `changefreq`: o conteúdo não tem uma data real de alteração e o Google ignora os dois últimos. Se uma coleção ganhar um campo `updatedAt`, informe-o em `sitemap.sources`.
 
+## Nome público
+
+Um único nome em título, H1, JSON-LD (`Person.name`, sem `alternateName`), textos de i18n, imagens de compartilhamento e `llms.txt`: **Gabriel Faria**, igual ao domínio, ao LinkedIn (`faria0703`) e ao autor no Arandu. Não reintroduza outra forma do nome; `tests/seo.test.ts` (suíte "public name") falha se o JSON-LD ou as páginas prerenderizadas divergirem. Os arquivos em `audit/` são registros históricos e não são atualizados.
+
 ## Rotas e idiomas
 
 Idiomas: `en` (padrão, sem prefixo), `pt`, `es`. Páginas indexáveis: `/`, `/about`, `/projects`, `/books`, `/blog` e `/experience/<slug>` (oby, dwcorp, serpro) em cada idioma (24 URLs, ex.: `/`, `/pt/books`, `/es/experience/oby`).

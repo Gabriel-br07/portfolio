@@ -85,8 +85,8 @@
     "nextReading": "Próxima leitura"
   },
   "seo": {
-    "siteTitle": "Portfólio Gabriel Oliveira",
-    "titleWithPage": "{title} — Portfólio Gabriel Oliveira",
+    "siteTitle": "Portfólio Gabriel Faria",
+    "titleWithPage": "{title} — Portfólio Gabriel Faria",
     "jobTitle": "Desenvolvedor Fullstack e Back-End",
     "personDescription": "Desenvolvedor que cria soluções digitais confiáveis, sustentáveis e com impacto, com foco em clareza, colaboração e software bem estruturado."
   },
@@ -96,7 +96,7 @@
   "hero": {
     "available": "Disponível para novos projetos",
     "unavailable": "Indisponível no momento",
-    "profileAlt": "Foto de perfil de Gabriel Oliveira"
+    "profileAlt": "Foto de perfil de Gabriel Faria"
   },
   "projects": {
     "viewDetails": "Ver detalhes",

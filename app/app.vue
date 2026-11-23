@@ -25,9 +25,7 @@ const jsonLd = computed(() => ({
     {
       '@type': 'Person',
       '@id': `${siteUrl}/#person`,
-      'name': 'Gabriel Oliveira',
-      // Byline used on Arandu articles (see blog/index.vue); links both names to one entity.
-      'alternateName': 'Gabriel Faria',
+      'name': 'Gabriel Faria',
       'jobTitle': t('seo.jobTitle'),
       'description': t('seo.personDescription'),
       'email': appConfig.global?.email,

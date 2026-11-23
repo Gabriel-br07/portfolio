@@ -85,8 +85,8 @@
     "nextReading": "Up next"
   },
   "seo": {
-    "siteTitle": "Gabriel Oliveira Portfolio",
-    "titleWithPage": "{title} — Gabriel Oliveira Portfolio",
+    "siteTitle": "Gabriel Faria Portfolio",
+    "titleWithPage": "{title} — Gabriel Faria Portfolio",
     "jobTitle": "Fullstack & Back-End Developer",
     "personDescription": "Developer who builds reliable, maintainable, and impactful digital solutions, focused on clarity, collaborative problem-solving, and well-structured software."
   },
@@ -96,7 +96,7 @@
   "hero": {
     "available": "Available for new projects",
     "unavailable": "Not available at the moment",
-    "profileAlt": "Gabriel Oliveira profile photo"
+    "profileAlt": "Gabriel Faria profile photo"
   },
   "projects": {
     "viewDetails": "View details",
