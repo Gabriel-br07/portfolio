@@ -10,7 +10,18 @@ pnpm audit:perf          # RUNS=5 pnpm audit:perf to change the run count
 Starts `.output/server/index.mjs`, runs Lighthouse 13 for the mobile (default)
 and desktop presets, stores the JSON reports in `.lighthouse/` (gitignored) and
 prints the median FCP, LCP, TBT, CLS, Speed Index and transferred bytes.
-Needs Chrome (`CHROME_PATH` is auto-detected from `google-chrome`/`chromium`).
+Needs Chrome (`CHROME_PATH` is auto-detected from `google-chrome`/`chromium`;
+any Chromium works, e.g. `CHROME_PATH=/usr/bin/brave-browser`).
+
+To audit another page or keep several reports apart (before/after a change):
+
+```bash
+OUT=.lighthouse/case-oby AUDIT_PATH=/experience/oby RUNS=5 pnpm audit:perf
+```
+
+`AUDIT_PATH` (default `/`) is the page to audit and `OUT` (default `.lighthouse`)
+the report directory. Compare numbers only between runs of the same browser on
+the same machine.
 
 ## Bundle analysis and sourcemaps
 
@@ -35,10 +46,16 @@ added later, upload the maps privately to it instead of serving them.
 
 ## Conventions
 
+- Case-study visuals (`.tech-tag__beam`, the timeline pulse) animate **only `transform` and `opacity`** (compositor)
+  and pause while off screen; never animate a registered custom property or a `box-shadow` in a loop.
 - The hero headline and description are the LCP element: keep them static and
   visible in the SSR HTML (no `opacity: 0`, blur, transform or JS gating).
 - Entrance animations only on secondary elements, CSS-only, and disabled under
   `prefers-reduced-motion`.
+- Scroll reveal on the home: mark an element with `data-reveal` (see `app/plugins/reveal.client.ts` and the
+  `[data-reveal-state]` rules in `main.css`). Only elements that start below the fold are hidden, after mount, so the
+  server HTML, the hero and the first screen are untouched. Do not put it on Embla carousels (they measure their
+  size, and the hidden state is scaled) or on anything above the fold.
 - `ui.experimental.componentDetection` is on: Nuxt UI generates theme CSS only for
   components found in `app/`. Components resolved from a dynamic name are not
   detected; list them in `ui.experimental.componentDetection` as an array.
