@@ -9,14 +9,24 @@ PORT="${PORT:-3123}"
 RUNS="${RUNS:-3}"
 OUT="${OUT:-.lighthouse}"
 AUDIT_PATH="${AUDIT_PATH:-/}"
+[[ $AUDIT_PATH == /* ]] || { echo "AUDIT_PATH must start with / (got: $AUDIT_PATH)" >&2; exit 1; }
 export OUT
 export CHROME_PATH="${CHROME_PATH:-$(command -v google-chrome || command -v chromium || true)}"
 
 mkdir -p "$OUT"
+# The median below reads every report in $OUT: drop old ones so runs with another RUNS or page never mix.
+rm -f "$OUT"/mobile-*.json "$OUT"/desktop-*.json
 PORT="$PORT" node .output/server/index.mjs > "$OUT/server.log" 2>&1 &
 SERVER=$!
 trap 'kill $SERVER 2>/dev/null || true' EXIT
-until curl -sf "http://localhost:$PORT/" > /dev/null; do sleep 1; done
+for attempt in $(seq 1 60); do
+  curl -sf "http://localhost:$PORT/" > /dev/null && break
+  if [ "$attempt" = 60 ]; then
+    echo "Server did not answer on port $PORT within 60s, see $OUT/server.log" >&2
+    exit 1
+  fi
+  sleep 1
+done
 
 for preset in mobile desktop; do
   args=(--output=json --quiet --chrome-flags="--headless=new --no-sandbox")
