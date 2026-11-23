@@ -3,132 +3,52 @@ import type { ExperienceItem } from '~/types/experience'
 
 const props = defineProps<{
   experience: ExperienceItem
-  variant: 'link' | 'plain'
+  /** Above-the-fold logo: skip lazy loading. */
+  eager?: boolean
 }>()
 
-const colorMode = useColorMode()
+const { t } = useI18n()
 
-function isSerpro(experience: ExperienceItem) {
-  const name = (experience.company?.name || '').toLowerCase()
-  const logo = (experience.company?.logo || '').toLowerCase()
-  return name.includes('serpro') || logo.includes('serpro')
-}
+const company = computed(() => props.experience.company)
+const logo = computed(() => company.value?.logo ?? '')
+const isImage = computed(() => logo.value.startsWith('/'))
+const alt = computed(() => t('experience.logoAlt', { name: company.value?.name ?? '' }))
 
-function isDWCorp(experience: ExperienceItem) {
-  const name = (experience.company?.name || '').toLowerCase()
-  const logo = (experience.company?.logo || '').toLowerCase()
-  return name.includes('dw corp') || logo.includes('dw-corp')
-}
-
-function isOby(experience: ExperienceItem) {
-  const name = (experience.company?.name || '').toLowerCase()
-  const logo = (experience.company?.logo || '').toLowerCase()
-  return name.includes('oby capital') || logo.includes('oby-capital')
-}
-
-const isDarkTheme = computed(() => colorMode.value === 'dark')
-
-function getLogoPath(experience: ExperienceItem) {
-  const logo = experience.company?.logo
-  if (!logo) return ''
-  if (isDWCorp(experience)) {
-    return isDarkTheme.value
-      ? '/logos/DW-Corp-logo-white-transparent.webp'
-      : logo
-  }
-  return logo
-}
-
-const wrapperClass = computed(() => {
-  const base = isOby(props.experience)
-    ? 'relative shrink-0 h-7 w-16 sm:h-8 sm:w-[4.5rem] overflow-visible'
-    : 'relative shrink-0 h-7 w-7 sm:h-8 sm:w-8 overflow-visible'
-  if (props.variant === 'plain') {
-    return base
-  }
-  if (isOby(props.experience)) {
-    return [base, '-ml-1']
-  }
-  return [base, isDWCorp(props.experience) ? 'ml-4' : 'ml-3']
-})
+const darkLogo = computed(() => DARK_LOGO_VARIANTS[logo.value])
+const size = sizeOfLogo
 </script>
 
 <template>
   <div
-    v-if="props.experience.company?.logo"
-    :class="wrapperClass"
-    :style="{ color: props.experience.company.color }"
+    v-if="logo"
+    class="flex h-6 shrink-0 items-center sm:h-7"
   >
-    <template v-if="props.experience.company.logo.startsWith('/')">
-      <ClientOnly v-if="isDWCorp(props.experience)">
-        <img
-          width="256"
-          height="111"
-          decoding="async"
-          :src="getLogoPath(props.experience)"
-          :alt="props.experience.company.name + ' logo'"
-          :class="[
-            props.variant === 'link'
-              ? 'absolute left-1/2 top-[4%] -translate-x-1/2'
-              : 'absolute left-1/2 top-[54%] -translate-x-1/2',
-            'h-full w-full object-contain',
-            props.variant === 'link' ? 'scale-[4]' : 'scale-[2]'
-          ]"
-        >
-        <template #fallback>
-          <img
-            width="256"
-            height="111"
-            decoding="async"
-            :src="props.experience.company.logo"
-            :alt="props.experience.company.name + ' logo'"
-            :class="[
-              props.variant === 'link'
-                ? 'absolute left-1/2 top-[4%] -translate-x-1/2'
-                : 'absolute left-1/2 top-[54%] -translate-x-1/2',
-              'h-full w-full object-contain',
-              props.variant === 'link' ? 'scale-[4]' : 'scale-[2]'
-            ]"
-          >
-        </template>
-      </ClientOnly>
-      <template v-else-if="isOby(props.experience)">
-        <img
-          width="256"
-          height="109"
-          decoding="async"
-          :src="props.experience.company.logo"
-          :alt="props.experience.company.name + ' logo'"
-          class="absolute inset-0 h-full w-full object-contain dark:hidden"
-        >
-        <img
-          width="256"
-          height="109"
-          decoding="async"
-          src="/logos/oby-capital-logo-white-transparent.webp"
-          :alt="props.experience.company.name + ' logo'"
-          class="absolute inset-0 hidden h-full w-full object-contain dark:block"
-        >
-      </template>
+    <template v-if="isImage">
       <img
-        v-else
-        width="256"
-        height="111"
+        :width="size(logo)[0]"
+        :height="size(logo)[1]"
+        :loading="eager ? 'eager' : 'lazy'"
         decoding="async"
-        :src="getLogoPath(props.experience)"
-        :alt="props.experience.company.name + ' logo'"
-        :class="[
-          'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2',
-          'h-full w-full object-contain',
-          isSerpro(props.experience) ? 'scale-[2]' : ''
-        ]"
+        :src="logo"
+        :alt
+        class="h-full w-auto max-w-40 object-contain object-left"
+        :class="{ 'dark:hidden': darkLogo }"
+      >
+      <img
+        v-if="darkLogo"
+        :width="size(darkLogo)[0]"
+        :height="size(darkLogo)[1]"
+        :loading="eager ? 'eager' : 'lazy'"
+        decoding="async"
+        :src="darkLogo"
+        :alt
+        class="hidden h-full w-auto max-w-40 object-contain object-left dark:block"
       >
     </template>
-    <template v-else>
-      <UIcon
-        :name="props.experience.company.logo"
-        class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-full w-full"
-      />
-    </template>
+    <UIcon
+      v-else
+      :name="logo"
+      class="size-full"
+    />
   </div>
 </template>

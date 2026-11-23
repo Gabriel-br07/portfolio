@@ -27,21 +27,48 @@ about:
 experience:
   title: "Experiência profissional"
   items:
-    - position: "Desenvolvedor de software na"
+    - slug: "oby"
+      position: "Desenvolvedor de software na"
       date: "jul. 2026 — atual"
+      summary: "ERP financeiro em nuvem para gestão de recebíveis educacionais, já em produção. Atuei em integrações bancárias, processamento assíncrono confiável e isolamento de dados multi-tenant."
+      highlights:
+        - "Integrações bancárias com execução idempotente e outbox transacional"
+        - "Verificação de pagamentos por webhook usando informação bancária confirmada"
+        - "Motor de validação de carteiras com 56 códigos de regra de negócio"
+      stack: ["Node.js", "TypeScript", "Python", "PostgreSQL", "Next.js", "GCP"]
       company:
         name: "Oby Capital"
         logo: "/logos/oby-capital-logo.webp"
         url: "https://www.obycapital.com.br/"
-    - position: "Desenvolvedor backend / full stack na"
+        color: "#0e7490"
+        colorDark: "#22d3ee"
+    - slug: "dwcorp"
+      position: "Desenvolvedor backend / full stack na"
       date: "jul. 2025 — jul. 2026"
+      summary: "Fábrica de software com entregas full stack para clientes: backend, front-end, integrações, testes e CI/CD, com validação em produção após o deploy."
+      highlights:
+        - "Autenticação redesenhada, eliminando 401s em casos-limite"
+        - "Pagamentos Stripe ponta a ponta com Django REST Framework"
+        - "Cache Redis: latência das rotas cacheadas na ordem de 20–35% menor"
+      stack: ["Python", "Django", "Go", "Vue", "React", "Redis"]
       company:
         name: "DW Corp"
         logo: "/logos/DW-Corp-logo.svg"
         url: "https://dwcorp.com.br/"
-    - position: "Estagiário na"
+        color: "#27272a"
+        colorDark: "#e4e4e7"
+    - slug: "serpro"
+      position: "Estagiário na"
       date: "mai. 2024 — jul. 2025"
+      summary: "Primeiro contato profissional: portais low-code, dashboards e o elo entre quem pede e quem desenvolve."
+      highlights:
+        - "Dashboards em Power BI e modelos em Excel para validar dados"
+        - "Requisitos traduzidos em especificações funcionais junto a PMs e desenvolvedores"
+        - "Planejamento de chatbots com fluxos de diálogo para municípios"
+      stack: ["Power BI", "Excel", "Low-code"]
       company:
         name: "Serpro"
         logo: "/logos/serpro.svg"
         url: "https://www.serpro.gov.br"
+        color: "#0000cc"
+        colorDark: "#8a8aff"

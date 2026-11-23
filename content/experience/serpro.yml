@@ -1,0 +1,14 @@
+slug: "serpro"
+title: "Intern at Serpro"
+description: "Internship at Serpro: low-code portals, Power BI dashboards, requirements gathering and chatbot planning for municipalities."
+themes:
+  - title: "Low-code portals"
+    paragraphs:
+      - "I configured and customized low-code portals to speed up the delivery of business websites."
+  - title: "Data and dashboards"
+    paragraphs:
+      - "I built Power BI dashboards and Excel models for data validation and decision support."
+  - title: "Requirements and chatbots"
+    paragraphs:
+      - "I gathered requirements from stakeholders and translated them into functional specifications with PMs and developers."
+      - "I planned dialogue-flow chatbots for municipalities, built by the development team."

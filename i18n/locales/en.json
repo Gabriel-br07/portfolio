@@ -108,6 +108,27 @@
     "outcome": "Outcome",
     "stack": "Stack"
   },
+  "experience": {
+    "highlights": "Highlights",
+    "readFull": "Read the full story",
+    "openFullPage": "Open full page",
+    "sheetTitle": "Role details",
+    "sheetDescription": "What I did in this role",
+    "loading": "Loading details…",
+    "error": "Could not load the details.",
+    "retry": "Try again",
+    "logoAlt": "{name} logo",
+    "visitCompany": "Visit {company}",
+    "newerLabel": "Newer role: {company}",
+    "olderLabel": "Previous role: {company}",
+    "onThisPage": "On this page",
+    "breadcrumbHome": "Home",
+    "breadcrumbExperience": "Experience",
+    "pagination": "More roles",
+    "company": "Company",
+    "period": "Period",
+    "stack": "Stack"
+  },
   "locale": {
     "ariaSwitch": "Change language",
     "viewProject": "View Project"

@@ -1,0 +1,33 @@
+slug: "oby"
+title: "Desenvolvedor de software na Oby Capital"
+description: "Desenvolvedor de software na Oby Capital: integrações bancárias, processamento assíncrono confiável, validação de carteiras e dados multi-tenant."
+themes:
+  - title: "Integrações bancárias e operações financeiras"
+    paragraphs:
+      - "Desenvolvi e coloquei em produção integrações bancárias com Node.js, TypeScript, Python e PostgreSQL, usando jobs em nuvem para a execução assíncrona."
+      - "Implementei fluxos de emissão, alteração e cancelamento de boletos direto pelo ERP."
+  - title: "Confiabilidade no processamento assíncrono"
+    paragraphs:
+      - "Usei outbox transacional para coordenar transações do banco de dados com operações bancárias externas."
+      - "Implementei idempotência, rastreamento do estado de execução, retentativas seguras e tratamento de respostas incertas, reduzindo o risco de operações financeiras duplicadas."
+  - title: "Verificação de pagamentos"
+    paragraphs:
+      - "Criei fluxos de verificação por webhook: o status do pagamento é atualizado com base em informação bancária verificada, e não apenas na notificação recebida."
+      - "Integrei a confirmação ao financeiro do ERP e ao portal do cliente."
+  - title: "Validação de carteira de recebíveis"
+    paragraphs:
+      - "Implementei a ingestão e a validação automatizada de carteiras, com um motor baseado em regras e 56 códigos de validação de negócio documentados."
+      - "A conferência registro a registro deu lugar à análise direcionada dos registros sinalizados."
+  - title: "Comunicação e notificações"
+    paragraphs:
+      - "Integrei e-mail e WhatsApp por APIs REST para comunicações de pagamento e configurei lembretes recorrentes agendados para boletos em aberto."
+  - title: "Portal de autoatendimento"
+    paragraphs:
+      - "Desenvolvi um portal autenticado para responsáveis financeiros, com ativação de conta e acesso a boletos, informações e status de pagamento confirmados."
+  - title: "Multi-tenant e segurança dos dados"
+    paragraphs:
+      - "Implementei isolamento multi-tenant no PostgreSQL com tenant_id e escopo por escola, aplicados por Row Level Security e triggers de integridade."
+      - "Modelei o schema por migrations versionadas e restringi cada responsável aos próprios registros por políticas de RLS."
+  - title: "IA no desenvolvimento"
+    paragraphs:
+      - "Usei agentes de codificação, como o Claude Code, apoiados por instruções e diretrizes de revisão no repositório."

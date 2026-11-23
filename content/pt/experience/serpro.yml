@@ -1,0 +1,14 @@
+slug: "serpro"
+title: "Estagiário no Serpro"
+description: "Estágio no Serpro: portais low-code, dashboards em Power BI, levantamento de requisitos e planejamento de chatbots para municípios."
+themes:
+  - title: "Portais low-code"
+    paragraphs:
+      - "Configurei e customizei portais low-code para acelerar a entrega de sites de negócio."
+  - title: "Dados e dashboards"
+    paragraphs:
+      - "Criei dashboards em Power BI e modelos em Excel para validação de dados e apoio a decisões."
+  - title: "Requisitos e chatbots"
+    paragraphs:
+      - "Levantei requisitos com stakeholders e os traduzi em especificações funcionais junto a PMs e desenvolvedores."
+      - "Planejei chatbots com fluxos de diálogo para municípios, desenvolvidos pela equipe de desenvolvimento."

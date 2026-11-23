@@ -3,6 +3,8 @@ import type { MaybeRefOrGetter } from 'vue'
 interface PageSeoInput {
   title?: string | null
   description?: string | null
+  /** Open Graph type; defaults to `website`. */
+  ogType?: 'website' | 'article' | 'profile'
   /** Dedicated SEO override (e.g. content `seo:` block); preferred over title/description. */
   seo?: {
     title?: string | null
@@ -57,7 +59,7 @@ export function usePageSeo(input: MaybeRefOrGetter<PageSeoInput | null | undefin
     ogTitle: () => resolved.value.title,
     ogDescription: () => resolved.value.description,
     ogUrl: () => url.value,
-    ogType: 'website',
+    ogType: () => toValue(input)?.ogType ?? 'website',
     ogSiteName: () => t('seo.siteTitle'),
     ogLocale: () => ogLocale.value,
     ogLocaleAlternate: () => ogLocaleAlternate.value,

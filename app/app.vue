@@ -75,7 +75,7 @@ useHead(() => ({
   script: [
     {
       type: 'application/ld+json',
-      innerHTML: JSON.stringify(jsonLd.value)
+      innerHTML: serializeJsonLd(jsonLd.value)
     }
   ]
 }))

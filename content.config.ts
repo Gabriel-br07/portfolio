@@ -57,13 +57,20 @@ export default defineContentConfig({
         about: createBaseSchema(),
         experience: createBaseSchema().extend({
           items: z.array(z.object({
+            slug: z.string().nonempty(),
             date: z.string(),
             position: z.string(),
+            // Answer-first: one short paragraph (<= 320 chars) that an answer engine can quote as-is.
+            summary: z.string().nonempty().max(320),
+            highlights: z.array(z.string().nonempty().max(120)).min(1),
+            stack: z.array(z.string().nonempty()).min(1),
             company: z.object({
               name: z.string(),
               url: z.string().optional(),
               logo: z.string().editor({ input: 'icon' }),
-              color: z.string().optional()
+              // Accent color of the company: `color` on the light theme, `colorDark` on the dark one.
+              color: z.string().regex(/^#[0-9a-fA-F]{6}$/).optional(),
+              colorDark: z.string().regex(/^#[0-9a-fA-F]{6}$/).optional()
             })
           }))
         }),
@@ -102,6 +109,28 @@ export default defineContentConfig({
         role: z.string().optional(),
         decisions: z.array(z.string()).optional(),
         outcome: z.string().optional()
+      })
+    }),
+    // Long-form case study per role (`/experience/<slug>`). The short summary, highlights and stack live in
+    // `index.experience.items`, so the home never ships this text.
+    experiences: defineCollection({
+      type: 'data',
+      source: [
+        { include: 'experience/*.yml' },
+        { include: 'pt/experience/*.yml' },
+        { include: 'es/experience/*.yml' }
+      ],
+      schema: z.object({
+        slug: z.string().nonempty(),
+        // H1 and SEO title (the clean role title; `position` in index.yml keeps its trailing "at/na/en" for llms.txt).
+        title: z.string().nonempty(),
+        // Meta description, keep it under ~160 characters.
+        description: z.string().nonempty().max(165),
+        themes: z.array(z.object({
+          title: z.string().nonempty(),
+          // Short, self-contained paragraphs (<= 320 chars) are easier to extract and cite.
+          paragraphs: z.array(z.string().nonempty().max(320)).min(1)
+        })).min(1)
       })
     }),
     pages: defineCollection({
