@@ -6,60 +6,70 @@
 //   hero/LCP and the first screen do not change. Hydration is not affected: it only sets a data attribute.
 // - The animation is CSS (transform/opacity, see main.css); it is off under prefers-reduced-motion.
 // - Elements entering in the same frame cascade with a small delay (`revealDelay`).
+// - The logic lives in `createRevealer` (app/utils/reveal.ts, unit tested); this file only wires it to the DOM.
+const adapters = new WeakMap<HTMLElement, RevealEl & { node: HTMLElement }>()
+
+function adapt(node: HTMLElement) {
+  let adapter = adapters.get(node)
+  if (!adapter) {
+    adapter = {
+      node,
+      rect: () => node.getBoundingClientRect(),
+      contains: target => target instanceof Node && node.contains(target),
+      setState: (state) => {
+        node.dataset.revealState = state
+      },
+      setDelay: (ms) => {
+        if (ms === null) node.style.removeProperty('--reveal-delay')
+        else node.style.setProperty('--reveal-delay', `${ms}ms`)
+      },
+      onTransformEnd: (cb) => {
+        node.addEventListener('transitionend', function onEnd(event) {
+          if (event.target !== node || event.propertyName !== 'transform') return
+          node.removeEventListener('transitionend', onEnd)
+          cb()
+        })
+      }
+    }
+    adapters.set(node, adapter)
+  }
+  return adapter
+}
+
 export default defineNuxtPlugin((nuxtApp) => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
-  let observer: IntersectionObserver | undefined
 
-  const timers = new WeakMap<HTMLElement, number>()
-
-  function finish(el: HTMLElement) {
-    window.clearTimeout(timers.get(el))
-    el.dataset.revealState = 'done' // drops the reveal styles, so hover/focus transitions of the element are untouched
-    el.style.removeProperty('--reveal-delay')
-  }
-
-  function show(el: HTMLElement, index: number) {
-    el.style.setProperty('--reveal-delay', `${revealDelay(index)}ms`)
-    el.dataset.revealState = 'in'
-    el.addEventListener('transitionend', function onEnd(event) {
-      if (event.target !== el || event.propertyName !== 'transform') return
-      el.removeEventListener('transitionend', onEnd)
-      finish(el)
-    })
-    timers.set(el, window.setTimeout(() => finish(el), 1800)) // safety net when transitionend never fires
-  }
-
-  function onIntersect(entries: IntersectionObserverEntry[]) {
-    entries
-      .filter(entry => entry.isIntersecting)
-      .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top || a.boundingClientRect.left - b.boundingClientRect.left)
-      .forEach((entry, index) => {
-        observer?.unobserve(entry.target)
-        show(entry.target as HTMLElement, index)
-      })
-  }
-
-  function scan() {
-    if (reduceMotion.matches) return
-    observer ??= new IntersectionObserver(onIntersect, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' })
-    // Deep link (`#theme-2`): the target block must not pop in after the browser scrolled to it.
-    const target = location.hash.length > 1 ? document.getElementById(decodeURIComponent(location.hash.slice(1))) : null
-    document.querySelectorAll<HTMLElement>('[data-reveal]:not([data-reveal-state])').forEach((el) => {
-      if (target && el.contains(target)) return
-      if (!needsReveal(el.getBoundingClientRect(), window.innerHeight)) return
-      el.dataset.revealState = 'hidden'
-      observer!.observe(el)
-    })
-  }
-
-  nuxtApp.hook('app:mounted', scan)
-  // Client-side navigation renders a new page after the plugin ran.
-  // Drop the previous page's elements from the observer; `scan` recreates it.
-  nuxtApp.hook('page:start', () => {
-    observer?.disconnect()
-    observer = undefined
+  const revealer = createRevealer({
+    prefersReducedMotion: () => reduceMotion.matches,
+    createObserver: (onIntersect) => {
+      const observer = new IntersectionObserver(
+        entries => onIntersect(entries.map(entry => ({
+          target: adapt(entry.target as HTMLElement),
+          isIntersecting: entry.isIntersecting,
+          rect: entry.boundingClientRect
+        }))),
+        { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
+      )
+      return {
+        observe: el => observer.observe(el.node),
+        unobserve: el => observer.unobserve(el.node),
+        disconnect: () => observer.disconnect()
+      }
+    },
+    pending: () => [...document.querySelectorAll<HTMLElement>('[data-reveal]:not([data-reveal-state])')].map(adapt),
+    viewportHeight: () => window.innerHeight,
+    hashTarget: () => {
+      const id = hashTargetId(location.hash)
+      return id ? document.getElementById(id) : null
+    },
+    setTimer: (fn, ms) => window.setTimeout(fn, ms),
+    clearTimer: id => window.clearTimeout(id)
   })
+
+  nuxtApp.hook('app:mounted', revealer.scan)
+  // Client-side navigation renders a new page after the plugin ran: drop the old elements, scan the new ones.
+  nuxtApp.hook('page:start', revealer.reset)
   nuxtApp.hook('page:finish', () => {
-    requestAnimationFrame(scan)
+    requestAnimationFrame(revealer.scan)
   })
 })
