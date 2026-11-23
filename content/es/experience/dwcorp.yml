@@ -1,0 +1,25 @@
+slug: "dwcorp"
+title: "Desarrollador full stack en DW Corp"
+description: "Desarrollador backend / full stack en DW Corp: autenticación segura, pagos con Stripe, caché Redis, CI/CD con Playwright y microservicios."
+themes:
+  - title: "Autenticación y seguridad"
+    paragraphs:
+      - "Rediseñé la validación y la persistencia de tokens en servicios Python, eliminando errores 401 en casos límite y dando más confiabilidad a las sesiones."
+      - "Apliqué patrones alineados con OWASP: JWT de acceso y de refresco, validación de claims y expiración, y verificación por correo en acciones sensibles."
+  - title: "Pagos y reglas de negocio"
+    paragraphs:
+      - "Entregué flujos de pago con Stripe de extremo a extremo (cobro y almacenamiento de métodos de pago) en APIs REST con Django REST Framework."
+      - "Diseñé la validación de solapamiento de reservas para evitar el double-booking."
+  - title: "Rendimiento"
+    paragraphs:
+      - "Introduje middleware de caché con Redis para consultas repetidas; en escenarios de lectura intensiva, la latencia de las rutas cacheadas bajó en torno al 20–35%."
+  - title: "Calidad y CI/CD"
+    paragraphs:
+      - "Estructuré la integración continua en GitHub Actions con pruebas unitarias, una suite E2E en Playwright y reglas de lint y formato, reduciendo regresiones antes del merge."
+  - title: "Front-end"
+    paragraphs:
+      - "Entregué mejoras de interfaz en Vue.js y React, estabilizando los flujos de uso y la integración con las APIs."
+  - title: "Microservicios y herramientas"
+    paragraphs:
+      - "Participé en el proyecto de asignación de salas de LabTech y creé una CLI en Go para levantar microservicios con Docker Compose, ahorrando unos 10–15 minutos por ciclo de configuración."
+      - "Contribuí a Curupira, un proveedor de identidad OAuth2/OIDC multi-tenant en Rust (Axum) con PostgreSQL y RBAC."

@@ -1,0 +1,25 @@
+slug: "dwcorp"
+title: "Full Stack Developer at DW Corp"
+description: "Backend / Full Stack Developer at DW Corp: secure authentication, Stripe payments, Redis caching, CI/CD with Playwright and microservices."
+themes:
+  - title: "Authentication and security"
+    paragraphs:
+      - "I redesigned token validation and persistence in Python services, eliminating edge-case 401 errors and making user sessions more reliable."
+      - "I applied OWASP-aligned patterns: access and refresh JWTs, claim and expiry validation, and email verification for sensitive actions."
+  - title: "Payments and business rules"
+    paragraphs:
+      - "I delivered end-to-end Stripe payment flows (charging and storing payment methods) in REST APIs built with Django REST Framework."
+      - "I designed overlap validation for bookings to prevent double-booking."
+  - title: "Performance"
+    paragraphs:
+      - "I introduced Redis caching middleware for repeated queries; in read-heavy scenarios, latency on cached routes dropped by roughly 20–35%."
+  - title: "Quality and CI/CD"
+    paragraphs:
+      - "I set up continuous integration on GitHub Actions with unit tests, a Playwright E2E suite and lint and formatting rules, reducing regressions before merge."
+  - title: "Front-end"
+    paragraphs:
+      - "I delivered interface improvements in Vue.js and React, stabilizing usage flows and the integration with the APIs."
+  - title: "Microservices and tooling"
+    paragraphs:
+      - "I worked on the LabTech room allocation project and built a Go CLI to bootstrap microservices with Docker Compose, saving about 10–15 minutes per setup cycle."
+      - "I contributed to Curupira, a multi-tenant OAuth2/OIDC identity provider in Rust (Axum) with PostgreSQL and RBAC."

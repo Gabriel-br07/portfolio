@@ -1,0 +1,33 @@
+slug: "oby"
+title: "Software Developer at Oby Capital"
+description: "Software Developer at Oby Capital: banking integrations, reliable asynchronous processing, receivables portfolio validation and multi-tenant data isolation."
+themes:
+  - title: "Banking integrations and financial operations"
+    paragraphs:
+      - "I built and shipped banking integrations with Node.js, TypeScript, Python and PostgreSQL, using cloud jobs for asynchronous execution."
+      - "I implemented bank-slip issuance, modification and cancellation workflows directly from the ERP."
+  - title: "Reliability in asynchronous processing"
+    paragraphs:
+      - "I used a transactional outbox to coordinate database transactions with external banking operations."
+      - "I implemented idempotency, execution-state tracking, safe retries and handling of uncertain responses, reducing the risk of duplicate financial operations."
+  - title: "Payment verification"
+    paragraphs:
+      - "I built webhook-driven verification workflows: a payment status is updated from verified banking information, not only from the notification received."
+      - "I integrated the confirmation with the ERP financial records and the customer portal."
+  - title: "Receivables portfolio validation"
+    paragraphs:
+      - "I implemented automated ingestion and validation of portfolios, with a rule-based engine and 56 documented business validation codes."
+      - "Record-by-record checking gave way to targeted analysis of the flagged records."
+  - title: "Communication and notifications"
+    paragraphs:
+      - "I integrated email and WhatsApp through REST APIs for payment communications and configured scheduled recurring reminders for outstanding bank slips."
+  - title: "Self-service portal"
+    paragraphs:
+      - "I developed an authenticated portal for financial guardians, with account activation and access to bank slips, payment information and confirmed payment statuses."
+  - title: "Multi-tenant data security"
+    paragraphs:
+      - "I implemented multi-tenant isolation in PostgreSQL with tenant_id and school-level scoping, enforced by Row Level Security and integrity triggers."
+      - "I modeled the schema through versioned migrations and restricted each guardian to their own records with RLS policies."
+  - title: "AI in development"
+    paragraphs:
+      - "I used AI coding agents, such as Claude Code, supported by repository-level instructions and review guidelines."

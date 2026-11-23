@@ -1,0 +1,14 @@
+slug: "serpro"
+title: "Pasante en Serpro"
+description: "Pasantía en Serpro: portales low-code, dashboards en Power BI, levantamiento de requisitos y planificación de chatbots para municipios."
+themes:
+  - title: "Portales low-code"
+    paragraphs:
+      - "Configuré y personalicé portales low-code para acelerar la entrega de sitios de negocio."
+  - title: "Datos y dashboards"
+    paragraphs:
+      - "Creé dashboards en Power BI y modelos en Excel para la validación de datos y el apoyo a decisiones."
+  - title: "Requisitos y chatbots"
+    paragraphs:
+      - "Levanté requisitos con stakeholders y los traduje en especificaciones funcionales junto a PMs y desarrolladores."
+      - "Planifiqué chatbots con flujos de diálogo para municipios, desarrollados por el equipo de desarrollo."

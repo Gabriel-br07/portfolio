@@ -18,6 +18,8 @@ export interface AnalyticsEvents {
   generate_lead: { method: 'contact_form' }
   click_project: { project: string, placement: 'card' | 'link' }
   open_project_details: { project: string }
+  open_experience_details: { experience: string, surface: 'page' | 'sheet' }
+  click_experience_nav: { experience: string, direction: 'newer' | 'older' }
   open_book_modal: { book: string }
   click_book_buy: { book: string }
   change_language: { language_from: string, language_to: string, placement: 'header' | 'footer' }

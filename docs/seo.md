@@ -12,18 +12,18 @@ Domínio canônico: `https://gabrielfaria.dev.br` (`PRODUCTION_SITE_URL` em `nux
 | canonical | `useLocaleHead()` (`baseUrl` = site URL), sem barra final | `i18n.baseUrl` |
 | `og:*` / `twitter:*` / `og:locale` | `usePageSeo()` (`app/composables/usePageSeo.ts`); mapa `OG_LOCALES` | chaves `seo*` em `i18n/locales/*.json` |
 | robots.txt | `@nuxtjs/robots` (rota dinâmica, não há arquivo em `public/`) | `site.indexable` |
-| JSON-LD | `app/app.vue` (Person + WebSite por idioma), `projects.vue`, `blog/index.vue` | |
+| JSON-LD | `app/app.vue` (Person + WebSite por idioma), `projects.vue`, `blog/index.vue`, `experience/[slug].vue` (WebPage + BreadcrumbList) | |
 
 Não existe `lastmod`, `priority` nem `changefreq`: o conteúdo não tem uma data real de alteração e o Google ignora os dois últimos. Se uma coleção ganhar um campo `updatedAt`, informe-o em `sitemap.sources`.
 
 ## Rotas e idiomas
 
-Idiomas: `en` (padrão, sem prefixo), `pt`, `es`. Páginas indexáveis: `/`, `/about`, `/projects`, `/books`, `/blog` em cada idioma (15 URLs, ex.: `/`, `/pt/books`, `/es/about`).
+Idiomas: `en` (padrão, sem prefixo), `pt`, `es`. Páginas indexáveis: `/`, `/about`, `/projects`, `/books`, `/blog` e `/experience/<slug>` (oby, dwcorp, serpro) em cada idioma (24 URLs, ex.: `/`, `/pt/books`, `/es/experience/oby`).
 Fora do sitemap: `/speaking` (noindex), `/livros*` (redirecionam 308 para `/books`) e páginas de erro (noindex, sem canonical).
 
 ## Como novas páginas entram
 
-Qualquer arquivo novo em `app/pages/` que seja prerenderizado ou alcançável por link (`crawlLinks`) entra no sitemap nos três idiomas. Para tirar uma página: `useRobotsRule('noindex, nofollow')` na página **e** `sitemap.exclude`. Hoje não há rotas dinâmicas; os artigos do blog são links externos para o Arandu e não pertencem a este sitemap.
+Qualquer arquivo novo em `app/pages/` que seja prerenderizado ou alcançável por link (`crawlLinks`) entra no sitemap nos três idiomas. Para tirar uma página: `useRobotsRule('noindex, nofollow')` na página **e** `sitemap.exclude`. A única rota dinâmica é `/experience/[slug]`. Os slugs são os nomes dos arquivos em `content/experience/` e o `nuxt.config.ts` os lê para listar as rotas em `nitro.prerender.routes` nos três idiomas (não dependemos só do `crawlLinks`); para publicar uma vaga nova crie o YAML nos três idiomas (`content/experience/`, `content/pt/experience/`, `content/es/experience/`) e o sitemap, o hreflang e o `/llms.txt` passam a incluí-la. Vaga em apenas um idioma quebra o hreflang recíproco e o teste de SEO. Os artigos do blog são links externos para o Arandu e não pertencem a este sitemap.
 
 ## Traduções ausentes
 
@@ -54,7 +54,7 @@ curl -s localhost:3000/pt/books | grep -E 'canonical|alternate|og:'
 1. **Propriedade:** adicione `gabrielfaria.dev.br` (propriedade de domínio, via registro DNS TXT) ou o prefixo `https://gabrielfaria.dev.br/`. A meta `google-site-verification` já está em `app/app.vue` e cobre a propriedade de prefixo de URL.
 2. Abra **Sitemaps** no menu lateral.
 3. Em "Adicionar um novo sitemap", informe `sitemap_index.xml` e envie.
-4. Confira a linha do sitemap: status "Sucesso", data da última leitura e número de páginas descobertas (esperado: 15). Erros aparecem ao clicar nela.
+4. Confira a linha do sitemap: status "Sucesso", data da última leitura e número de páginas descobertas (esperado: 24). Erros aparecem ao clicar nela.
 5. Em **Inspeção de URL**, inspecione `/`, `/pt` e `/es` (e uma página interna por idioma). Verifique "Canonical declarado pelo usuário" = "Canonical selecionado pelo Google" e, se necessário, **Solicitar indexação**.
 6. Em **Indexação > Páginas**, veja quantas URLs estão indexadas e a lista de motivos para as não indexadas.
 7. Investigue cada motivo: "Rastreada, mas não indexada no momento" e "Descoberta, mas não indexada" indicam fila ou baixa prioridade, não erro; "Página alternativa com tag canônica adequada" e "Redirecionamento" são esperados para `/livros`; "Excluída pela tag noindex" é esperado só para `/speaking`.

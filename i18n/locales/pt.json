@@ -108,6 +108,27 @@
     "outcome": "Resultado",
     "stack": "Stack"
   },
+  "experience": {
+    "highlights": "Destaques",
+    "readFull": "Ler completo",
+    "openFullPage": "Abrir página completa",
+    "sheetTitle": "Detalhes da experiência",
+    "sheetDescription": "O que eu fiz nesta experiência",
+    "loading": "Carregando detalhes…",
+    "error": "Não foi possível carregar os detalhes.",
+    "retry": "Tentar novamente",
+    "logoAlt": "Logo da {name}",
+    "visitCompany": "Visitar {company}",
+    "newerLabel": "Experiência mais recente: {company}",
+    "olderLabel": "Experiência anterior: {company}",
+    "onThisPage": "Nesta página",
+    "breadcrumbHome": "Início",
+    "breadcrumbExperience": "Experiência",
+    "pagination": "Outras experiências",
+    "company": "Empresa",
+    "period": "Período",
+    "stack": "Stack"
+  },
   "locale": {
     "ariaSwitch": "Alterar idioma",
     "viewProject": "Ver projeto"

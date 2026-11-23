@@ -1,4 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { readdirSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 
 // Single normalized site URL used by SEO modules (sitemap/robots), i18n `baseUrl`,
 // and `runtimeConfig.public.siteUrl`. A production build/generate must never ship the
@@ -27,6 +29,24 @@ const siteUrl = resolveSiteUrl()
 const isIndexable = process.env.VERCEL_ENV
   ? process.env.VERCEL_ENV === 'production'
   : process.env.NODE_ENV === 'production'
+
+// Case-study slugs = file names in content/experience/ (the single source of truth, see docs/seo.md).
+// Listing the routes explicitly keeps the prerender, and so the sitemap and its hreflang groups,
+// independent of whether the crawler finds the links on the home page.
+const experienceSlugs = (() => {
+  let slugs: string[] = []
+  try {
+    slugs = readdirSync(fileURLToPath(new URL('./content/experience', import.meta.url)))
+      .filter(f => f.endsWith('.yml'))
+      .map(f => f.replace(/\.yml$/, ''))
+  } catch {
+    // handled below
+  }
+  // Fail loudly in CI: silently prerendering zero case studies would ship broken links.
+  if (!slugs.length && process.env.CI) throw new Error('No experience case studies found in content/experience')
+  return slugs
+})()
+const experienceRoutes = ['', '/pt', '/es'].flatMap(prefix => experienceSlugs.map(slug => `${prefix}/experience/${slug}`))
 
 export default defineNuxtConfig({
   modules: [
@@ -107,7 +127,8 @@ export default defineNuxtConfig({
         '/',
         '/pt',
         '/es',
-        '/llms.txt'
+        '/llms.txt',
+        ...experienceRoutes
       ],
       crawlLinks: true,
       // The crawler also finds `/pt/` and `/es/`; on Vercel that trailing-slash copy replaces the
