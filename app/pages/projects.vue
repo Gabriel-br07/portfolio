@@ -135,20 +135,12 @@ useHead(() => ({
           </template>
           <template #description>
             <p>{{ project.description }}</p>
-            <div
+            <TechTagList
               v-if="project.tags?.length"
-              class="flex flex-wrap gap-1.5 mt-2"
-            >
-              <UBadge
-                v-for="tag in project.tags"
-                :key="`${project.title}-${tag}`"
-                variant="subtle"
-                size="sm"
-                color="neutral"
-              >
-                {{ tag }}
-              </UBadge>
-            </div>
+              class="exp-scope exp-scope--primary mt-2"
+              :tags="project.tags"
+              :show-icons="false"
+            />
           </template>
           <template #footer>
             <ProjectsDetailsModal

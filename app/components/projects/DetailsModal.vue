@@ -90,16 +90,12 @@ watch(open, (isOpen) => {
           <dt class="font-semibold text-highlighted">
             {{ t('projects.stack') }}
           </dt>
-          <dd class="mt-1 flex flex-wrap gap-1.5">
-            <UBadge
-              v-for="tag in project.tags"
-              :key="`${project.title}-details-${tag}`"
-              variant="subtle"
-              size="sm"
-              color="neutral"
-            >
-              {{ tag }}
-            </UBadge>
+          <dd class="mt-1">
+            <TechTagList
+              class="exp-scope exp-scope--primary"
+              :tags="project.tags"
+              :show-icons="false"
+            />
           </dd>
         </div>
       </dl>
