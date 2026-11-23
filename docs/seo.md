@@ -20,6 +20,16 @@ Não existe `lastmod`, `priority` nem `changefreq`: o conteúdo não tem uma dat
 
 Um único nome em título, H1, JSON-LD (`Person.name`, sem `alternateName`), textos de i18n, imagens de compartilhamento e `llms.txt`: **Gabriel Faria**, igual ao domínio, ao LinkedIn (`faria0703`) e ao autor no Arandu. Não reintroduza outra forma do nome; `tests/seo.test.ts` (suíte "public name") falha se o JSON-LD ou as páginas prerenderizadas divergirem. Os arquivos em `audit/` são registros históricos e não são atualizados.
 
+## Imagens de compartilhamento
+
+Cartões 1200×630 PNG em `public/images/seo/`: `og-home.png` (site inteiro) e `og-<slug>.png` (um por case de `content/experience/`). São gerados por `scripts/generate-og-images.mts` a partir do `content/index.yml` (cargo, logo, `colorDark`) e do título de cada case, e **commitados**; o build não precisa de navegador.
+
+```bash
+CHROME_PATH=/usr/bin/brave-browser pnpm generate:og   # precisa de internet (fonte Public Sans) e de um Chromium
+```
+
+Rode de novo quando mudar o nome, o cargo, uma cor, um logo ou o título de um case, e **ao criar um case novo** (o cartão usa o slug). O script falha se algum PNG não tiver 1200×630 ou passar de 300 KB; `tests/seo-images.test.ts` confere isso no CI. Logos sem variante escura (`DARK_LOGO_VARIANTS` em `app/utils/experienceLogos.ts`) vão sobre um selo claro.
+
 ## Rotas e idiomas
 
 Idiomas: `en` (padrão, sem prefixo), `pt`, `es`. Páginas indexáveis: `/`, `/about`, `/projects`, `/books`, `/blog` e `/experience/<slug>` (oby, dwcorp, serpro) em cada idioma (24 URLs, ex.: `/`, `/pt/books`, `/es/experience/oby`).
