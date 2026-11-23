@@ -12,6 +12,7 @@ const single = computed(() => props.articles.length === 1)
     <li
       v-for="article in articles"
       :key="article.id"
+      data-reveal
     >
       <BlogArticleCard
         :article
