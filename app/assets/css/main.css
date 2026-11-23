@@ -64,3 +64,38 @@
     animation: none;
   }
 }
+
+/* ---- Experience visuals: company accent scope + sphere marker ----
+   Used by the home timeline and the case-study page. The tag beam (`exp-rotate`) rotates with `transform`
+   only, so it runs on the compositor (no repaint per frame). */
+.exp-scope {
+  --exp-accent: var(--exp-accent-light, var(--ui-text-highlighted));
+}
+
+.dark .exp-scope {
+  --exp-accent: var(--exp-accent-dark, var(--ui-text-highlighted));
+}
+
+/* Pages without a company (projects): the site's primary color */
+.exp-scope--primary {
+  --exp-accent-light: var(--ui-primary);
+  --exp-accent-dark: var(--ui-primary);
+}
+
+@keyframes exp-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Sphere marker (home timeline and case-study rail): a ring that fills with the company color when it is the
+   current/selected one. No looping animation. */
+.exp-orb {
+  flex: none;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 2px solid var(--ui-border-accented);
+  border-radius: 9999px;
+  background: var(--ui-bg);
+  transition: background-color 0.2s, border-color 0.2s, box-shadow 0.25s;
+}
