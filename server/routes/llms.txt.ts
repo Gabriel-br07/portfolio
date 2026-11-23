@@ -1,5 +1,5 @@
 import { queryCollection } from '@nuxt/content/server'
-import type { LlmsExperience, LlmsProject } from '../utils/llms'
+import type { LlmsProject } from '../utils/llms'
 
 interface ProjectEntry extends LlmsProject {
   stem?: string
@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
     .filter(project => !project.stem?.startsWith('pt/') && !project.stem?.startsWith('es/'))
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-  const home = await queryCollection(event, 'index').path('/').first() as { experience?: { items?: LlmsExperience[] } } | null
+  const home = await queryCollection(event, 'index').path('/').first()
 
   setHeader(event, 'content-type', 'text/plain; charset=utf-8')
   return buildLlmsTxt({

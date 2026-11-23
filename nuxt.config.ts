@@ -128,6 +128,7 @@ export default defineNuxtConfig({
         '/pt',
         '/es',
         '/llms.txt',
+        '/llms-full.txt',
         ...experienceRoutes
       ],
       crawlLinks: true,
