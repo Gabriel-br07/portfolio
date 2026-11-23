@@ -72,7 +72,7 @@ export interface LlmsInput {
 }
 
 const HEADER = [
-  '# Gabriel Oliveira',
+  '# Gabriel Faria',
   '',
   '> Fullstack & Back-End Developer. Builds reliable, maintainable, and impactful digital solutions, focused on clarity, collaborative problem-solving, and well-structured software.',
   '',

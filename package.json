@@ -13,6 +13,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "sync:articles": "node --experimental-strip-types scripts/sync-articles.mts",
+    "generate:og": "node --experimental-strip-types scripts/generate-og-images.mts",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "nuxt typecheck",

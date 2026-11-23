@@ -9,7 +9,7 @@ How SEO works in this Nuxt 4 portfolio, and the checklist for any page change.
 
 ## Global setup (`app/app.vue`)
 - `useSeoMeta` sets `titleTemplate` from i18n: empty page title → `t('seo.siteTitle')`; otherwise `t('seo.titleWithPage', { title })`. **Do not** set a full title elsewhere — pass only the page-specific part.
-- Static OG/Twitter fallback (`ogImage`, `twitterImage`, `twitterCard: 'summary_large_image'`).
+- OG/Twitter: global `og-home.png` (`ogImage`, `twitterImage`, `twitterCard: 'summary_large_image'`) plus a per-page `image` in `usePageSeo` (cases use `og-<slug>.png`, see `docs/seo.md`).
 - `useLocaleHead()` emits hreflang alternates + `htmlAttrs` (lang/dir) and the canonical link; `theme-color` and `google-site-verification` live here too.
 - A single `application/ld+json` block (`Person` + `WebSite`) is injected via `useHead`, built from `app.config.ts` + `runtimeConfig.public.siteUrl`.
 
@@ -30,9 +30,10 @@ Every page sets SEO through the shared **`usePageSeo()`** composable (`app/compo
 - [ ] Title set via the template (page-specific part only), unique per page.
 - [ ] Description present, unique, and localized.
 - [ ] `usePageSeo()` called (not raw `useSeoMeta`).
-- [ ] OG image generated (or intentionally using the static fallback).
+- [ ] Share image: `og-home.png` fallback, or a generated `og-<slug>.png` passed as `image` to `usePageSeo()` (run `pnpm generate:og` for a new case).
 - [ ] Canonical + hreflang alternates present (verify in page source for `/`, `/pt`, `/es`).
 - [ ] JSON-LD present where relevant (Person/WebSite global; add page-specific schema only when it adds value).
 - [ ] Page appears in `/sitemap.xml` and is not blocked by `robots.txt`.
 - [ ] Any new i18n SEO key added to en/pt/es.
 - [ ] Images use `NuxtImg` with dimensions; remote host allow-listed.
+- [ ] Person name matches the domain ("Gabriel Faria"); no `alternateName` and no other spelling of the name.

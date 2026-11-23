@@ -85,10 +85,11 @@
     "nextReading": "Próxima lectura"
   },
   "seo": {
-    "siteTitle": "Portafolio Gabriel Oliveira",
-    "titleWithPage": "{title} — Portafolio Gabriel Oliveira",
+    "siteTitle": "Portafolio Gabriel Faria",
+    "titleWithPage": "{title} — Portafolio Gabriel Faria",
     "jobTitle": "Desarrollador Fullstack y Back-End",
-    "personDescription": "Desarrollador que construye soluciones digitales fiables, mantenibles y con impacto, con foco en la claridad, el trabajo colaborativo y el software bien estructurado."
+    "personDescription": "Desarrollador que construye soluciones digitales fiables, mantenibles y con impacto, con foco en la claridad, el trabajo colaborativo y el software bien estructurado.",
+    "ogImageAlt": "Gabriel Faria, {jobTitle}"
   },
   "home": {
     "techCarouselTitle": "Herramientas y tecnologías que he usado"
@@ -96,7 +97,7 @@
   "hero": {
     "available": "Disponible para nuevos proyectos",
     "unavailable": "No disponible por ahora",
-    "profileAlt": "Foto de perfil de Gabriel Oliveira"
+    "profileAlt": "Foto de perfil de Gabriel Faria"
   },
   "projects": {
     "viewDetails": "Ver detalles",
@@ -122,6 +123,7 @@
     "newerLabel": "Experiencia más reciente: {company}",
     "olderLabel": "Experiencia anterior: {company}",
     "onThisPage": "En esta página",
+    "ogImageAlt": "{role}, por Gabriel Faria",
     "breadcrumbHome": "Inicio",
     "breadcrumbExperience": "Experiencia",
     "pagination": "Otras experiencias",

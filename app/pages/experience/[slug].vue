@@ -15,10 +15,15 @@ if (!data.value) {
   })
 }
 
+// One generated share image per case (`pnpm generate:og`), named after the slug.
+const ogImagePath = computed(() => `/images/seo/og-${slug.value}.png`)
+
 usePageSeo(() => ({
   title: data.value?.detail.title,
   description: data.value?.detail.description,
-  ogType: 'article'
+  ogType: 'article',
+  image: ogImagePath.value,
+  imageAlt: t('experience.ogImageAlt', { role: data.value?.detail.title ?? '' })
 }))
 
 // Reading progress for the side rail (desktop) and the top progress bar (phones/tablets).
@@ -45,6 +50,12 @@ const jsonLd = computed(() => {
         'name': data.value?.detail.title,
         'description': data.value?.detail.description,
         'inLanguage': locale.value,
+        'primaryImageOfPage': {
+          '@type': 'ImageObject',
+          'url': resolveOgImage(siteUrl, ogImagePath.value),
+          'width': OG_IMAGE_WIDTH,
+          'height': OG_IMAGE_HEIGHT
+        },
         'isPartOf': { '@id': `${localeHome}/#website` },
         // Ties the page to the Person entity declared in app.vue; the role itself is the main entity.
         'about': { '@id': `${siteUrl}/#person` },

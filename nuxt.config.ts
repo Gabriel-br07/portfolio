@@ -72,7 +72,7 @@ export default defineNuxtConfig({
   // Single source of truth for Nuxt SEO modules (sitemap, robots).
   site: {
     url: siteUrl,
-    name: 'Gabriel Oliveira Portfolio',
+    name: 'Gabriel Faria Portfolio',
     indexable: isIndexable
   },
   colorMode: {
