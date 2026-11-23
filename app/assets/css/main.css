@@ -65,6 +65,31 @@
   }
 }
 
+/* ---- Scroll reveal ("spring"): app/plugins/reveal.client.ts toggles data-reveal-state on [data-reveal] ----
+   Only transform/opacity, so it stays on the compositor. No state attribute = visible (SSR, no JS). */
+[data-reveal-state='hidden'] {
+  opacity: 0;
+  transform: translateY(3.5rem) scale(0.9);
+}
+
+[data-reveal-state='in'] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.5s ease-out var(--reveal-delay, 0ms),
+    transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) var(--reveal-delay, 0ms);
+}
+
+/* The plugin sets no state under reduced motion, but the preference can change while elements are already
+   hidden: `!important` makes those visible at once. */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal-state] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
 /* ---- Experience visuals: company accent scope + sphere marker ----
    Used by the home timeline and the case-study page. The tag beam (`exp-rotate`) rotates with `transform`
    only, so it runs on the compositor (no repaint per frame). */

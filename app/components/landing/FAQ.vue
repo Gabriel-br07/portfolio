@@ -29,6 +29,7 @@ const ui = {
 <template>
   <UPageSection
     v-if="page.faq"
+    data-reveal
     :title="page.faq.title"
     :description="page.faq.description"
     :ui="{

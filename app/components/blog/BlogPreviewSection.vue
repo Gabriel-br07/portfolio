@@ -26,6 +26,7 @@ const others = computed(() => latest.value.slice(1))
     />
     <template v-else>
       <BlogFeaturedArticle
+        data-reveal
         :article="featured"
         compact
       />
@@ -33,7 +34,7 @@ const others = computed(() => latest.value.slice(1))
         v-if="others.length"
         :articles="others"
       />
-      <div>
+      <div data-reveal>
         <UButton
           :to="localePath('/blog')"
           :label="t('blog.viewAll')"
